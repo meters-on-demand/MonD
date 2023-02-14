@@ -1,3 +1,4 @@
 skin.rmskin
 *.log
 pages/*.json
+meters.json
