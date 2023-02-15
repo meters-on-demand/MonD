@@ -2,13 +2,18 @@
 param (
     [Parameter(Position = 0)]
     [string]
-    $Command = "help"
+    $Command = "help",
+    [Parameter(Position = 1)]
+    [string]
+    $Parameter
 )
 
 . .env.ps1
 
 $githubAPI = "https://api.github.com/"
 $rainmeterSkinsTopic = "$($githubAPI)search/repositories?q=topic:rainmeter-skin&per_page=50"
+$packageListFile = "skins.json"
+$skinFile = "skin.rmskin"
 
 function Main {
     param (
@@ -23,6 +28,13 @@ function Main {
         "update" {
             if (-not($TOKEN)) { throw "`$TOKEN must be set to use update" }
             Update
+            Paginate
+        }
+        "install" {
+            Install $Parameter
+        }
+        "paginate" {
+            Paginate $Parameter
         }
         Default { }
     }
@@ -54,8 +66,72 @@ function Update {
         }
     }
 
-    $skins | ConvertTo-Json | Out-File -FilePath "skins.json"
+    $skins | ConvertTo-Json | Out-File -FilePath $packageListFile
 
+}
+
+function Install {
+    param (
+        [Parameter()]
+        [string]
+        $SkinName
+    )
+
+    $skin = Find-Skin $SkinName
+
+    if (-not($skin)) { throw "No skins named $($SkinName) found" }
+
+    Invoke-WebRequest -Uri $skin.latest_release.browser_download_url -UseBasicParsing -OutFile $skinFile
+    Start-Process -FilePath $skinFile
+
+}
+
+function Paginate {
+    param (
+        [Parameter(Position = 0)]
+        [int]
+        $ItemsOnPage
+    )
+    if ($ItemsOnPage -eq 0) { $ItemsOnPage = 10 }
+
+    $emptyPage = @()
+    for ($i = 0; $i -lt $ItemsOnPage; $i++) {
+        $emptyPage += @{
+            name = "" 
+            repo = "" 
+        }
+    }
+
+    $skins = Package-List
+    for ($i = 0; $i -lt $skins.Count / $ItemsOnPage; $i++) {
+        $page = $emptyPage
+        for ($j = 0; $j -lt $page.Count; $j++) {
+            $item = $skins[($i * $ItemsOnPage) + $j]
+            if ($item) {
+                $page[$j % $ItemsOnPage] = $item
+            }
+        }
+        $page | ConvertTo-Json | Out-File -FilePath "pages\$($i).json" -Force
+    }
+}
+
+function Find-Skin {
+    param (
+        [Parameter()]
+        [string]
+        $SkinName
+    )
+    $skins = Package-List
+    foreach ($skin in $skins) {
+        if ($skin.full_name -like $SkinName) {
+            return $skin
+        }
+    }
+    return $false
+}
+
+function Package-List {
+    return Get-Content $packageListFile | ConvertFrom-Json
 }
 
 function Get-RainmeterRepositories { 
