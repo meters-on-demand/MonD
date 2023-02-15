@@ -1,698 +1,1474 @@
 [
   {
-    "latest_release": "https://github.com/marcopixel/monstercat-visualizer/releases/download/2.1.0/Monstercat.Visualizer.for.Rainmeter_2.1.0.rmskin",
+    "latest_release": {
+      "body": "###  **INFO: This update requires Rainmeter 4.3 (r3298) or higher**\r\n\r\nThis update is rather small but includes multiple smaller fixes, including a guide on how to change to Spicetify + WebNowPlaying to get Spotify working again. Many thanks to @tjhrulz and @khanhas for making this possible ???? \r\n## Changelog:\r\n\r\n* **Fixed:** Replaced standalone Spotify plugin with Spicetify + WebNowPlaying. (#191, 247e489f70da4f8fa9297de674ad391210778852)\r\n  For more information on how to migrate, click here: https://github.com/marcopixel/Monstercat-Visualizer/wiki/WebNowPlaying-Spotify\r\n\r\n* **Fixed:** Song information had incorrect bounding box, made precise positioning impossible (5a876cfb568f2ddfcbe31a49513b4a7d456fa13c)\r\n* **Fixed:** Clickable progress bar is back again ???? (331caf644cb51e06543ad7b7c2febcf13201e765)\r\n* **Added:** New genres added to dynamic genre coloring (#211, thanks to @Franckyi)\r\n* **Added:** Dynamic coloring now supports Windows Accent colors. (061c123ccda86441018ab1fec37b36105d59237f)\r\nYou can now use this to make the color change to your background image.\r\n\r\nMD5: 6d131961dbc019f43514a7bd98459ce9\r\n",
+      "tag_name": "2.1.0",
+      "browser_download_url": "https://github.com/marcopixel/monstercat-visualizer/releases/download/2.1.0/Monstercat.Visualizer.for.Rainmeter_2.1.0.rmskin",
+      "name": "Update 2.1.0 - ???? Spotify gone, Spicetify here ????"
+    },
     "name": "monstercat-visualizer",
-    "latest_release_url": "https://api.github.com/repos/marcopixel/monstercat-visualizer/releases/latest",
     "id": 60963133,
     "has_downloads": true,
-    "full_name": "marcopixel/monstercat-visualizer"
+    "full_name": "marcopixel/monstercat-visualizer",
+    "owner": {
+      "name": "marcopixel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3743025?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/SilverAzide/Gadgets/releases/download/v7.5.0/Gadgets_7.5.0.rmskin",
+    "latest_release": {
+      "body": "7.5.0 - 2022-11-04\r\n* Corrected Weather Meter issue (again) that prevented automatic region detection from working and could cause the gadget to fail.\r\n* Corrected All CPU Meter display issue on systems where the Show Usage Per Logical Core option was unchecked and the CPU had more than 16 cores.\r\n* Enhanced All CPU Meter to add option to show from 1 to 5 top processes by CPU usage.\r\n* Enhanced All CPU Meter to allow showing/hiding the fan graph.\r\n* Enhanced All CPU Meter to allow showing/hiding RAM and Page File statistics and/or usage.\r\n* Enhanced GPU Meter to allow showing/hiding VRAM statistics and/or usage.\r\n* Corrected GPU Meter regression that could crash Rainmeter when using multiple GPU Meter skins with different configurations.\r\n* Corrected Network Meter gadgets calculation for peak throughput.\r\n* Enhanced Network Meter gadgets to add option to show ping times and link to a speed test website (optional).\r\n* Enhanced Network Meter gadgets to add visible indicator when IP addresses are hidden.\r\n\r\n***Requires Rainmeter 4.5.16 or later.***\r\n\r\n---\r\n#### Upgrade Notes\r\nIf upgrading an existing Gadgets installation:\r\n+ **All CPU Meter**: Due to internal changes, you may need to reselect your preferences for displaying RAM and page file stats.\r\n+ **Network Meter** or **Wireless Meter**: You will need to reset the \"Ping Color\" value (currently unused gray color) to its new yellow-orange color. Middle-mouse click the color to reset it.\r\n+ **Network Meter Pro** and **Wireless Meter Pro**: The NetMonitor service has **_not_** been updated in this release. Upgrading the service is optional. To upgrade, use the Network Settings to stop the service, uninstall it, and then reinstall.\r\n---",
+      "tag_name": "v7.5.0",
+      "browser_download_url": "https://github.com/SilverAzide/Gadgets/releases/download/v7.5.0/Gadgets_7.5.0.rmskin",
+      "name": "v7.5.0"
+    },
     "name": "Gadgets",
-    "latest_release_url": "https://api.github.com/repos/SilverAzide/Gadgets/releases/latest",
     "id": 254747402,
     "has_downloads": true,
-    "full_name": "SilverAzide/Gadgets"
+    "full_name": "SilverAzide/Gadgets",
+    "owner": {
+      "name": "SilverAzide",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2706567?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/marcopixel/SysDash/releases/download/1.1.0/SysDash_1.1.0.rmskin",
+    "latest_release": {
+      "body": "There are a lot of changes in this new update so let's get right into the changelog:\r\n\r\n- Added Scale parameter (you can properly size the skin now)\r\n- Added CPU & GPU temperature skins\r\n- Added quickaccess to hard drives (click on the hard drives letter to open)\r\n- Added quickaccess to volume mixer (click on the speaker icon to open)\r\n- Added variable for changing fonts\r\n- Tweaked skin sizes (all normal modules now have the same height, allows for easier placement)\r\n- Tweaked skin logic to improve performance (about 20% from 1.0.0)\r\n- Reworked weather icons (to make them fit more to the other icons)\r\n- Reworked media skins (the old one was not easily scalable to the other modules)\r\n- Updated [Google Play Music Desktop Player Plugin](https://github.com/tjhrulz/GPMDP-Plugin) to 1.4.1.0\r\n- Fixed media progress bar not showing the correct values\r\n- Fixed volume slider not changing when moving it\r\n- Fixed incorrect scaling of Download/Upload values\r\n- Fixed that the volume is set to 0 when muting and then unmuting\r\n- Fixed external ip showing wrong address when using proxy server\r\n- Smaller tweaks and bugfixes\r\n\r\nMany thanks to the contributers and please leave feedback/report issues :)",
+      "tag_name": "1.1.0",
+      "browser_download_url": "https://github.com/marcopixel/SysDash/releases/download/1.1.0/SysDash_1.1.0.rmskin",
+      "name": "Update 1.1.0 - How HOT is your system"
+    },
     "name": "SysDash",
-    "latest_release_url": "https://api.github.com/repos/marcopixel/SysDash/releases/latest",
     "id": 95987631,
     "has_downloads": true,
-    "full_name": "marcopixel/SysDash"
+    "full_name": "marcopixel/SysDash",
+    "owner": {
+      "name": "marcopixel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3743025?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/redsaph/cleartext/releases/download/6.0/Cleartext_6.0a.rmskin",
+    "latest_release": {
+      "body": "??? **Latest Rainmeter 4.4 beta required**\r\n\r\n**Cleartext 6.0** brings a completely new look and feel to the entire experience, with enhancements in performance.\r\n\r\n* New Settings panel: more compact and more reactive to variable toggles, simpler color management\r\n* New typeface: better support for international text\r\n* Smooth Scroll on regular Cleartext\r\n* Center alignment on regular Cleartext & Cleartext Pure\r\n* Dynamic Disable: unused player plugins are disabled to reduce overhead CPU usage\r\n* Dynamic Update: increased skin update only when scrolling is active, otherwise kept to a minimum",
+      "tag_name": "6.0",
+      "browser_download_url": "https://github.com/redsaph/cleartext/releases/download/6.0/Cleartext_6.0a.rmskin",
+      "name": "6.0"
+    },
     "name": "cleartext",
-    "latest_release_url": "https://api.github.com/repos/redsaph/cleartext/releases/latest",
     "id": 106453399,
     "has_downloads": true,
-    "full_name": "redsaph/cleartext"
+    "full_name": "redsaph/cleartext",
+    "owner": {
+      "name": "redsaph",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18696835?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/khanhas/Notch/releases/download/v1.4/Notch_1.4.rmskin",
+    "latest_release": {
+      "body": "",
+      "tag_name": "v1.4",
+      "browser_download_url": "https://github.com/khanhas/Notch/releases/download/v1.4/Notch_1.4.rmskin",
+      "name": "Fix: Module unclickable bug"
+    },
     "name": "Notch",
-    "latest_release_url": "https://api.github.com/repos/khanhas/Notch/releases/latest",
     "id": 165543867,
     "has_downloads": true,
-    "full_name": "khanhas/Notch"
+    "full_name": "khanhas/Notch",
+    "owner": {
+      "name": "khanhas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26436809?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Jax-Core/ModularPlayers/releases/download/v2.64/ModularPlayers_v2.64.rmskin",
+    "latest_release": {
+      "body": "- Fixed display for modern style\r\n- Color option for side style",
+      "tag_name": "v2.64",
+      "browser_download_url": "https://github.com/Jax-Core/ModularPlayers/releases/download/v2.64/ModularPlayers_v2.64.rmskin",
+      "name": "Display fixes"
+    },
     "name": "ModularPlayers",
-    "latest_release_url": "https://api.github.com/repos/Jax-Core/ModularPlayers/releases/latest",
     "id": 381375461,
     "has_downloads": true,
-    "full_name": "Jax-Core/ModularPlayers"
+    "full_name": "Jax-Core/ModularPlayers",
+    "owner": {
+      "name": "Jax-Core",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94787831?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Ruben35/More-Icons-unFold-Rainmeter/releases/download/4.0/unFold_4.0.rmskin",
+    "latest_release": {
+      "body": "???? This release has the same buttons of **unFold 3.0** and more developed by:\r\n- [PinkDev1](https://github.com/PinkDev1) Contributor. \r\n- [Ruben35](https://github.com/Ruben35) Owner of this repository.\r\n\r\nFor more info of the features on this release click [here](https://github.com/Ruben35/Icons-unFold-Rainmeter/blob/master/REALESES_FEATURES.md).\r\n\r\nAs always, you just need to download the **_.rmskin_** and run it!\r\n**Enjoy!**",
+      "tag_name": "4.0",
+      "browser_download_url": "https://github.com/Ruben35/More-Icons-unFold-Rainmeter/releases/download/4.0/unFold_4.0.rmskin",
+      "name": "unFold 4.0"
+    },
     "name": "More-Icons-unFold-Rainmeter",
-    "latest_release_url": "https://api.github.com/repos/Ruben35/More-Icons-unFold-Rainmeter/releases/latest",
     "id": 162235619,
     "has_downloads": true,
-    "full_name": "Ruben35/More-Icons-unFold-Rainmeter"
+    "full_name": "Ruben35/More-Icons-unFold-Rainmeter",
+    "owner": {
+      "name": "Ruben35",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30848819?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/maze404/FluentDash/releases/download/v2.5.3/FluentDash11_2.5.3.rmskin",
+    "latest_release": {
+      "body": "# What's new:\r\n- Minor bugfixes\r\n- Further cleaned up and optimized the settings widget",
+      "tag_name": "v2.5.3",
+      "browser_download_url": "https://github.com/maze404/FluentDash/releases/download/v2.5.3/FluentDash11_2.5.3.rmskin",
+      "name": "FluentDash11 v2.5.3"
+    },
     "name": "FluentDash",
-    "latest_release_url": "https://api.github.com/repos/maze404/FluentDash/releases/latest",
     "id": 139732142,
     "has_downloads": true,
-    "full_name": "maze404/FluentDash"
+    "full_name": "maze404/FluentDash",
+    "owner": {
+      "name": "maze404",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25077734?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/TheProtagonists/SpectrumForRainmeter/releases/download/3.1.0/SPECTRUM.v3.1.rmskin",
+    "latest_release": {
+      "body": "# Release v3.1.0\r\n\r\nRequires Rainmeter 4.2 or above\r\nHover mouse cursor to the top of the screen to activate, right click Launcher Settings to change variables.\r\n\r\n----\r\n\r\nChanges:\r\n\r\n* Skin organization restructure (again)\r\n* Fixed a problem that caused the launcher to unload when Rainmeter closes/restarts\r\n* Fixed launcher examples",
+      "tag_name": "3.1.0",
+      "browser_download_url": "https://github.com/TheProtagonists/SpectrumForRainmeter/releases/download/3.1.0/SPECTRUM.v3.1.rmskin",
+      "name": "3.1.0"
+    },
     "name": "SpectrumForRainmeter",
-    "latest_release_url": "https://api.github.com/repos/TheProtagonists/SpectrumForRainmeter/releases/latest",
     "id": 135863799,
     "has_downloads": true,
-    "full_name": "TheProtagonists/SpectrumForRainmeter"
+    "full_name": "TheProtagonists/SpectrumForRainmeter",
+    "owner": {
+      "name": "TheProtagonists",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30360248?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Jax-Core/ModularVisualizer/releases/download/v1.1/ModularVisualizer_v1.1.rmskin",
+    "latest_release": {
+      "body": "- Removed built-in overlayer\r\n- Added welcome screen\r\n- Removed redundant files",
+      "tag_name": "v1.1",
+      "browser_download_url": "https://github.com/Jax-Core/ModularVisualizer/releases/download/v1.1/ModularVisualizer_v1.1.rmskin",
+      "name": "Removed built-in overlayer to new overlayer module"
+    },
     "name": "ModularVisualizer",
-    "latest_release_url": "https://api.github.com/repos/Jax-Core/ModularVisualizer/releases/latest",
     "id": 436870183,
     "has_downloads": true,
-    "full_name": "Jax-Core/ModularVisualizer"
+    "full_name": "Jax-Core/ModularVisualizer",
+    "owner": {
+      "name": "Jax-Core",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94787831?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Jax-Core/Keylaunch/releases/download/v2.21/Keylaunch_v2.21.rmskin",
+    "latest_release": {
+      "body": "- New editor screen\r\n- Fixed quotes within actions, now supports multiple actions",
+      "tag_name": "v2.21",
+      "browser_download_url": "https://github.com/Jax-Core/Keylaunch/releases/download/v2.21/Keylaunch_v2.21.rmskin",
+      "name": "New editor, multiple actions"
+    },
     "name": "Keylaunch",
-    "latest_release_url": "https://api.github.com/repos/Jax-Core/Keylaunch/releases/latest",
     "id": 398818406,
     "has_downloads": true,
-    "full_name": "Jax-Core/Keylaunch"
+    "full_name": "Jax-Core/Keylaunch",
+    "owner": {
+      "name": "Jax-Core",
+      "avatar_url": "https://avatars.githubusercontent.com/u/94787831?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/lezzthanthree/Needy-Streamer-Overload/releases/download/v.4.0.1/Needy.Streamer.Overload_4.0.1.rmskin",
+    "latest_release": {
+      "body": "# [v.4.0 Update Details Located Here](https://github.com/lezzthanthree/Needy-Streamer-Overload/releases/tag/v.4.0)\r\n\r\n# Media Player\r\n- Fixed bug when choosing WebPlayer as their chosen player.\r\n\r\n# Settings\r\n- Media Player and Social Media only refreshes the skin.",
+      "tag_name": "v.4.0.1",
+      "browser_download_url": "https://github.com/lezzthanthree/Needy-Streamer-Overload/releases/download/v.4.0.1/Needy.Streamer.Overload_4.0.1.rmskin",
+      "name": "NSO v.4.0.1"
+    },
     "name": "Needy-Streamer-Overload",
-    "latest_release_url": "https://api.github.com/repos/lezzthanthree/Needy-Streamer-Overload/releases/latest",
     "id": 542580356,
     "has_downloads": true,
-    "full_name": "lezzthanthree/Needy-Streamer-Overload"
+    "full_name": "lezzthanthree/Needy-Streamer-Overload",
+    "owner": {
+      "name": "lezzthanthree",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63889032?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/avenom/Spotibar/releases/download/v0.3/Spotibar_0.3.rmskin",
+    "latest_release": {
+      "body": "<img src=\"https://raw.githubusercontent.com/avenom/Spotibar/main/Spotibar/%40Resources/Images/Spotibar.gif\">\r\n\r\nNow two themes are available in one skin: Spotibar Mini and Spotibar Max + versions with background.\r\n\r\n### Spotibar Mini:\r\n\r\n* Launch Spotify on icon, minimizes back to icon when Spotify is not running\r\n* Clicking on the current track and artist opens the Spotify window*\r\n* Control buttons: `Previous track` `Play/Pause` `Next track`\r\n* Volume control by mouse wheel when hovering over the player, right click turns off the sound\r\n\r\n###### Requirements: Rainmeter 4.4, Windows 7+\r\n\r\n### Spotibar Max:\r\n\r\n* Launch Spotify on icon, minimizes back to icon when Spotify is not running\r\n* Clicking on the current track and artist opens the Spotify window*\r\n* Control buttons: `Previous track` `Play/Pause` `Next track`\r\n* Control buttons when hovering over the cover: `Like` `Repeat track` `Shuffle tracks`\r\n* Volume control by mouse wheel when hovering over the player, right click turns off the sound\r\n* Track progress and background version adapt to cover color\r\n\r\n<img src=\"https://raw.githubusercontent.com/avenom/Spotibar/main/Spotibar/%40Resources/Images/SpotibarBG.png\">\r\n\r\n###### * Minimize the Spotify window rather than close it to work properly.\r\n\r\nSpotibar Max requires installation Spicetify to work, instructions on the [Spotibar](https://github.com/avenom/spotibar) main page \r\n\r\n###### Requirements: Spicetify 1.2.1, Rainmeter 4.4, Windows 7+\r\n___\r\n\r\n???????????? ?? ?????????? ?????????? ???????????????? ?????? ????????: Spotibar Mini ?? Spotibar Max + ???????????? ?? ??????????.\r\n\r\n### Spotibar Mini:\r\n\r\n* ???????????? Spotify ???? ????????????, ?????????????????????????? ?????????????? ?? ????????????, ?????????? Spotify ???? ??????????????\r\n* ???????? ???? ???????????????? ?????????? ?? ?????????????????????? ?????????????????? ???????? Spotify*\r\n* ???????????? ????????????????????:  `???????????????????? ????????` `????????/??????????` `?????????????????? ????????`\r\n* ?????????????????????? ?????????????????? ?????????????? ???????? ?????? ?????????????????? ???? ??????????, ???????????? ???????? ?????????????????? ????????\r\n\r\n###### ????????????????????: Rainmeter 4.4, Windows 7+\r\n\r\n### Spotibar Max:\r\n\r\n* ???????????? Spotify ???? ????????????, ?????????????????????????? ?????????????? ?? ????????????, ?????????? Spotify ???? ??????????????\r\n* ???????? ???? ???????????????? ?????????? ?? ?????????????????????? ?????????????????? ???????? Spotify*\r\n* ???????????? ????????????????????:  `???????????????????? ????????` `????????/??????????` `?????????????????? ????????`\r\n* ???????????? ???????????????????? ?????? ?????????????????? ???? ??????????????:  `????????` `?????????????????? ????????` `???????????????????? ??????????`\r\n* ?????????????????????? ?????????????????? ?????????????? ???????? ?????? ?????????????????? ???? ??????????, ???????????? ???????? ?????????????????? ????????\r\n* ???????????????? ?????????? ?? ???????????? ?? ?????????? ???????????????????????? ?????? ???????? ??????????????\r\n\r\n<img src=\"https://raw.githubusercontent.com/avenom/Spotibar/main/Spotibar/%40Resources/Images/SpotibarBG.png\">\r\n\r\n###### * ?????? ???????????????????? ???????????? ???????????????????????? ???????? Spotify, ?? ???? ????????????????????.\r\n\r\n?????? ???????????? Spotibar Max ?????????????????? ?????????????????? Spicetify, ???????????????????? ???? ?????????????? ???????????????? [Spotibar](https://github.com/avenom/spotibar)\r\n\r\n###### ????????????????????: Spicetify 1.2.1, Rainmeter 4.4, Windows 7+",
+      "tag_name": "v0.3",
+      "browser_download_url": "https://github.com/avenom/Spotibar/releases/download/v0.3/Spotibar_0.3.rmskin",
+      "name": "Spotibar v0.3"
+    },
     "name": "Spotibar",
-    "latest_release_url": "https://api.github.com/repos/avenom/Spotibar/releases/latest",
     "id": 359781974,
     "has_downloads": true,
-    "full_name": "avenom/Spotibar"
+    "full_name": "avenom/Spotibar",
+    "owner": {
+      "name": "avenom",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17644125?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/tterb/GitHubCalendar/releases/download/v1.1.3/GitHubCalendar_v1.1.3.rmskin",
+    "latest_release": {
+      "body": "### Changes\n- Fixed various issues created by GitHub changes. \n- Improved skin update processes.\n",
+      "tag_name": "v1.1.3",
+      "browser_download_url": "https://github.com/tterb/GitHubCalendar/releases/download/v1.1.3/GitHubCalendar_v1.1.3.rmskin",
+      "name": "GitHubCalendar v1.1.3"
+    },
     "name": "GitHubCalendar",
-    "latest_release_url": "https://api.github.com/repos/tterb/GitHubCalendar/releases/latest",
     "id": 64281579,
     "has_downloads": true,
-    "full_name": "tterb/GitHubCalendar"
+    "full_name": "tterb/GitHubCalendar",
+    "owner": {
+      "name": "tterb",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16360374?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/sceleri/amogus/releases/download/v1.0/Amogus_v1.0.rmskin",
+    "latest_release": {
+      "body": "Amogus v1.0 launch\r\n\r\nEdit: Changed the rmskin to include AudioAnalyzer",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/sceleri/amogus/releases/download/v1.0/Amogus_v1.0.rmskin",
+      "name": "Amogus launch"
+    },
     "name": "amogus",
-    "latest_release_url": "https://api.github.com/repos/sceleri/amogus/releases/latest",
     "id": 348751873,
     "has_downloads": true,
-    "full_name": "sceleri/amogus"
+    "full_name": "sceleri/amogus",
+    "owner": {
+      "name": "sceleri",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63425016?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/killall-q/Hologram/releases/download/point-cloud/Hologram-Point-Cloud-2022.12.01.rmskin",
+    "latest_release": {
+      "body": "",
+      "tag_name": "point-cloud",
+      "browser_download_url": "https://github.com/killall-q/Hologram/releases/download/point-cloud/Hologram-Point-Cloud-2022.12.01.rmskin",
+      "name": "Hologram Point Cloud"
+    },
     "name": "Hologram",
-    "latest_release_url": "https://api.github.com/repos/killall-q/Hologram/releases/latest",
     "id": 54828978,
     "has_downloads": true,
-    "full_name": "killall-q/Hologram"
+    "full_name": "killall-q/Hologram",
+    "owner": {
+      "name": "killall-q",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6220407?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Mive82/Persona-5-Calendar/releases/download/v1.1/Persona.5.Calendar_1.1.rmskin",
+    "latest_release": {
+      "body": "Rainmeter install package for Version 1.1\r\nIncludes inverted calendar",
+      "tag_name": "v1.1",
+      "browser_download_url": "https://github.com/Mive82/Persona-5-Calendar/releases/download/v1.1/Persona.5.Calendar_1.1.rmskin",
+      "name": "Release 1.1 for Github"
+    },
     "name": "Persona-5-Calendar",
-    "latest_release_url": "https://api.github.com/repos/Mive82/Persona-5-Calendar/releases/latest",
     "id": 267397006,
     "has_downloads": true,
-    "full_name": "Mive82/Persona-5-Calendar"
+    "full_name": "Mive82/Persona-5-Calendar",
+    "owner": {
+      "name": "Mive82",
+      "avatar_url": "https://avatars.githubusercontent.com/u/47537720?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/nitesh-prasad/Quantum-Dock/releases/download/v1.1.0/Quantum-Dock_1.1.rmskin",
+    "latest_release": {
+      "body": "First public release of Quantum Dock skin for Rainmeter",
+      "tag_name": "v1.1.0",
+      "browser_download_url": "https://github.com/nitesh-prasad/Quantum-Dock/releases/download/v1.1.0/Quantum-Dock_1.1.rmskin",
+      "name": "Quantum Dock v1.1"
+    },
     "name": "Quantum-Dock",
-    "latest_release_url": "https://api.github.com/repos/nitesh-prasad/Quantum-Dock/releases/latest",
     "id": 464109118,
     "has_downloads": true,
-    "full_name": "nitesh-prasad/Quantum-Dock"
+    "full_name": "nitesh-prasad/Quantum-Dock",
+    "owner": {
+      "name": "nitesh-prasad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/18258063?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/LucasOe/rainmeter/releases/download/v2.2.1/Launcher.Bar_2.2.1.rmskin",
+    "latest_release": {
+      "body": "### Changelog\r\n* Changed path to relative path for increased compatibility\r\n* Removed unnecessary code",
+      "tag_name": "v2.2.1",
+      "browser_download_url": "https://github.com/LucasOe/rainmeter/releases/download/v2.2.1/Launcher.Bar_2.2.1.rmskin",
+      "name": "Release 2.2.1"
+    },
     "name": "rainmeter",
-    "latest_release_url": "https://api.github.com/repos/LucasOe/rainmeter/releases/latest",
     "id": 164312177,
     "has_downloads": true,
-    "full_name": "LucasOe/rainmeter"
+    "full_name": "LucasOe/rainmeter",
+    "owner": {
+      "name": "LucasOe",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16548335?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/JacobA2000/Rainmeter-MinimalCryptoTracker/releases/download/0.3.2/MinimalCryptoTracker_0.3.2.rmskin",
+    "latest_release": {
+      "body": "Added a vertical tracker.",
+      "tag_name": "0.3.2",
+      "browser_download_url": "https://github.com/JacobA2000/Rainmeter-MinimalCryptoTracker/releases/download/0.3.2/MinimalCryptoTracker_0.3.2.rmskin",
+      "name": "0.3.2 - Vertical Tracker"
+    },
     "name": "Rainmeter-MinimalCryptoTracker",
-    "latest_release_url": "https://api.github.com/repos/JacobA2000/Rainmeter-MinimalCryptoTracker/releases/latest",
     "id": 373980660,
     "has_downloads": true,
-    "full_name": "JacobA2000/Rainmeter-MinimalCryptoTracker"
+    "full_name": "JacobA2000/Rainmeter-MinimalCryptoTracker",
+    "owner": {
+      "name": "JacobA2000",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44875489?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/SilverAzide/Clipboard-Meter/releases/download/v7.4.0/Clipboard.Meter.-.Gadgets.Patch_7.4.0.rmskin",
+    "latest_release": {
+      "body": "7.4.0 - 2022-09-23\r\n* Enhanced to support the Gadgets Modernizer patch.\r\n",
+      "tag_name": "v7.4.0",
+      "browser_download_url": "https://github.com/SilverAzide/Clipboard-Meter/releases/download/v7.4.0/Clipboard.Meter.-.Gadgets.Patch_7.4.0.rmskin",
+      "name": "v7.4.0"
+    },
     "name": "Clipboard-Meter",
-    "latest_release_url": "https://api.github.com/repos/SilverAzide/Clipboard-Meter/releases/latest",
     "id": 266841506,
     "has_downloads": true,
-    "full_name": "SilverAzide/Clipboard-Meter"
+    "full_name": "SilverAzide/Clipboard-Meter",
+    "owner": {
+      "name": "SilverAzide",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2706567?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/tterb/PlayMusic/releases/download/v1.2.1/PlayMusic_v1.2.1.rmskin",
+    "latest_release": {
+      "body": "- Fix issue #7 - fix issues with .rmskin package\n",
+      "tag_name": "v1.2.1",
+      "browser_download_url": "https://github.com/tterb/PlayMusic/releases/download/v1.2.1/PlayMusic_v1.2.1.rmskin",
+      "name": "PlayMusic v1.2.1"
+    },
     "name": "PlayMusic",
-    "latest_release_url": "https://api.github.com/repos/tterb/PlayMusic/releases/latest",
     "id": 60314128,
     "has_downloads": true,
-    "full_name": "tterb/PlayMusic"
+    "full_name": "tterb/PlayMusic",
+    "owner": {
+      "name": "tterb",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16360374?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/nikolay-borzov/rainmeter-monochrome/releases/download/v1.6.0/Monochrome_1.6.0.rmskin",
+    "latest_release": {
+      "body": "- Drive: Apparently HWiNFO can't provide Disk activity for logical disks. Also old issue with PerfMon providing values > 100 is solved by setting `MinValue` and `MaxValue`\r\n- Player: Fix Artist and Title wrapping\r\n- GPU: Fade usage string when value is `0`\r\n\r\n<details>\r\n  <summary>Updating from 1.6.0</summary>\r\n\r\nSee [`Config.inc` diff](https://github.com/nikolay-borzov/rainmeter-monochrome/commit/7dfdda8307ee32b4d7e1249d5a1b3fa3eba3da27#diff-c7fda7b86b1855d0a2009eb31f7755837d9be519530e4ba35f003d4bcdce4814)\r\n</details>",
+      "tag_name": "v1.6.0",
+      "browser_download_url": "https://github.com/nikolay-borzov/rainmeter-monochrome/releases/download/v1.6.0/Monochrome_1.6.0.rmskin",
+      "name": "v1.6.0"
+    },
     "name": "rainmeter-monochrome",
-    "latest_release_url": "https://api.github.com/repos/nikolay-borzov/rainmeter-monochrome/releases/latest",
     "id": 309784869,
     "has_downloads": true,
-    "full_name": "nikolay-borzov/rainmeter-monochrome"
+    "full_name": "nikolay-borzov/rainmeter-monochrome",
+    "owner": {
+      "name": "nikolay-borzov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/4221449?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/sceleri/swatchbar/releases/download/v1.1.1/SwatchBar_1.1.1.rmskin",
+    "latest_release": {
+      "body": "# Change log:\r\n * Fixed the double refreshing that SwatchBar 1.0 had to do on my old PC.\r\n * Added automatic alignment.\r\n * Updated settings skin.\r\n * Updated instructions skin.\r\n * Miscellaneous bug fixes and other improvements.",
+      "tag_name": "v1.1.1",
+      "browser_download_url": "https://github.com/sceleri/swatchbar/releases/download/v1.1.1/SwatchBar_1.1.1.rmskin",
+      "name": "SwatchBar v1.1.1"
+    },
     "name": "swatchbar",
-    "latest_release_url": "https://api.github.com/repos/sceleri/swatchbar/releases/latest",
     "id": 333765633,
     "has_downloads": true,
-    "full_name": "sceleri/swatchbar"
+    "full_name": "sceleri/swatchbar",
+    "owner": {
+      "name": "sceleri",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63425016?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/SaberAkiyama/SAWeatherCast/releases/download/1.1.2/SA.Weather.Cast.v1.1.2.rmskin",
+    "latest_release": {
+      "body": "[Replaced] Color Code preset into Input Skin code",
+      "tag_name": "1.1.2",
+      "browser_download_url": "https://github.com/SaberAkiyama/SAWeatherCast/releases/download/1.1.2/SA.Weather.Cast.v1.1.2.rmskin",
+      "name": "v1.1.2"
+    },
     "name": "SAWeatherCast",
-    "latest_release_url": "https://api.github.com/repos/SaberAkiyama/SAWeatherCast/releases/latest",
     "id": 281328348,
     "has_downloads": true,
-    "full_name": "SaberAkiyama/SAWeatherCast"
+    "full_name": "SaberAkiyama/SAWeatherCast",
+    "owner": {
+      "name": "SaberAkiyama",
+      "avatar_url": "https://avatars.githubusercontent.com/u/48464326?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Weidows-projects/Rainmeter-skin/releases/download/1.3.0/Weidows_1.3.0.rmskin",
+    "latest_release": {
+      "body": "",
+      "tag_name": "1.3.0",
+      "browser_download_url": "https://github.com/Weidows-projects/Rainmeter-skin/releases/download/1.3.0/Weidows_1.3.0.rmskin",
+      "name": ""
+    },
     "name": "Rainmeter-skin",
-    "latest_release_url": "https://api.github.com/repos/Weidows-projects/Rainmeter-skin/releases/latest",
     "id": 294722097,
     "has_downloads": true,
-    "full_name": "Weidows-projects/Rainmeter-skin"
+    "full_name": "Weidows-projects/Rainmeter-skin",
+    "owner": {
+      "name": "Weidows-projects",
+      "avatar_url": "https://avatars.githubusercontent.com/u/83894026?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/SmileyDrag0n/RSSddit/releases/download/v1.2.0/RSSddit_1.2.0.rmskin",
+    "latest_release": {
+      "body": "In this release, I've adressed some major bugs and fully rewritten the parser code to further improve RSS feed stability. It is now able to parse **almost every** RSS feed on Reddit there is. This bugfix is a huge improvement, so I decided to release it as its own version. \r\n\r\n## What's new\r\n- Completely new RSS parser module\r\n- Twitch Live skin now supports relative positioning\r\n\r\n## Special thanks\r\n@hiimkir - betatesting and documentation improvement",
+      "tag_name": "v1.2.0",
+      "browser_download_url": "https://github.com/SmileyDrag0n/RSSddit/releases/download/v1.2.0/RSSddit_1.2.0.rmskin",
+      "name": "Major bug fix"
+    },
     "name": "RSSddit",
-    "latest_release_url": "https://api.github.com/repos/SmileyDrag0n/RSSddit/releases/latest",
     "id": 466489109,
     "has_downloads": true,
-    "full_name": "SmileyDrag0n/RSSddit"
+    "full_name": "SmileyDrag0n/RSSddit",
+    "owner": {
+      "name": "SmileyDrag0n",
+      "avatar_url": "https://avatars.githubusercontent.com/u/61558055?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/misterhaan/Reminisce/releases/download/v1.0/reminisce-v1.0.rmskin",
-    "name": "Reminisce",
-    "latest_release_url": "https://api.github.com/repos/misterhaan/Reminisce/releases/latest",
-    "id": 117858809,
-    "has_downloads": true,
-    "full_name": "misterhaan/Reminisce"
-  },
-  {
-    "latest_release": "https://github.com/SilverAzide/Stopwatch/releases/download/v7.4.0/Stopwatch.-.Gadgets.Patch_7.4.0.rmskin",
+    "latest_release": {
+      "body": "7.4.0 - 2022-09-23\r\n* Enhanced to support the Gadgets Modernizer patch.\r\n",
+      "tag_name": "v7.4.0",
+      "browser_download_url": "https://github.com/SilverAzide/Stopwatch/releases/download/v7.4.0/Stopwatch.-.Gadgets.Patch_7.4.0.rmskin",
+      "name": "v7.4.0"
+    },
     "name": "Stopwatch",
-    "latest_release_url": "https://api.github.com/repos/SilverAzide/Stopwatch/releases/latest",
     "id": 266846784,
     "has_downloads": true,
-    "full_name": "SilverAzide/Stopwatch"
+    "full_name": "SilverAzide/Stopwatch",
+    "owner": {
+      "name": "SilverAzide",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2706567?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/d3ward/bouncydvd/releases/download/v1.0/BouncyDVD_1.0.rmskin",
+    "latest_release": {
+      "body": "The initial release of Reminisce photo slideshow skin for Rainmeter includes the following:\r\n\r\n* Shows random photo from a configurable directory for a configurable amount of time\r\n* Can launch the photo in the default photo viewer\r\n* Can choose a new random photo on demand\r\n* Can switch back to the previous photo in case you wanted to see it bigger but didn???t click that button in time",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/misterhaan/Reminisce/releases/download/v1.0/reminisce-v1.0.rmskin",
+      "name": "Reminisce v1.0"
+    },
+    "name": "Reminisce",
+    "id": 117858809,
+    "has_downloads": true,
+    "full_name": "misterhaan/Reminisce",
+    "owner": {
+      "name": "misterhaan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9259035?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/d3ward/bouncydvd/releases/download/v1.0/BouncyDVD_1.0.rmskin",
+      "name": "BouncyDVD v1.0"
+    },
     "name": "bouncydvd",
-    "latest_release_url": "https://api.github.com/repos/d3ward/bouncydvd/releases/latest",
     "id": 241635578,
     "has_downloads": true,
-    "full_name": "d3ward/bouncydvd"
+    "full_name": "d3ward/bouncydvd",
+    "owner": {
+      "name": "d3ward",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39910418?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/SilverAzide/Weather-Meter-Yahoo/releases/download/v7.4.0/Weather.Meter.Yahoo.-.Gadgets.Patch_7.4.0.rmskin",
+    "latest_release": {
+      "body": "Changes:\r\n\r\n- Made it easy to switch back to using Anurati as the clock font\r\n- Improved context menu centering actions\r\n- Added a layout to load all included skins automatically",
+      "tag_name": "v1.2.1",
+      "browser_download_url": "https://github.com/reisir/mondtholomew/releases/download/v1.2.1/Mondtholomew_v1.2.1.rmskin",
+      "name": "v1.2.1"
+    },
+    "name": "mondtholomew",
+    "id": 523792040,
+    "has_downloads": true,
+    "full_name": "reisir/mondtholomew",
+    "owner": {
+      "name": "reisir",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93496808?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "7.4.0 - 2022-09-23\r\n* Enhanced to support the Gadgets Modernizer patch.\r\n* HOTFIX 2022-09-24: Corrected issue that prevented automatic region detection from working and could cause the gadget to fail.\r\n\r\n***Requires Gadgets 7.4.0 or later.***",
+      "tag_name": "v7.4.0",
+      "browser_download_url": "https://github.com/SilverAzide/Weather-Meter-Yahoo/releases/download/v7.4.0/Weather.Meter.Yahoo.-.Gadgets.Patch_7.4.0.rmskin",
+      "name": "v7.4.0"
+    },
     "name": "Weather-Meter-Yahoo",
-    "latest_release_url": "https://api.github.com/repos/SilverAzide/Weather-Meter-Yahoo/releases/latest",
     "id": 267963921,
     "has_downloads": true,
-    "full_name": "SilverAzide/Weather-Meter-Yahoo"
+    "full_name": "SilverAzide/Weather-Meter-Yahoo",
+    "owner": {
+      "name": "SilverAzide",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2706567?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/infeeeee/infinimal/releases/download/3.0.1/infinimal_3.0.1.rmskin",
+    "latest_release": {
+      "body": "Fixed the rmskin installers",
+      "tag_name": "3.0.1",
+      "browser_download_url": "https://github.com/infeeeee/infinimal/releases/download/3.0.1/infinimal_3.0.1.rmskin",
+      "name": "Version 3.0.1"
+    },
     "name": "infinimal",
-    "latest_release_url": "https://api.github.com/repos/infeeeee/infinimal/releases/latest",
     "id": 118456875,
     "has_downloads": true,
-    "full_name": "infeeeee/infinimal"
+    "full_name": "infeeeee/infinimal",
+    "owner": {
+      "name": "infeeeee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1271737?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/jsmorley/JSMeter10/releases/download/v10.0/JSMeter10.rmskin",
+    "latest_release": {
+      "body": "Version 10.0 of the JSMeter10 Suite of Rainmeter skins.\r\nNovember 29, 2020",
+      "tag_name": "v10.0",
+      "browser_download_url": "https://github.com/jsmorley/JSMeter10/releases/download/v10.0/JSMeter10.rmskin",
+      "name": "JSMeter10 Suite of Rainmeter skins"
+    },
     "name": "JSMeter10",
-    "latest_release_url": "https://api.github.com/repos/jsmorley/JSMeter10/releases/latest",
     "id": 316996822,
     "has_downloads": true,
-    "full_name": "jsmorley/JSMeter10"
+    "full_name": "jsmorley/JSMeter10",
+    "owner": {
+      "name": "jsmorley",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1533041?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/AdamWHY2K/Fa-apulu/releases/download/v1.0.8/Fa.apulu_1.0.8.rmskin",
+    "latest_release": {
+      "body": "*Should* hopefully be immune to volvo adding new random app ids that aren't legitimate games from now on.",
+      "tag_name": "v1.0.8",
+      "browser_download_url": "https://github.com/AdamWHY2K/Fa-apulu/releases/download/v1.0.8/Fa.apulu_1.0.8.rmskin",
+      "name": "Fa'apulu_1.0.8"
+    },
     "name": "Fa-apulu",
-    "latest_release_url": "https://api.github.com/repos/AdamWHY2K/Fa-apulu/releases/latest",
     "id": 390183129,
     "has_downloads": true,
-    "full_name": "AdamWHY2K/Fa-apulu"
+    "full_name": "AdamWHY2K/Fa-apulu",
+    "owner": {
+      "name": "AdamWHY2K",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68286215?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/modkavartini/TaskControl/releases/download/v1.3.2/TaskControl_1.3.2.rmskin",
+    "latest_release": {
+      "body": "What's New:\r\n* Added a third `Icon Scheme`. The skin now has filled, round and outlined schemes.",
+      "tag_name": "v1.3.2",
+      "browser_download_url": "https://github.com/modkavartini/TaskControl/releases/download/v1.3.2/TaskControl_1.3.2.rmskin",
+      "name": "1.3.2"
+    },
     "name": "TaskControl",
-    "latest_release_url": "https://api.github.com/repos/modkavartini/TaskControl/releases/latest",
     "id": 363369619,
     "has_downloads": true,
-    "full_name": "modkavartini/TaskControl"
+    "full_name": "modkavartini/TaskControl",
+    "owner": {
+      "name": "modkavartini",
+      "avatar_url": "https://avatars.githubusercontent.com/u/81793953?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/mehdieft95/EQClock/releases/download/3.0/EQClock_3.0.rmskin",
+    "latest_release": {
+      "body": "NEW:\r\n    -Control your Web players such as Youtube, Soundcloud, GooglePlayMusic, AmazonMusic, Pandora, Tidal, Deezer, Plex using WebNowPlaying  browser plugin thanks to Trevor Hamilton.\r\n    -Check the song title and artist name right on the EQClock\r\n    -Toggle song repeat and playlist shuffle with one click\r\n    -Easily change the color or player right in Clock.ini file (instruction included)\r\n    -Elegant new design for paused mode\r\nFIXED:\r\n    -Spotify album art issue can be solved by installing Spicetify\r\nREMOVED:\r\n    -EQClock no longer shows CPU, RAM, Upload and Download meters\r\n",
+      "tag_name": "3.0",
+      "browser_download_url": "https://github.com/mehdieft95/EQClock/releases/download/3.0/EQClock_3.0.rmskin",
+      "name": "EQClock 3.0"
+    },
     "name": "EQClock",
-    "latest_release_url": "https://api.github.com/repos/mehdieft95/EQClock/releases/latest",
     "id": 90695486,
     "has_downloads": true,
-    "full_name": "mehdieft95/EQClock"
+    "full_name": "mehdieft95/EQClock",
+    "owner": {
+      "name": "mehdieft95",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8690114?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Halloyo/BandoriWidgets/releases/download/2.0/BandoriWidgets_2.0.rmskin",
+    "latest_release": {
+      "body": "Switch from Bestdori's API to Bandori.ga's. Added feature to switch between banner and logo image. This version *should* work no matter if the event is ongoing, completed, TBA, etc. (Only time will tell, but I am very confident this version should be the last major one) This version should also be more efficient. ",
+      "tag_name": "2.0",
+      "browser_download_url": "https://github.com/Halloyo/BandoriWidgets/releases/download/2.0/BandoriWidgets_2.0.rmskin",
+      "name": "2.0"
+    },
     "name": "BandoriWidgets",
-    "latest_release_url": "https://api.github.com/repos/Halloyo/BandoriWidgets/releases/latest",
     "id": 284388572,
     "has_downloads": true,
-    "full_name": "Halloyo/BandoriWidgets"
+    "full_name": "Halloyo/BandoriWidgets",
+    "owner": {
+      "name": "Halloyo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62628491?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/parasyte/kwcpu/releases/download/1.2.1/kwcpu-1.2.1.rmskin",
-    "name": "kwcpu",
-    "latest_release_url": "https://api.github.com/repos/parasyte/kwcpu/releases/latest",
-    "id": 443619070,
-    "has_downloads": true,
-    "full_name": "parasyte/kwcpu"
-  },
-  {
-    "latest_release": "https://github.com/JacobA2000/Rainmeter-MinimalStockTracker/releases/download/0.1.1/MinimalStockTracker_0.1.1.rmskin",
+    "latest_release": {
+      "body": "Added Vertical Trackers",
+      "tag_name": "0.1.1",
+      "browser_download_url": "https://github.com/JacobA2000/Rainmeter-MinimalStockTracker/releases/download/0.1.1/MinimalStockTracker_0.1.1.rmskin",
+      "name": "0.1.1 - Vertical Trackers"
+    },
     "name": "Rainmeter-MinimalStockTracker",
-    "latest_release_url": "https://api.github.com/repos/JacobA2000/Rainmeter-MinimalStockTracker/releases/latest",
     "id": 375023201,
     "has_downloads": true,
-    "full_name": "JacobA2000/Rainmeter-MinimalStockTracker"
+    "full_name": "JacobA2000/Rainmeter-MinimalStockTracker",
+    "owner": {
+      "name": "JacobA2000",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44875489?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/xXNickznXx/Nicksons-Suite/releases/download/1.0.2/Nicksons-Suite_1.0.2.rmskin",
+    "latest_release": {
+      "body": "Activate Windows",
+      "tag_name": "v.1.0.0",
+      "browser_download_url": "https://github.com/reisir/activate-windows/releases/download/v.1.0.0/Activate.Windows_v.1.0.0.rmskin",
+      "name": "v.1.0.0"
+    },
+    "name": "activate-windows",
+    "id": 457556540,
+    "has_downloads": true,
+    "full_name": "reisir/activate-windows",
+    "owner": {
+      "name": "reisir",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93496808?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "Fixes:\r\n\r\n- Fixed skin version number displayed in the Rainmeter manager.",
+      "tag_name": "1.2.1",
+      "browser_download_url": "https://github.com/parasyte/kwcpu/releases/download/1.2.1/kwcpu-1.2.1.rmskin",
+      "name": "1.2.1"
+    },
+    "name": "kwcpu",
+    "id": 443619070,
+    "has_downloads": true,
+    "full_name": "parasyte/kwcpu",
+    "owner": {
+      "name": "parasyte",
+      "avatar_url": "https://avatars.githubusercontent.com/u/456942?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "Initial release",
+      "tag_name": "v1.0.0",
+      "browser_download_url": "https://github.com/reisir/robux/releases/download/v1.0.0/Robux.rmskin",
+      "name": "v1.0.0"
+    },
+    "name": "robux",
+    "id": 555865644,
+    "has_downloads": true,
+    "full_name": "reisir/robux",
+    "owner": {
+      "name": "reisir",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93496808?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "",
+      "tag_name": "1.0.2",
+      "browser_download_url": "https://github.com/xXNickznXx/Nicksons-Suite/releases/download/1.0.2/Nicksons-Suite_1.0.2.rmskin",
+      "name": "Nicksons-Suite"
+    },
     "name": "Nicksons-Suite",
-    "latest_release_url": "https://api.github.com/repos/xXNickznXx/Nicksons-Suite/releases/latest",
     "id": 224022471,
     "has_downloads": true,
-    "full_name": "xXNickznXx/Nicksons-Suite"
+    "full_name": "xXNickznXx/Nicksons-Suite",
+    "owner": {
+      "name": "xXNickznXx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31235664?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/claudiobosetti/GlowyMinimalBin/releases/download/v1.0/Glowy.Minimal.Bin_1.0.rmskin",
+    "latest_release": {
+      "body": "",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/claudiobosetti/GlowyMinimalBin/releases/download/v1.0/Glowy.Minimal.Bin_1.0.rmskin",
+      "name": "Glowy Minimal Bin v1.0"
+    },
     "name": "GlowyMinimalBin",
-    "latest_release_url": "https://api.github.com/repos/claudiobosetti/GlowyMinimalBin/releases/latest",
     "id": 287102951,
     "has_downloads": true,
-    "full_name": "claudiobosetti/GlowyMinimalBin"
+    "full_name": "claudiobosetti/GlowyMinimalBin",
+    "owner": {
+      "name": "claudiobosetti",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57715060?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/minusInfinite/simple_forecast/releases/download/v1.2.1/Simple.Forecast_1.2.1.rmskin",
+    "latest_release": {
+      "body": "### Changes since 1.2.0\r\nThe Degrees will display in \"F\" or \"C\" automatically depending on the Variable Units\r\n\r\nIf the units variable is set to \"imperial\" F will be used\r\nIf the units variable is set to \"metric\" C will be used",
+      "tag_name": "v1.2.1",
+      "browser_download_url": "https://github.com/minusInfinite/simple_forecast/releases/download/v1.2.1/Simple.Forecast_1.2.1.rmskin",
+      "name": "Simple Forecast 1.2.1"
+    },
     "name": "simple_forecast",
-    "latest_release_url": "https://api.github.com/repos/minusInfinite/simple_forecast/releases/latest",
     "id": 235239142,
     "has_downloads": true,
-    "full_name": "minusInfinite/simple_forecast"
+    "full_name": "minusInfinite/simple_forecast",
+    "owner": {
+      "name": "minusInfinite",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15844295?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/2bndy5/LCARS-Door-Rainmeter-Skin/releases/download/v1.0.1/LCARS.Door_7a5639f7.rmskin",
+    "latest_release": {
+      "body": "Fixes bug introduced by weather.com changing their website again",
+      "tag_name": "v1.0.1",
+      "browser_download_url": "https://github.com/2bndy5/LCARS-Door-Rainmeter-Skin/releases/download/v1.0.1/LCARS.Door_7a5639f7.rmskin",
+      "name": "Weather Fix"
+    },
     "name": "LCARS-Door-Rainmeter-Skin",
-    "latest_release_url": "https://api.github.com/repos/2bndy5/LCARS-Door-Rainmeter-Skin/releases/latest",
     "id": 266244848,
     "has_downloads": true,
-    "full_name": "2bndy5/LCARS-Door-Rainmeter-Skin"
+    "full_name": "2bndy5/LCARS-Door-Rainmeter-Skin",
+    "owner": {
+      "name": "2bndy5",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14963867?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/nek7u/Snip-and-Pin-to-Screen/releases/download/2022-12-14/SnipAndPinToScreen.rmskin",
+    "latest_release": {
+      "body": "2022-12-14 (YYYY-MM-DD)  \r\n* Icon: Tweaks\r\n* Viewer: Tweaks\r\n* Viewer: Added more color filter options.\r\n\r\nSHA256 `56881c607f5b2a9405b1dc16c50e07f10d5996986222af9fb9395191f183ff42`  ",
+      "tag_name": "2022-12-14",
+      "browser_download_url": "https://github.com/nek7u/Snip-and-Pin-to-Screen/releases/download/2022-12-14/SnipAndPinToScreen.rmskin",
+      "name": "Snip and Pin to Screen 2022-12-14"
+    },
     "name": "Snip-and-Pin-to-Screen",
-    "latest_release_url": "https://api.github.com/repos/nek7u/Snip-and-Pin-to-Screen/releases/latest",
     "id": 547090043,
     "has_downloads": true,
-    "full_name": "nek7u/Snip-and-Pin-to-Screen"
+    "full_name": "nek7u/Snip-and-Pin-to-Screen",
+    "owner": {
+      "name": "nek7u",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58021194?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/newtoallofthis123/ranpack/releases/download/v.0.1/RanPack_v.0.1.rmskin",
+    "latest_release": {
+      "body": "# RanPack v.0.1\r\n\r\nRanPack has 5 packages\r\n\r\n1. ranpack_v.0.1_rmskin_with_joke.zip (*Recommended*)\r\n2. ranpack_v.0.1_full.zip: Raw Folder assets without rmskin , rainmeter_joke.exe included\r\n3. rainmeter_joke.exe: Generate a random joke for RanPack joke widget (compiled executable, no python required)\r\n4. ranpack_v.0.1.rmskin: Normal RmSkin setup (*Recommended for beginners*)\r\n5. rainmeter_joke.py: Generate a random joke for RanPack joke widget (python required)",
+      "tag_name": "v.0.1",
+      "browser_download_url": "https://github.com/newtoallofthis123/ranpack/releases/download/v.0.1/RanPack_v.0.1.rmskin",
+      "name": "The First Release"
+    },
     "name": "ranpack",
-    "latest_release_url": "https://api.github.com/repos/newtoallofthis123/ranpack/releases/latest",
     "id": 393661977,
     "has_downloads": true,
-    "full_name": "newtoallofthis123/ranpack"
+    "full_name": "newtoallofthis123/ranpack",
+    "owner": {
+      "name": "newtoallofthis123",
+      "avatar_url": "https://avatars.githubusercontent.com/u/78465651?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Proliantaholic/TaiwanWeatherAQI/releases/download/v3.01/TaiwanWeatherAQI_3.01.rmskin",
+    "latest_release": {
+      "body": "### Version 3.01 / 2022-11-02\r\n- ?????? ObsStations202211.txt\r\n- ?????? GetWebDriver.ps1: ??????Selenium WebDriver?????????????????????",
+      "tag_name": "v3.01",
+      "browser_download_url": "https://github.com/Proliantaholic/TaiwanWeatherAQI/releases/download/v3.01/TaiwanWeatherAQI_3.01.rmskin",
+      "name": "Taiwan Weather and AQI ????????????????????????????????? v3.01"
+    },
     "name": "TaiwanWeatherAQI",
-    "latest_release_url": "https://api.github.com/repos/Proliantaholic/TaiwanWeatherAQI/releases/latest",
     "id": 179050721,
     "has_downloads": true,
-    "full_name": "Proliantaholic/TaiwanWeatherAQI"
+    "full_name": "Proliantaholic/TaiwanWeatherAQI",
+    "owner": {
+      "name": "Proliantaholic",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49068319?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/VulpesPaw/Rainmeter-WallpaperTimeWalker/releases/download/v1.0.2/Wallpaper.Time.Walker_1.0.2.rmskin",
+    "latest_release": {
+      "body": "Release of the Rainmeter skin and containing an installer\r\n\r\nFull Changelog: https://github.com/VulpesPaw/Rainmeter-WallpaperTimeWalker/commits/Release\r\n\r\nChanges:\r\n- Improvments and further clarifications\r\n\r\n![preview](https://user-images.githubusercontent.com/63596133/184534807-8d63af74-785d-4ada-a999-8134930994c0.png)\r\n",
+      "tag_name": "v1.0.2",
+      "browser_download_url": "https://github.com/VulpesPaw/Rainmeter-WallpaperTimeWalker/releases/download/v1.0.2/Wallpaper.Time.Walker_1.0.2.rmskin",
+      "name": "Release 1.0.2"
+    },
     "name": "Rainmeter-WallpaperTimeWalker",
-    "latest_release_url": "https://api.github.com/repos/VulpesPaw/Rainmeter-WallpaperTimeWalker/releases/latest",
     "id": 524626396,
     "has_downloads": true,
-    "full_name": "VulpesPaw/Rainmeter-WallpaperTimeWalker"
+    "full_name": "VulpesPaw/Rainmeter-WallpaperTimeWalker",
+    "owner": {
+      "name": "VulpesPaw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/63596133?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/blackk100/Frankenstein/releases/download/v1.2.1/Frankenstein_1.2.1.rmskin",
-    "name": "Frankenstein",
-    "latest_release_url": "https://api.github.com/repos/blackk100/Frankenstein/releases/latest",
-    "id": 192048596,
-    "has_downloads": true,
-    "full_name": "blackk100/Frankenstein"
-  },
-  {
-    "latest_release": "https://github.com/Sigmanor/Aion-Servers-Status/releases/download/v0.5/Aion-Servers-Status_0.5.rmskin",
+    "latest_release": {
+      "body": "[Release notes](https://github.com/Sigmanor/Aion-Servers-Status/wiki/Release-notes)\n",
+      "tag_name": "v0.5",
+      "browser_download_url": "https://github.com/Sigmanor/Aion-Servers-Status/releases/download/v0.5/Aion-Servers-Status_0.5.rmskin",
+      "name": "Release v0.5"
+    },
     "name": "Aion-Servers-Status",
-    "latest_release_url": "https://api.github.com/repos/Sigmanor/Aion-Servers-Status/releases/latest",
     "id": 45754882,
     "has_downloads": true,
-    "full_name": "Sigmanor/Aion-Servers-Status"
+    "full_name": "Sigmanor/Aion-Servers-Status",
+    "owner": {
+      "name": "Sigmanor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7986067?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin/releases/download/3.0.0/Headset.Battery_3.0.rmskin",
+    "latest_release": {
+      "body": "Added decent (ish) documentation in the skins ini file\r\n\r\nMade it look kinda nice",
+      "tag_name": "3.0.0",
+      "browser_download_url": "https://github.com/Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin/releases/download/3.0.0/Headset.Battery_3.0.rmskin",
+      "name": "Arctis 7 Battery Rainmeter Skin"
+    },
     "name": "Arctis-7-Battery-Rainmeter-Skin",
-    "latest_release_url": "https://api.github.com/repos/Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin/releases/latest",
     "id": 368022670,
     "has_downloads": true,
-    "full_name": "Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin"
+    "full_name": "Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin",
+    "owner": {
+      "name": "Hamza-Rafi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60830513?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Mayochun/Rainmeter-Sys-Monitor/releases/download/v0.3/Rainmeter-Sys-Monitor_v0.3.rmskin",
-    "name": "Rainmeter-Sys-Monitor",
-    "latest_release_url": "https://api.github.com/repos/Mayochun/Rainmeter-Sys-Monitor/releases/latest",
-    "id": 417012959,
+    "latest_release": {
+      "body": "Network measures all network interfaces and Shutdown shuts down/restarts with an appropriate Reason Code.",
+      "tag_name": "v1.2.1",
+      "browser_download_url": "https://github.com/blackk100/Frankenstein/releases/download/v1.2.1/Frankenstein_1.2.1.rmskin",
+      "name": "Minor Modifications"
+    },
+    "name": "Frankenstein",
+    "id": 192048596,
     "has_downloads": true,
-    "full_name": "Mayochun/Rainmeter-Sys-Monitor"
+    "full_name": "blackk100/Frankenstein",
+    "owner": {
+      "name": "blackk100",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22541378?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/supercam19/Delta/releases/download/v1.3.3/Delta_1.3.3.rmskin",
+    "latest_release": {
+      "body": "## Update v1.3.3 - User greetings (Nov 11, 2022)\r\n\r\n### Additions\r\n- Added a greeting skin that changes based on time\r\n\r\n### Fixes\r\n- Reversed the day of the month and month so it is in the correct order (date/date and time skins)",
+      "tag_name": "v1.3.3",
+      "browser_download_url": "https://github.com/supercam19/Delta/releases/download/v1.3.3/Delta_1.3.3.rmskin",
+      "name": "User Greetings [v1.3.3]"
+    },
     "name": "Delta",
-    "latest_release_url": "https://api.github.com/repos/supercam19/Delta/releases/latest",
     "id": 387334543,
     "has_downloads": true,
-    "full_name": "supercam19/Delta"
+    "full_name": "supercam19/Delta",
+    "owner": {
+      "name": "supercam19",
+      "avatar_url": "https://avatars.githubusercontent.com/u/79729769?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/DerianMelvin/SASMusicPlayer/releases/download/v1.2.1/S.A.S_MusicPlayer_1.2.1.rmskin",
-    "name": "SASMusicPlayer",
-    "latest_release_url": "https://api.github.com/repos/DerianMelvin/SASMusicPlayer/releases/latest",
-    "id": 559890537,
+    "latest_release": {
+      "body": "Code Improvements",
+      "tag_name": "v0.3",
+      "browser_download_url": "https://github.com/Mayochun/Rainmeter-Sys-Monitor/releases/download/v0.3/Rainmeter-Sys-Monitor_v0.3.rmskin",
+      "name": "v0.3"
+    },
+    "name": "Rainmeter-Sys-Monitor",
+    "id": 417012959,
     "has_downloads": true,
-    "full_name": "DerianMelvin/SASMusicPlayer"
+    "full_name": "Mayochun/Rainmeter-Sys-Monitor",
+    "owner": {
+      "name": "Mayochun",
+      "avatar_url": "https://avatars.githubusercontent.com/u/92324644?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Katakuari/AiOGPUInfo/releases/download/1.2/AiOGPUInfo_1.2.rmskin",
-    "name": "AiOGPUInfo",
-    "latest_release_url": "https://api.github.com/repos/Katakuari/AiOGPUInfo/releases/latest",
-    "id": 404656650,
+    "latest_release": {
+      "body": "Michaelsoft Binbows",
+      "tag_name": "v.1.0.0",
+      "browser_download_url": "https://github.com/reisir/michaelsoft-binbows/releases/download/v.1.0.0/Michaelsoft.Binbows_1.rmskin",
+      "name": "v.1.0.0"
+    },
+    "name": "michaelsoft-binbows",
+    "id": 553796627,
     "has_downloads": true,
-    "full_name": "Katakuari/AiOGPUInfo"
+    "full_name": "reisir/michaelsoft-binbows",
+    "owner": {
+      "name": "reisir",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93496808?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/SilverAzide/Dark-Side-of-the-Moon/releases/download/v1.0.0/Dark.Side.of.the.Moon_1.0.0.rmskin",
+    "latest_release": {
+      "body": "v1.0.0 release",
+      "tag_name": "v1.0.0",
+      "browser_download_url": "https://github.com/reisir/ssshpn/releases/download/v1.0.0/ssshpn.rmskin",
+      "name": "v1.0.0"
+    },
+    "name": "ssshpn",
+    "id": 556421546,
+    "has_downloads": true,
+    "full_name": "reisir/ssshpn",
+    "owner": {
+      "name": "reisir",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93496808?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "1.0.0 - 2021-01-01\r\n* Initial release.\r\n\r\n***Requires Rainmeter 4.4-r3412-beta or later.***",
+      "tag_name": "v1.0.0",
+      "browser_download_url": "https://github.com/SilverAzide/Dark-Side-of-the-Moon/releases/download/v1.0.0/Dark.Side.of.the.Moon_1.0.0.rmskin",
+      "name": "v1.0.0"
+    },
     "name": "Dark-Side-of-the-Moon",
-    "latest_release_url": "https://api.github.com/repos/SilverAzide/Dark-Side-of-the-Moon/releases/latest",
     "id": 326027286,
     "has_downloads": true,
-    "full_name": "SilverAzide/Dark-Side-of-the-Moon"
+    "full_name": "SilverAzide/Dark-Side-of-the-Moon",
+    "owner": {
+      "name": "SilverAzide",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2706567?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/DarkFalc0n/Weather-Widget/releases/download/vAlpha/Weather-Widget_vAlpha.rmskin",
+    "latest_release": {
+      "body": "",
+      "tag_name": "vAlpha",
+      "browser_download_url": "https://github.com/DarkFalc0n/Weather-Widget/releases/download/vAlpha/Weather-Widget_vAlpha.rmskin",
+      "name": "Alpha Release"
+    },
     "name": "Weather-Widget",
-    "latest_release_url": "https://api.github.com/repos/DarkFalc0n/Weather-Widget/releases/latest",
     "id": 408370640,
     "has_downloads": true,
-    "full_name": "DarkFalc0n/Weather-Widget"
+    "full_name": "DarkFalc0n/Weather-Widget",
+    "owner": {
+      "name": "DarkFalc0n",
+      "avatar_url": "https://avatars.githubusercontent.com/u/59203815?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/InLurker/Rainmeter-Simple-AlbumArt/releases/download/Release/AlbumArt_v1.0.rmskin",
+    "latest_release": {
+      "body": "Initial release",
+      "tag_name": "Release",
+      "browser_download_url": "https://github.com/InLurker/Rainmeter-Simple-AlbumArt/releases/download/Release/AlbumArt_v1.0.rmskin",
+      "name": "Release v1.0"
+    },
     "name": "Rainmeter-Simple-AlbumArt",
-    "latest_release_url": "https://api.github.com/repos/InLurker/Rainmeter-Simple-AlbumArt/releases/latest",
     "id": 432700000,
     "has_downloads": true,
-    "full_name": "InLurker/Rainmeter-Simple-AlbumArt"
+    "full_name": "InLurker/Rainmeter-Simple-AlbumArt",
+    "owner": {
+      "name": "InLurker",
+      "avatar_url": "https://avatars.githubusercontent.com/u/82582556?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/RedEcho/chaRm/releases/download/v1.2.0/chaRm_1.2.0.rmskin",
+    "latest_release": {
+      "body": "- Added font to resources, with credit added in the Information section\r\n- Removed unnecessary folder \"AiOGPUInfo\"\r\n- \"sensors.inc\" is now integrated into skin file\r\n- Changed \"D3D\" to \"Util\" in the skin text\r\n\r\n![2022-03-22_11-36-20](https://user-images.githubusercontent.com/24562538/159463761-de7b4643-c39e-4193-8624-e85d3b0baa15.png)\r\n",
+      "tag_name": "1.2",
+      "browser_download_url": "https://github.com/Katakuari/AiOGPUInfo/releases/download/1.2/AiOGPUInfo_1.2.rmskin",
+      "name": "1.2"
+    },
+    "name": "AiOGPUInfo",
+    "id": 404656650,
+    "has_downloads": true,
+    "full_name": "Katakuari/AiOGPUInfo",
+    "owner": {
+      "name": "Katakuari",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24562538?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "- UI: Fixed long input values from extending outside the skin border\r\n- UI: Adjusted skin load in settings to toggle\r\n- UI: Added a toggle to switch between different variants of alignment settings\r\n- UI: Adjusted settings width & height slightly\r\n- UI: Adjusted text and description on some settings",
+      "tag_name": "v1.2.1",
+      "browser_download_url": "https://github.com/DerianMelvin/SASMusicPlayer/releases/download/v1.2.1/S.A.S_MusicPlayer_1.2.1.rmskin",
+      "name": "v1.2.1"
+    },
+    "name": "SASMusicPlayer",
+    "id": 559890537,
+    "has_downloads": true,
+    "full_name": "DerianMelvin/SASMusicPlayer",
+    "owner": {
+      "name": "DerianMelvin",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53027082?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "Changelog :\r\n\r\n* Added a pause button if you need more performance or want to see your background image\r\n* Compatibility verified with Rainmeter 4.3 Release (r3298)",
+      "tag_name": "v1.2.0",
+      "browser_download_url": "https://github.com/RedEcho/chaRm/releases/download/v1.2.0/chaRm_1.2.0.rmskin",
+      "name": "chaRm v1.2.0 \"Dark Blue\""
+    },
     "name": "chaRm",
-    "latest_release_url": "https://api.github.com/repos/RedEcho/chaRm/releases/latest",
     "id": 146214134,
     "has_downloads": true,
-    "full_name": "RedEcho/chaRm"
+    "full_name": "RedEcho/chaRm",
+    "owner": {
+      "name": "RedEcho",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31902717?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/minusInfinite/MIUI-Weather-Fork/releases/download/1.1.0/MIUI.Weather._1.1.0.rmskin",
+    "latest_release": {
+      "body": "This is a rework of the Web Parse for [MIUI Weather](https://www.deviantart.com/yahibazou/art/MIUI-Weather-295260009) but YahibazOu\r\n\r\nEnsure you have read the README - https://github.com/minusInfinite/MIUI-Weather-Fork#setup - for setup",
+      "tag_name": "1.1.0",
+      "browser_download_url": "https://github.com/minusInfinite/MIUI-Weather-Fork/releases/download/1.1.0/MIUI.Weather._1.1.0.rmskin",
+      "name": "MIUI Weather - Rework Release "
+    },
     "name": "MIUI-Weather-Fork",
-    "latest_release_url": "https://api.github.com/repos/minusInfinite/MIUI-Weather-Fork/releases/latest",
     "id": 451729866,
     "has_downloads": true,
-    "full_name": "minusInfinite/MIUI-Weather-Fork"
+    "full_name": "minusInfinite/MIUI-Weather-Fork",
+    "owner": {
+      "name": "minusInfinite",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15844295?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/nek7u/OhTenkiMoe/releases/download/2022-08-06/OhTenkiMoe.rmskin",
+    "latest_release": {
+      "body": "2022-08-06 (YYYY-MM-DD)  \r\n* [Icon] Tweaks  \r\n* [Viewer] Tweaks  \r\n* [ColorSwatch] Added some color swatches.\r\n\r\nSHA256 `7dcfaf390387c693a6b41175052d577e39b4607441e60a32094b8d05d730c163` ",
+      "tag_name": "2022-08-06",
+      "browser_download_url": "https://github.com/nek7u/OhTenkiMoe/releases/download/2022-08-06/OhTenkiMoe.rmskin",
+      "name": "OhTenkiMoe 2022-08-06"
+    },
     "name": "OhTenkiMoe",
-    "latest_release_url": "https://api.github.com/repos/nek7u/OhTenkiMoe/releases/latest",
     "id": 434834599,
     "has_downloads": true,
-    "full_name": "nek7u/OhTenkiMoe"
+    "full_name": "nek7u/OhTenkiMoe",
+    "owner": {
+      "name": "nek7u",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58021194?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/kazeraniman/dont-break-the-chain-skin/releases/download/1.0.0/dont-break-the-chain_1.0.0.rmskin",
+    "latest_release": {
+      "body": "The initial release for the skin.",
+      "tag_name": "1.0.0",
+      "browser_download_url": "https://github.com/kazeraniman/dont-break-the-chain-skin/releases/download/1.0.0/dont-break-the-chain_1.0.0.rmskin",
+      "name": "1.0.0 Release"
+    },
     "name": "dont-break-the-chain-skin",
-    "latest_release_url": "https://api.github.com/repos/kazeraniman/dont-break-the-chain-skin/releases/latest",
     "id": 136871118,
     "has_downloads": true,
-    "full_name": "kazeraniman/dont-break-the-chain-skin"
+    "full_name": "kazeraniman/dont-break-the-chain-skin",
+    "owner": {
+      "name": "kazeraniman",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9021098?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Matsukii/Mondstat-dynamic/releases/download/v1.1/Genshim.impact.-.Mondstat.day.cycle_1.1.rmskin",
+    "latest_release": {
+      "body": "Base release\r\nThe .rmskin includes 32 images (one for each hour + between hour extras)",
+      "tag_name": "v1.1",
+      "browser_download_url": "https://github.com/Matsukii/Mondstat-dynamic/releases/download/v1.1/Genshim.impact.-.Mondstat.day.cycle_1.1.rmskin",
+      "name": "v1.1 - base release"
+    },
     "name": "Mondstat-dynamic",
-    "latest_release_url": "https://api.github.com/repos/Matsukii/Mondstat-dynamic/releases/latest",
     "id": 352766321,
     "has_downloads": true,
-    "full_name": "Matsukii/Mondstat-dynamic"
+    "full_name": "Matsukii/Mondstat-dynamic",
+    "owner": {
+      "name": "Matsukii",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28326534?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/reisir/ffmpegger/releases/download/v1.0/ffmpegger_v1.0.rmskin",
+    "latest_release": {
+      "body": "Initial release\r\n\r\nThe .rmskin bundles in ffmpeg.exe from [BtbN/FFmpeg-Builds](https://github.com/BtbN/FFmpeg-Builds/releases)",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/reisir/ffmpegger/releases/download/v1.0/ffmpegger_v1.0.rmskin",
+      "name": "v1.0"
+    },
     "name": "ffmpegger",
-    "latest_release_url": "https://api.github.com/repos/reisir/ffmpegger/releases/latest",
     "id": 590833749,
     "has_downloads": true,
-    "full_name": "reisir/ffmpegger"
+    "full_name": "reisir/ffmpegger",
+    "owner": {
+      "name": "reisir",
+      "avatar_url": "https://avatars.githubusercontent.com/u/93496808?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Hockeyfan360/W10-Clock-Rainmeter-Skin/releases/download/v1.0/W10.Lock.Screen.Clock_1.0.rmskin",
+    "latest_release": {
+      "body": "This is the initial release of the Rainmeter skin.\n",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/Hockeyfan360/W10-Clock-Rainmeter-Skin/releases/download/v1.0/W10.Lock.Screen.Clock_1.0.rmskin",
+      "name": "W10-Clock-Rainmeter-Skin v1.0"
+    },
     "name": "W10-Clock-Rainmeter-Skin",
-    "latest_release_url": "https://api.github.com/repos/Hockeyfan360/W10-Clock-Rainmeter-Skin/releases/latest",
     "id": 82429495,
     "has_downloads": true,
-    "full_name": "Hockeyfan360/W10-Clock-Rainmeter-Skin"
+    "full_name": "Hockeyfan360/W10-Clock-Rainmeter-Skin",
+    "owner": {
+      "name": "Hockeyfan360",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8217424?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/LatinoF/LTFBin/releases/download/V1.0/LTFBin.1.0.rmskin",
+    "latest_release": {
+      "body": "Intial release",
+      "tag_name": "V1.0",
+      "browser_download_url": "https://github.com/LatinoF/LTFBin/releases/download/V1.0/LTFBin.1.0.rmskin",
+      "name": "v1.0"
+    },
     "name": "LTFBin",
-    "latest_release_url": "https://api.github.com/repos/LatinoF/LTFBin/releases/latest",
     "id": 503143262,
     "has_downloads": true,
-    "full_name": "LatinoF/LTFBin"
+    "full_name": "LatinoF/LTFBin",
+    "owner": {
+      "name": "LatinoF",
+      "avatar_url": "https://avatars.githubusercontent.com/u/39635923?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/rdivanji/ChromeMeter/releases/download/v1.1/ChromeMeter_1.1.rmskin",
-    "name": "ChromeMeter",
-    "latest_release_url": "https://api.github.com/repos/rdivanji/ChromeMeter/releases/latest",
-    "id": 287767493,
-    "has_downloads": true,
-    "full_name": "rdivanji/ChromeMeter"
-  },
-  {
-    "latest_release": "https://github.com/Halloyo/StellaVisualizer/releases/download/1.0/Stella.by.Starlight_1.0.rmskin",
-    "name": "StellaVisualizer",
-    "latest_release_url": "https://api.github.com/repos/Halloyo/StellaVisualizer/releases/latest",
-    "id": 279948591,
-    "has_downloads": true,
-    "full_name": "Halloyo/StellaVisualizer"
-  },
-  {
-    "latest_release": "https://github.com/Proliantaholic/MaskInfo/releases/download/v0.99/MaskInfo_0.99.rmskin",
-    "name": "MaskInfo",
-    "latest_release_url": "https://api.github.com/repos/Proliantaholic/MaskInfo/releases/latest",
-    "id": 246507978,
-    "has_downloads": true,
-    "full_name": "Proliantaholic/MaskInfo"
-  },
-  {
-    "latest_release": "https://github.com/fhazal/Rainmeter-Skin/releases/download/rainmeter/onedarkpro_rainformer_aida64_edition_by_belon_dfe9bk1.rmskin",
+    "latest_release": {
+      "body": "<img width=\"1920\" alt=\"OneDarkProFormerv1-2\" src=\"https://user-images.githubusercontent.com/15804741/193193992-977d9ebd-35d5-4bc2-a46b-658255b55925.png\">\r\n\r\n**Full Changelog**: https://github.com/fhazal/RainMeter/commits/skin",
+      "tag_name": "rainmeter",
+      "browser_download_url": "https://github.com/fhazal/Rainmeter-Skin/releases/download/rainmeter/onedarkpro_rainformer_aida64_edition_by_belon_dfe9bk1.rmskin",
+      "name": "One Dark Pro Rainformer v1.0"
+    },
     "name": "Rainmeter-Skin",
-    "latest_release_url": "https://api.github.com/repos/fhazal/Rainmeter-Skin/releases/latest",
     "id": 543436263,
     "has_downloads": true,
-    "full_name": "fhazal/Rainmeter-Skin"
+    "full_name": "fhazal/Rainmeter-Skin",
+    "owner": {
+      "name": "fhazal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15804741?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/AdamWHY2K/Rainmeter_Jellyfin_Status/releases/download/v1.0.3/Jellyfin_Status_1.0.3.rmskin",
+    "latest_release": {
+      "body": "# Changelog\r\n- Fixed bug that prevented shrinking with largest line width",
+      "tag_name": "v1.0.3",
+      "browser_download_url": "https://github.com/AdamWHY2K/Rainmeter_Jellyfin_Status/releases/download/v1.0.3/Jellyfin_Status_1.0.3.rmskin",
+      "name": "Jellyfin_Status_1.0.3"
+    },
     "name": "Rainmeter_Jellyfin_Status",
-    "latest_release_url": "https://api.github.com/repos/AdamWHY2K/Rainmeter_Jellyfin_Status/releases/latest",
     "id": 598582628,
     "has_downloads": true,
-    "full_name": "AdamWHY2K/Rainmeter_Jellyfin_Status"
+    "full_name": "AdamWHY2K/Rainmeter_Jellyfin_Status",
+    "owner": {
+      "name": "AdamWHY2K",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68286215?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/alexesprit/SleepyTime/releases/download/2020-05-20/SleepyTime_2020-05-20.rmskin",
+    "latest_release": {
+      "body": "",
+      "tag_name": "1.0",
+      "browser_download_url": "https://github.com/Halloyo/StellaVisualizer/releases/download/1.0/Stella.by.Starlight_1.0.rmskin",
+      "name": "v1.0"
+    },
+    "name": "StellaVisualizer",
+    "id": 279948591,
+    "has_downloads": true,
+    "full_name": "Halloyo/StellaVisualizer",
+    "owner": {
+      "name": "Halloyo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/62628491?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "### Version 0.99 / 2020-11-24\r\n* ?????? ?????????????????????????????????????????????????????????https",
+      "tag_name": "v0.99",
+      "browser_download_url": "https://github.com/Proliantaholic/MaskInfo/releases/download/v0.99/MaskInfo_0.99.rmskin",
+      "name": "MaskInfo ?????????????????????????????????????????? v0.99"
+    },
+    "name": "MaskInfo",
+    "id": 246507978,
+    "has_downloads": true,
+    "full_name": "Proliantaholic/MaskInfo",
+    "owner": {
+      "name": "Proliantaholic",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49068319?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "Didn't change much, only the opacity of the clock text.",
+      "tag_name": "v1.1",
+      "browser_download_url": "https://github.com/rdivanji/ChromeMeter/releases/download/v1.1/ChromeMeter_1.1.rmskin",
+      "name": "1.1"
+    },
+    "name": "ChromeMeter",
+    "id": 287767493,
+    "has_downloads": true,
+    "full_name": "rdivanji/ChromeMeter",
+    "owner": {
+      "name": "rdivanji",
+      "avatar_url": "https://avatars.githubusercontent.com/u/31264739?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "Updated font style.",
+      "tag_name": "2020-05-20",
+      "browser_download_url": "https://github.com/alexesprit/SleepyTime/releases/download/2020-05-20/SleepyTime_2020-05-20.rmskin",
+      "name": "SleepyTime (2020-05-20)"
+    },
     "name": "SleepyTime",
-    "latest_release_url": "https://api.github.com/repos/alexesprit/SleepyTime/releases/latest",
     "id": 47916683,
     "has_downloads": true,
-    "full_name": "alexesprit/SleepyTime"
+    "full_name": "alexesprit/SleepyTime",
+    "owner": {
+      "name": "alexesprit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1119267?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/xun468/Rainmeter-TomatoTelemetry/releases/download/2.1/TomatoTelemetry_2.1.rmskin",
+    "latest_release": {
+      "body": "Added a meter to display how many minutes ago the miaomiao communicated with the website ",
+      "tag_name": "2.1",
+      "browser_download_url": "https://github.com/xun468/Rainmeter-TomatoTelemetry/releases/download/2.1/TomatoTelemetry_2.1.rmskin",
+      "name": "V2.1"
+    },
     "name": "Rainmeter-TomatoTelemetry",
-    "latest_release_url": "https://api.github.com/repos/xun468/Rainmeter-TomatoTelemetry/releases/latest",
     "id": 327823556,
     "has_downloads": true,
-    "full_name": "xun468/Rainmeter-TomatoTelemetry"
+    "full_name": "xun468/Rainmeter-TomatoTelemetry",
+    "owner": {
+      "name": "xun468",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8162613?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/kerfootj/rainmeter-f1-calendar/releases/download/2020.1.0/F1.Calendar_2020.1.0.rmskin",
+    "latest_release": {
+      "body": "F1 2020 Calendar \r\nversion: 2020.1.0",
+      "tag_name": "2020.1.0",
+      "browser_download_url": "https://github.com/kerfootj/rainmeter-f1-calendar/releases/download/2020.1.0/F1.Calendar_2020.1.0.rmskin",
+      "name": "F1 2020 Calendar"
+    },
     "name": "rainmeter-f1-calendar",
-    "latest_release_url": "https://api.github.com/repos/kerfootj/rainmeter-f1-calendar/releases/latest",
     "id": 181090596,
     "has_downloads": true,
-    "full_name": "kerfootj/rainmeter-f1-calendar"
+    "full_name": "kerfootj/rainmeter-f1-calendar",
+    "owner": {
+      "name": "kerfootj",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28577877?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/lisonge/tiny-toys/releases/download/0.1.0/tiny-toys_0.1.0.rmskin",
+    "latest_release": {
+      "body": "First submission, only include windmill\r\n\r\n",
+      "tag_name": "0.1.0",
+      "browser_download_url": "https://github.com/lisonge/tiny-toys/releases/download/0.1.0/tiny-toys_0.1.0.rmskin",
+      "name": "v0.1.0"
+    },
     "name": "tiny-toys",
-    "latest_release_url": "https://api.github.com/repos/lisonge/tiny-toys/releases/latest",
     "id": 317860391,
     "has_downloads": true,
-    "full_name": "lisonge/tiny-toys"
+    "full_name": "lisonge/tiny-toys",
+    "owner": {
+      "name": "lisonge",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38517192?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/forgetaz/RokuyouCalendar/releases/download/0.20/RokuyouCalendar_0.2.rmskin",
+    "latest_release": {
+      "body": "???????????????????????????????????????????????????????????????????????????????????????????????????????????????",
+      "tag_name": "0.20",
+      "browser_download_url": "https://github.com/forgetaz/RokuyouCalendar/releases/download/0.20/RokuyouCalendar_0.2.rmskin",
+      "name": "????????????????????? for Rainmeter"
+    },
     "name": "RokuyouCalendar",
-    "latest_release_url": "https://api.github.com/repos/forgetaz/RokuyouCalendar/releases/latest",
     "id": 296209013,
     "has_downloads": true,
-    "full_name": "forgetaz/RokuyouCalendar"
+    "full_name": "forgetaz/RokuyouCalendar",
+    "owner": {
+      "name": "forgetaz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/71302707?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/Blantas/animated-vinyl-player/releases/download/v0.2/Animated.Vinyl.Player_0.2.rmskin",
+    "latest_release": {
+      "body": "0.2 (Aug, 15 2015)\r\n\t- Added extra support for Spotify player.",
+      "tag_name": "v0.2",
+      "browser_download_url": "https://github.com/Blantas/animated-vinyl-player/releases/download/v0.2/Animated.Vinyl.Player_0.2.rmskin",
+      "name": "Animated Vinyl Player 0.2"
+    },
     "name": "animated-vinyl-player",
-    "latest_release_url": "https://api.github.com/repos/Blantas/animated-vinyl-player/releases/latest",
     "id": 195466033,
     "has_downloads": true,
-    "full_name": "Blantas/animated-vinyl-player"
+    "full_name": "Blantas/animated-vinyl-player",
+    "owner": {
+      "name": "Blantas",
+      "avatar_url": "https://avatars.githubusercontent.com/u/24192680?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/nek7u/OneTicker/releases/download/2023-02-02/OneTicker.rmskin",
-    "name": "OneTicker",
-    "latest_release_url": "https://api.github.com/repos/nek7u/OneTicker/releases/latest",
-    "id": 586518961,
-    "has_downloads": true,
-    "full_name": "nek7u/OneTicker"
-  },
-  {
-    "latest_release": "https://github.com/OfficialCRUGG/smpl-launchers/releases/download/1.0/smpl.Launchers_1.0.rmskin",
-    "name": "smpl-launchers",
-    "latest_release_url": "https://api.github.com/repos/OfficialCRUGG/smpl-launchers/releases/latest",
-    "id": 175998502,
-    "has_downloads": true,
-    "full_name": "OfficialCRUGG/smpl-launchers"
-  },
-  {
-    "latest_release": "https://github.com/vesegluco/nightscout-rainmenter-skin/releases/download/v1.1/Rainmeter-Nightscout_1.1.rmskin",
-    "name": "nightscout-rainmenter-skin",
-    "latest_release_url": "https://api.github.com/repos/vesegluco/nightscout-rainmenter-skin/releases/latest",
-    "id": 590139370,
-    "has_downloads": true,
-    "full_name": "vesegluco/nightscout-rainmenter-skin"
-  },
-  {
-    "latest_release": "https://github.com/CampaniaGuy/Campania-Rainmeter-Skin/releases/download/1.0/Campania_1.0.rmskin",
-    "name": "Campania-Rainmeter-Skin",
-    "latest_release_url": "https://api.github.com/repos/CampaniaGuy/Campania-Rainmeter-Skin/releases/latest",
-    "id": 461572571,
-    "has_downloads": true,
-    "full_name": "CampaniaGuy/Campania-Rainmeter-Skin"
-  },
-  {
-    "latest_release": "https://github.com/0x-jerry/MusicWave/releases/download/2.0/Music.Wave_2.0.rmskin",
-    "name": "MusicWave",
-    "latest_release_url": "https://api.github.com/repos/0x-jerry/MusicWave/releases/latest",
-    "id": 84146774,
-    "has_downloads": true,
-    "full_name": "0x-jerry/MusicWave"
-  },
-  {
-    "latest_release": "https://github.com/minusInfinite/NuSkopeUsage-Rainmeter/releases/download/2.1.3/Nuskope.Usage.Meter_2.1.3.rmskin",
+    "latest_release": {
+      "body": "**Issues Resolved**\r\n* Issues with dating Calculations and Appearances in app\r\n* Roll up of all current Commits. ",
+      "tag_name": "2.1.3",
+      "browser_download_url": "https://github.com/minusInfinite/NuSkopeUsage-Rainmeter/releases/download/2.1.3/Nuskope.Usage.Meter_2.1.3.rmskin",
+      "name": "Nuskope Usage Meter 2.1.3"
+    },
     "name": "NuSkopeUsage-Rainmeter",
-    "latest_release_url": "https://api.github.com/repos/minusInfinite/NuSkopeUsage-Rainmeter/releases/latest",
     "id": 112536339,
     "has_downloads": true,
-    "full_name": "minusInfinite/NuSkopeUsage-Rainmeter"
+    "full_name": "minusInfinite/NuSkopeUsage-Rainmeter",
+    "owner": {
+      "name": "minusInfinite",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15844295?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/bluwy/Rainmeter-Pong/releases/download/v1.0/Pong.rmskin",
+    "latest_release": {
+      "body": "",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/bluwy/Rainmeter-Pong/releases/download/v1.0/Pong.rmskin",
+      "name": "Initial Release"
+    },
     "name": "Rainmeter-Pong",
-    "latest_release_url": "https://api.github.com/repos/bluwy/Rainmeter-Pong/releases/latest",
     "id": 183744818,
     "has_downloads": true,
-    "full_name": "bluwy/Rainmeter-Pong"
+    "full_name": "bluwy/Rainmeter-Pong",
+    "owner": {
+      "name": "bluwy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/34116392?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/M-O-Z-G/currency-markets-rmskin/releases/download/v290220/currency_markets_by_mordasius.rmskin",
+    "latest_release": {
+      "body": "Fix: UpDown style now use Up/Down price instead percentage.",
+      "tag_name": "v290220",
+      "browser_download_url": "https://github.com/M-O-Z-G/currency-markets-rmskin/releases/download/v290220/currency_markets_by_mordasius.rmskin",
+      "name": "Unofficial fix v290220 "
+    },
     "name": "currency-markets-rmskin",
-    "latest_release_url": "https://api.github.com/repos/M-O-Z-G/currency-markets-rmskin/releases/latest",
     "id": 243634866,
     "has_downloads": true,
-    "full_name": "M-O-Z-G/currency-markets-rmskin"
+    "full_name": "M-O-Z-G/currency-markets-rmskin",
+    "owner": {
+      "name": "M-O-Z-G",
+      "avatar_url": "https://avatars.githubusercontent.com/u/492967?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/simwai/dark-boruto-rainmeter-skin/releases/download/v1.2/Dark.Boruto_1.2.rmskin",
+    "latest_release": {
+      "body": "Added the support for switching audio device\r\nOptimized the width of the sysinfo component\r\nAdded some cool components",
+      "tag_name": "v1.2",
+      "browser_download_url": "https://github.com/simwai/dark-boruto-rainmeter-skin/releases/download/v1.2/Dark.Boruto_1.2.rmskin",
+      "name": "Version 1.2"
+    },
     "name": "dark-boruto-rainmeter-skin",
-    "latest_release_url": "https://api.github.com/repos/simwai/dark-boruto-rainmeter-skin/releases/latest",
     "id": 253285831,
     "has_downloads": true,
-    "full_name": "simwai/dark-boruto-rainmeter-skin"
+    "full_name": "simwai/dark-boruto-rainmeter-skin",
+    "owner": {
+      "name": "simwai",
+      "avatar_url": "https://avatars.githubusercontent.com/u/16225108?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/EccTM/Conky-Gemini/releases/download/v1.0/Conky.Gemini_1.0.rmskin",
+    "latest_release": {
+      "body": "This is the skin in a Rainmeter-preferred .RMskin package for easy importing.\r\n\r\nYou will need to sign up for a free account with [weatherbit.io](http://weatherbit.io) and generate your own API key to have weather scraping work. Just pop it into the [Variables.inc](./@Resources/Variables.inc) file.\r\n\r\nIt also includes MSIAfterburner and WebNowPlaying plugins, and a default ConkyGemini layout.",
+      "tag_name": "v1.0",
+      "browser_download_url": "https://github.com/EccTM/Conky-Gemini/releases/download/v1.0/Conky.Gemini_1.0.rmskin",
+      "name": "Initial Release"
+    },
     "name": "Conky-Gemini",
-    "latest_release_url": "https://api.github.com/repos/EccTM/Conky-Gemini/releases/latest",
     "id": 258916478,
     "has_downloads": true,
-    "full_name": "EccTM/Conky-Gemini"
+    "full_name": "EccTM/Conky-Gemini",
+    "owner": {
+      "name": "EccTM",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2828657?v=4"
+    }
   },
   {
-    "latest_release": "https://github.com/minusInfinite/rainmeter-afl-ladder/releases/download/1.0.0/AFL.Ladder_1.0.0.rmskin",
+    "latest_release": {
+      "body": "This is the release of 1.0.0,\r\n\r\nIt will display the following AFL ladder information\r\n\r\n- The current Round\r\n- All 18 teams\r\n- Top 8\r\n- If the team position has changed from last round.",
+      "tag_name": "1.0.0",
+      "browser_download_url": "https://github.com/minusInfinite/rainmeter-afl-ladder/releases/download/1.0.0/AFL.Ladder_1.0.0.rmskin",
+      "name": "v1.0.0"
+    },
     "name": "rainmeter-afl-ladder",
-    "latest_release_url": "https://api.github.com/repos/minusInfinite/rainmeter-afl-ladder/releases/latest",
     "id": 472801958,
     "has_downloads": true,
-    "full_name": "minusInfinite/rainmeter-afl-ladder"
+    "full_name": "minusInfinite/rainmeter-afl-ladder",
+    "owner": {
+      "name": "minusInfinite",
+      "avatar_url": "https://avatars.githubusercontent.com/u/15844295?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "",
+      "tag_name": "v1.1",
+      "browser_download_url": "https://github.com/vesegluco/nightscout-rainmenter-skin/releases/download/v1.1/Rainmeter-Nightscout_1.1.rmskin",
+      "name": "v1.1"
+    },
+    "name": "nightscout-rainmenter-skin",
+    "id": 590139370,
+    "has_downloads": true,
+    "full_name": "vesegluco/nightscout-rainmenter-skin",
+    "owner": {
+      "name": "vesegluco",
+      "avatar_url": "https://avatars.githubusercontent.com/u/122530755?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "",
+      "tag_name": "1.0",
+      "browser_download_url": "https://github.com/OfficialCRUGG/smpl-launchers/releases/download/1.0/smpl.Launchers_1.0.rmskin",
+      "name": "v1.0 - Initial Release"
+    },
+    "name": "smpl-launchers",
+    "id": 175998502,
+    "has_downloads": true,
+    "full_name": "OfficialCRUGG/smpl-launchers",
+    "owner": {
+      "name": "OfficialCRUGG",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25248999?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "2023-02-02 (YYYY-MM-DD) \r\n* Fixed a possible WebParser stop working while skin first loading.\r\n\r\nSHA256 `292c8d34c7b7ec5b6bc02fc83272926cb8e8d485f34150b7c364c2160da892be`",
+      "tag_name": "2023-02-02",
+      "browser_download_url": "https://github.com/nek7u/OneTicker/releases/download/2023-02-02/OneTicker.rmskin",
+      "name": "OneTicker 2023-02-02"
+    },
+    "name": "OneTicker",
+    "id": 586518961,
+    "has_downloads": true,
+    "full_name": "nek7u/OneTicker",
+    "owner": {
+      "name": "nek7u",
+      "avatar_url": "https://avatars.githubusercontent.com/u/58021194?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "",
+      "tag_name": "2.0",
+      "browser_download_url": "https://github.com/0x-jerry/MusicWave/releases/download/2.0/Music.Wave_2.0.rmskin",
+      "name": "Version 2.0"
+    },
+    "name": "MusicWave",
+    "id": 84146774,
+    "has_downloads": true,
+    "full_name": "0x-jerry/MusicWave",
+    "owner": {
+      "name": "0x-jerry",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14226737?v=4"
+    }
+  },
+  {
+    "latest_release": {
+      "body": "",
+      "tag_name": "1.0",
+      "browser_download_url": "https://github.com/CampaniaGuy/Campania-Rainmeter-Skin/releases/download/1.0/Campania_1.0.rmskin",
+      "name": "v1.0"
+    },
+    "name": "Campania-Rainmeter-Skin",
+    "id": 461572571,
+    "has_downloads": true,
+    "full_name": "CampaniaGuy/Campania-Rainmeter-Skin",
+    "owner": {
+      "name": "CampaniaGuy",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57142637?v=4"
+    }
   }
 ]

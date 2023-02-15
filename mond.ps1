@@ -33,11 +33,14 @@ function Update {
     $allSkins = @()
     Get-RainmeterRepositories | ForEach-Object {
         $skin = @{
-            id                 = $_.id
-            name               = $_.name
-            full_name          = $_.full_name
-            has_downloads      = $_.has_downloads
-            latest_release_url = "$($githubAPI)repos/$($_.full_name)/releases/latest"
+            id            = $_.id
+            name          = $_.name
+            full_name     = $_.full_name
+            has_downloads = $_.has_downloads
+            owner         = @{
+                name       = $_.owner.login
+                avatar_url = $_.owner.avatar_url
+            }
         }
         $allSkins += $skin
     }
@@ -90,7 +93,7 @@ function Latest-RMskin {
     if (-not($Skin.has_downloads)) { return $false }
 
     try {
-        $releaseResponse = Get-Request $Skin.latest_release_url | ConvertFrom-Json
+        $releaseResponse = Get-Request "$($githubAPI)repos/$($Skin.full_name)/releases/latest" | ConvertFrom-Json
     }
     catch {
         return $false
@@ -98,7 +101,13 @@ function Latest-RMskin {
 
     foreach ($asset in $releaseResponse.assets) {
         if ($asset.name -match '(?i).*?\.rmskin') {
-            return $asset.browser_download_url
+            $assetHashtable = @{
+                browser_download_url = $asset.browser_download_url
+                tag_name             = $releaseResponse.tag_name
+                name                 = $releaseResponse.name
+                body                 = $releaseResponse.body
+            }
+            return $assetHashtable
         }
     }
 
