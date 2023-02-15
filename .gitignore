@@ -1,4 +1,5 @@
-skin.rmskin
+*.env*
+*.rmskin
 *.log
+
 pages/*.json
-meters.json

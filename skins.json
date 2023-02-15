@@ -1,0 +1,698 @@
+[
+  {
+    "latest_release": "https://github.com/marcopixel/monstercat-visualizer/releases/download/2.1.0/Monstercat.Visualizer.for.Rainmeter_2.1.0.rmskin",
+    "name": "monstercat-visualizer",
+    "latest_release_url": "https://api.github.com/repos/marcopixel/monstercat-visualizer/releases/latest",
+    "id": 60963133,
+    "has_downloads": true,
+    "full_name": "marcopixel/monstercat-visualizer"
+  },
+  {
+    "latest_release": "https://github.com/SilverAzide/Gadgets/releases/download/v7.5.0/Gadgets_7.5.0.rmskin",
+    "name": "Gadgets",
+    "latest_release_url": "https://api.github.com/repos/SilverAzide/Gadgets/releases/latest",
+    "id": 254747402,
+    "has_downloads": true,
+    "full_name": "SilverAzide/Gadgets"
+  },
+  {
+    "latest_release": "https://github.com/marcopixel/SysDash/releases/download/1.1.0/SysDash_1.1.0.rmskin",
+    "name": "SysDash",
+    "latest_release_url": "https://api.github.com/repos/marcopixel/SysDash/releases/latest",
+    "id": 95987631,
+    "has_downloads": true,
+    "full_name": "marcopixel/SysDash"
+  },
+  {
+    "latest_release": "https://github.com/redsaph/cleartext/releases/download/6.0/Cleartext_6.0a.rmskin",
+    "name": "cleartext",
+    "latest_release_url": "https://api.github.com/repos/redsaph/cleartext/releases/latest",
+    "id": 106453399,
+    "has_downloads": true,
+    "full_name": "redsaph/cleartext"
+  },
+  {
+    "latest_release": "https://github.com/khanhas/Notch/releases/download/v1.4/Notch_1.4.rmskin",
+    "name": "Notch",
+    "latest_release_url": "https://api.github.com/repos/khanhas/Notch/releases/latest",
+    "id": 165543867,
+    "has_downloads": true,
+    "full_name": "khanhas/Notch"
+  },
+  {
+    "latest_release": "https://github.com/Jax-Core/ModularPlayers/releases/download/v2.64/ModularPlayers_v2.64.rmskin",
+    "name": "ModularPlayers",
+    "latest_release_url": "https://api.github.com/repos/Jax-Core/ModularPlayers/releases/latest",
+    "id": 381375461,
+    "has_downloads": true,
+    "full_name": "Jax-Core/ModularPlayers"
+  },
+  {
+    "latest_release": "https://github.com/Ruben35/More-Icons-unFold-Rainmeter/releases/download/4.0/unFold_4.0.rmskin",
+    "name": "More-Icons-unFold-Rainmeter",
+    "latest_release_url": "https://api.github.com/repos/Ruben35/More-Icons-unFold-Rainmeter/releases/latest",
+    "id": 162235619,
+    "has_downloads": true,
+    "full_name": "Ruben35/More-Icons-unFold-Rainmeter"
+  },
+  {
+    "latest_release": "https://github.com/maze404/FluentDash/releases/download/v2.5.3/FluentDash11_2.5.3.rmskin",
+    "name": "FluentDash",
+    "latest_release_url": "https://api.github.com/repos/maze404/FluentDash/releases/latest",
+    "id": 139732142,
+    "has_downloads": true,
+    "full_name": "maze404/FluentDash"
+  },
+  {
+    "latest_release": "https://github.com/TheProtagonists/SpectrumForRainmeter/releases/download/3.1.0/SPECTRUM.v3.1.rmskin",
+    "name": "SpectrumForRainmeter",
+    "latest_release_url": "https://api.github.com/repos/TheProtagonists/SpectrumForRainmeter/releases/latest",
+    "id": 135863799,
+    "has_downloads": true,
+    "full_name": "TheProtagonists/SpectrumForRainmeter"
+  },
+  {
+    "latest_release": "https://github.com/Jax-Core/ModularVisualizer/releases/download/v1.1/ModularVisualizer_v1.1.rmskin",
+    "name": "ModularVisualizer",
+    "latest_release_url": "https://api.github.com/repos/Jax-Core/ModularVisualizer/releases/latest",
+    "id": 436870183,
+    "has_downloads": true,
+    "full_name": "Jax-Core/ModularVisualizer"
+  },
+  {
+    "latest_release": "https://github.com/Jax-Core/Keylaunch/releases/download/v2.21/Keylaunch_v2.21.rmskin",
+    "name": "Keylaunch",
+    "latest_release_url": "https://api.github.com/repos/Jax-Core/Keylaunch/releases/latest",
+    "id": 398818406,
+    "has_downloads": true,
+    "full_name": "Jax-Core/Keylaunch"
+  },
+  {
+    "latest_release": "https://github.com/lezzthanthree/Needy-Streamer-Overload/releases/download/v.4.0.1/Needy.Streamer.Overload_4.0.1.rmskin",
+    "name": "Needy-Streamer-Overload",
+    "latest_release_url": "https://api.github.com/repos/lezzthanthree/Needy-Streamer-Overload/releases/latest",
+    "id": 542580356,
+    "has_downloads": true,
+    "full_name": "lezzthanthree/Needy-Streamer-Overload"
+  },
+  {
+    "latest_release": "https://github.com/avenom/Spotibar/releases/download/v0.3/Spotibar_0.3.rmskin",
+    "name": "Spotibar",
+    "latest_release_url": "https://api.github.com/repos/avenom/Spotibar/releases/latest",
+    "id": 359781974,
+    "has_downloads": true,
+    "full_name": "avenom/Spotibar"
+  },
+  {
+    "latest_release": "https://github.com/tterb/GitHubCalendar/releases/download/v1.1.3/GitHubCalendar_v1.1.3.rmskin",
+    "name": "GitHubCalendar",
+    "latest_release_url": "https://api.github.com/repos/tterb/GitHubCalendar/releases/latest",
+    "id": 64281579,
+    "has_downloads": true,
+    "full_name": "tterb/GitHubCalendar"
+  },
+  {
+    "latest_release": "https://github.com/sceleri/amogus/releases/download/v1.0/Amogus_v1.0.rmskin",
+    "name": "amogus",
+    "latest_release_url": "https://api.github.com/repos/sceleri/amogus/releases/latest",
+    "id": 348751873,
+    "has_downloads": true,
+    "full_name": "sceleri/amogus"
+  },
+  {
+    "latest_release": "https://github.com/killall-q/Hologram/releases/download/point-cloud/Hologram-Point-Cloud-2022.12.01.rmskin",
+    "name": "Hologram",
+    "latest_release_url": "https://api.github.com/repos/killall-q/Hologram/releases/latest",
+    "id": 54828978,
+    "has_downloads": true,
+    "full_name": "killall-q/Hologram"
+  },
+  {
+    "latest_release": "https://github.com/Mive82/Persona-5-Calendar/releases/download/v1.1/Persona.5.Calendar_1.1.rmskin",
+    "name": "Persona-5-Calendar",
+    "latest_release_url": "https://api.github.com/repos/Mive82/Persona-5-Calendar/releases/latest",
+    "id": 267397006,
+    "has_downloads": true,
+    "full_name": "Mive82/Persona-5-Calendar"
+  },
+  {
+    "latest_release": "https://github.com/nitesh-prasad/Quantum-Dock/releases/download/v1.1.0/Quantum-Dock_1.1.rmskin",
+    "name": "Quantum-Dock",
+    "latest_release_url": "https://api.github.com/repos/nitesh-prasad/Quantum-Dock/releases/latest",
+    "id": 464109118,
+    "has_downloads": true,
+    "full_name": "nitesh-prasad/Quantum-Dock"
+  },
+  {
+    "latest_release": "https://github.com/LucasOe/rainmeter/releases/download/v2.2.1/Launcher.Bar_2.2.1.rmskin",
+    "name": "rainmeter",
+    "latest_release_url": "https://api.github.com/repos/LucasOe/rainmeter/releases/latest",
+    "id": 164312177,
+    "has_downloads": true,
+    "full_name": "LucasOe/rainmeter"
+  },
+  {
+    "latest_release": "https://github.com/JacobA2000/Rainmeter-MinimalCryptoTracker/releases/download/0.3.2/MinimalCryptoTracker_0.3.2.rmskin",
+    "name": "Rainmeter-MinimalCryptoTracker",
+    "latest_release_url": "https://api.github.com/repos/JacobA2000/Rainmeter-MinimalCryptoTracker/releases/latest",
+    "id": 373980660,
+    "has_downloads": true,
+    "full_name": "JacobA2000/Rainmeter-MinimalCryptoTracker"
+  },
+  {
+    "latest_release": "https://github.com/SilverAzide/Clipboard-Meter/releases/download/v7.4.0/Clipboard.Meter.-.Gadgets.Patch_7.4.0.rmskin",
+    "name": "Clipboard-Meter",
+    "latest_release_url": "https://api.github.com/repos/SilverAzide/Clipboard-Meter/releases/latest",
+    "id": 266841506,
+    "has_downloads": true,
+    "full_name": "SilverAzide/Clipboard-Meter"
+  },
+  {
+    "latest_release": "https://github.com/tterb/PlayMusic/releases/download/v1.2.1/PlayMusic_v1.2.1.rmskin",
+    "name": "PlayMusic",
+    "latest_release_url": "https://api.github.com/repos/tterb/PlayMusic/releases/latest",
+    "id": 60314128,
+    "has_downloads": true,
+    "full_name": "tterb/PlayMusic"
+  },
+  {
+    "latest_release": "https://github.com/nikolay-borzov/rainmeter-monochrome/releases/download/v1.6.0/Monochrome_1.6.0.rmskin",
+    "name": "rainmeter-monochrome",
+    "latest_release_url": "https://api.github.com/repos/nikolay-borzov/rainmeter-monochrome/releases/latest",
+    "id": 309784869,
+    "has_downloads": true,
+    "full_name": "nikolay-borzov/rainmeter-monochrome"
+  },
+  {
+    "latest_release": "https://github.com/sceleri/swatchbar/releases/download/v1.1.1/SwatchBar_1.1.1.rmskin",
+    "name": "swatchbar",
+    "latest_release_url": "https://api.github.com/repos/sceleri/swatchbar/releases/latest",
+    "id": 333765633,
+    "has_downloads": true,
+    "full_name": "sceleri/swatchbar"
+  },
+  {
+    "latest_release": "https://github.com/SaberAkiyama/SAWeatherCast/releases/download/1.1.2/SA.Weather.Cast.v1.1.2.rmskin",
+    "name": "SAWeatherCast",
+    "latest_release_url": "https://api.github.com/repos/SaberAkiyama/SAWeatherCast/releases/latest",
+    "id": 281328348,
+    "has_downloads": true,
+    "full_name": "SaberAkiyama/SAWeatherCast"
+  },
+  {
+    "latest_release": "https://github.com/Weidows-projects/Rainmeter-skin/releases/download/1.3.0/Weidows_1.3.0.rmskin",
+    "name": "Rainmeter-skin",
+    "latest_release_url": "https://api.github.com/repos/Weidows-projects/Rainmeter-skin/releases/latest",
+    "id": 294722097,
+    "has_downloads": true,
+    "full_name": "Weidows-projects/Rainmeter-skin"
+  },
+  {
+    "latest_release": "https://github.com/SmileyDrag0n/RSSddit/releases/download/v1.2.0/RSSddit_1.2.0.rmskin",
+    "name": "RSSddit",
+    "latest_release_url": "https://api.github.com/repos/SmileyDrag0n/RSSddit/releases/latest",
+    "id": 466489109,
+    "has_downloads": true,
+    "full_name": "SmileyDrag0n/RSSddit"
+  },
+  {
+    "latest_release": "https://github.com/misterhaan/Reminisce/releases/download/v1.0/reminisce-v1.0.rmskin",
+    "name": "Reminisce",
+    "latest_release_url": "https://api.github.com/repos/misterhaan/Reminisce/releases/latest",
+    "id": 117858809,
+    "has_downloads": true,
+    "full_name": "misterhaan/Reminisce"
+  },
+  {
+    "latest_release": "https://github.com/SilverAzide/Stopwatch/releases/download/v7.4.0/Stopwatch.-.Gadgets.Patch_7.4.0.rmskin",
+    "name": "Stopwatch",
+    "latest_release_url": "https://api.github.com/repos/SilverAzide/Stopwatch/releases/latest",
+    "id": 266846784,
+    "has_downloads": true,
+    "full_name": "SilverAzide/Stopwatch"
+  },
+  {
+    "latest_release": "https://github.com/d3ward/bouncydvd/releases/download/v1.0/BouncyDVD_1.0.rmskin",
+    "name": "bouncydvd",
+    "latest_release_url": "https://api.github.com/repos/d3ward/bouncydvd/releases/latest",
+    "id": 241635578,
+    "has_downloads": true,
+    "full_name": "d3ward/bouncydvd"
+  },
+  {
+    "latest_release": "https://github.com/SilverAzide/Weather-Meter-Yahoo/releases/download/v7.4.0/Weather.Meter.Yahoo.-.Gadgets.Patch_7.4.0.rmskin",
+    "name": "Weather-Meter-Yahoo",
+    "latest_release_url": "https://api.github.com/repos/SilverAzide/Weather-Meter-Yahoo/releases/latest",
+    "id": 267963921,
+    "has_downloads": true,
+    "full_name": "SilverAzide/Weather-Meter-Yahoo"
+  },
+  {
+    "latest_release": "https://github.com/infeeeee/infinimal/releases/download/3.0.1/infinimal_3.0.1.rmskin",
+    "name": "infinimal",
+    "latest_release_url": "https://api.github.com/repos/infeeeee/infinimal/releases/latest",
+    "id": 118456875,
+    "has_downloads": true,
+    "full_name": "infeeeee/infinimal"
+  },
+  {
+    "latest_release": "https://github.com/jsmorley/JSMeter10/releases/download/v10.0/JSMeter10.rmskin",
+    "name": "JSMeter10",
+    "latest_release_url": "https://api.github.com/repos/jsmorley/JSMeter10/releases/latest",
+    "id": 316996822,
+    "has_downloads": true,
+    "full_name": "jsmorley/JSMeter10"
+  },
+  {
+    "latest_release": "https://github.com/AdamWHY2K/Fa-apulu/releases/download/v1.0.8/Fa.apulu_1.0.8.rmskin",
+    "name": "Fa-apulu",
+    "latest_release_url": "https://api.github.com/repos/AdamWHY2K/Fa-apulu/releases/latest",
+    "id": 390183129,
+    "has_downloads": true,
+    "full_name": "AdamWHY2K/Fa-apulu"
+  },
+  {
+    "latest_release": "https://github.com/modkavartini/TaskControl/releases/download/v1.3.2/TaskControl_1.3.2.rmskin",
+    "name": "TaskControl",
+    "latest_release_url": "https://api.github.com/repos/modkavartini/TaskControl/releases/latest",
+    "id": 363369619,
+    "has_downloads": true,
+    "full_name": "modkavartini/TaskControl"
+  },
+  {
+    "latest_release": "https://github.com/mehdieft95/EQClock/releases/download/3.0/EQClock_3.0.rmskin",
+    "name": "EQClock",
+    "latest_release_url": "https://api.github.com/repos/mehdieft95/EQClock/releases/latest",
+    "id": 90695486,
+    "has_downloads": true,
+    "full_name": "mehdieft95/EQClock"
+  },
+  {
+    "latest_release": "https://github.com/Halloyo/BandoriWidgets/releases/download/2.0/BandoriWidgets_2.0.rmskin",
+    "name": "BandoriWidgets",
+    "latest_release_url": "https://api.github.com/repos/Halloyo/BandoriWidgets/releases/latest",
+    "id": 284388572,
+    "has_downloads": true,
+    "full_name": "Halloyo/BandoriWidgets"
+  },
+  {
+    "latest_release": "https://github.com/parasyte/kwcpu/releases/download/1.2.1/kwcpu-1.2.1.rmskin",
+    "name": "kwcpu",
+    "latest_release_url": "https://api.github.com/repos/parasyte/kwcpu/releases/latest",
+    "id": 443619070,
+    "has_downloads": true,
+    "full_name": "parasyte/kwcpu"
+  },
+  {
+    "latest_release": "https://github.com/JacobA2000/Rainmeter-MinimalStockTracker/releases/download/0.1.1/MinimalStockTracker_0.1.1.rmskin",
+    "name": "Rainmeter-MinimalStockTracker",
+    "latest_release_url": "https://api.github.com/repos/JacobA2000/Rainmeter-MinimalStockTracker/releases/latest",
+    "id": 375023201,
+    "has_downloads": true,
+    "full_name": "JacobA2000/Rainmeter-MinimalStockTracker"
+  },
+  {
+    "latest_release": "https://github.com/xXNickznXx/Nicksons-Suite/releases/download/1.0.2/Nicksons-Suite_1.0.2.rmskin",
+    "name": "Nicksons-Suite",
+    "latest_release_url": "https://api.github.com/repos/xXNickznXx/Nicksons-Suite/releases/latest",
+    "id": 224022471,
+    "has_downloads": true,
+    "full_name": "xXNickznXx/Nicksons-Suite"
+  },
+  {
+    "latest_release": "https://github.com/claudiobosetti/GlowyMinimalBin/releases/download/v1.0/Glowy.Minimal.Bin_1.0.rmskin",
+    "name": "GlowyMinimalBin",
+    "latest_release_url": "https://api.github.com/repos/claudiobosetti/GlowyMinimalBin/releases/latest",
+    "id": 287102951,
+    "has_downloads": true,
+    "full_name": "claudiobosetti/GlowyMinimalBin"
+  },
+  {
+    "latest_release": "https://github.com/minusInfinite/simple_forecast/releases/download/v1.2.1/Simple.Forecast_1.2.1.rmskin",
+    "name": "simple_forecast",
+    "latest_release_url": "https://api.github.com/repos/minusInfinite/simple_forecast/releases/latest",
+    "id": 235239142,
+    "has_downloads": true,
+    "full_name": "minusInfinite/simple_forecast"
+  },
+  {
+    "latest_release": "https://github.com/2bndy5/LCARS-Door-Rainmeter-Skin/releases/download/v1.0.1/LCARS.Door_7a5639f7.rmskin",
+    "name": "LCARS-Door-Rainmeter-Skin",
+    "latest_release_url": "https://api.github.com/repos/2bndy5/LCARS-Door-Rainmeter-Skin/releases/latest",
+    "id": 266244848,
+    "has_downloads": true,
+    "full_name": "2bndy5/LCARS-Door-Rainmeter-Skin"
+  },
+  {
+    "latest_release": "https://github.com/nek7u/Snip-and-Pin-to-Screen/releases/download/2022-12-14/SnipAndPinToScreen.rmskin",
+    "name": "Snip-and-Pin-to-Screen",
+    "latest_release_url": "https://api.github.com/repos/nek7u/Snip-and-Pin-to-Screen/releases/latest",
+    "id": 547090043,
+    "has_downloads": true,
+    "full_name": "nek7u/Snip-and-Pin-to-Screen"
+  },
+  {
+    "latest_release": "https://github.com/newtoallofthis123/ranpack/releases/download/v.0.1/RanPack_v.0.1.rmskin",
+    "name": "ranpack",
+    "latest_release_url": "https://api.github.com/repos/newtoallofthis123/ranpack/releases/latest",
+    "id": 393661977,
+    "has_downloads": true,
+    "full_name": "newtoallofthis123/ranpack"
+  },
+  {
+    "latest_release": "https://github.com/Proliantaholic/TaiwanWeatherAQI/releases/download/v3.01/TaiwanWeatherAQI_3.01.rmskin",
+    "name": "TaiwanWeatherAQI",
+    "latest_release_url": "https://api.github.com/repos/Proliantaholic/TaiwanWeatherAQI/releases/latest",
+    "id": 179050721,
+    "has_downloads": true,
+    "full_name": "Proliantaholic/TaiwanWeatherAQI"
+  },
+  {
+    "latest_release": "https://github.com/VulpesPaw/Rainmeter-WallpaperTimeWalker/releases/download/v1.0.2/Wallpaper.Time.Walker_1.0.2.rmskin",
+    "name": "Rainmeter-WallpaperTimeWalker",
+    "latest_release_url": "https://api.github.com/repos/VulpesPaw/Rainmeter-WallpaperTimeWalker/releases/latest",
+    "id": 524626396,
+    "has_downloads": true,
+    "full_name": "VulpesPaw/Rainmeter-WallpaperTimeWalker"
+  },
+  {
+    "latest_release": "https://github.com/blackk100/Frankenstein/releases/download/v1.2.1/Frankenstein_1.2.1.rmskin",
+    "name": "Frankenstein",
+    "latest_release_url": "https://api.github.com/repos/blackk100/Frankenstein/releases/latest",
+    "id": 192048596,
+    "has_downloads": true,
+    "full_name": "blackk100/Frankenstein"
+  },
+  {
+    "latest_release": "https://github.com/Sigmanor/Aion-Servers-Status/releases/download/v0.5/Aion-Servers-Status_0.5.rmskin",
+    "name": "Aion-Servers-Status",
+    "latest_release_url": "https://api.github.com/repos/Sigmanor/Aion-Servers-Status/releases/latest",
+    "id": 45754882,
+    "has_downloads": true,
+    "full_name": "Sigmanor/Aion-Servers-Status"
+  },
+  {
+    "latest_release": "https://github.com/Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin/releases/download/3.0.0/Headset.Battery_3.0.rmskin",
+    "name": "Arctis-7-Battery-Rainmeter-Skin",
+    "latest_release_url": "https://api.github.com/repos/Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin/releases/latest",
+    "id": 368022670,
+    "has_downloads": true,
+    "full_name": "Hamza-Rafi/Arctis-7-Battery-Rainmeter-Skin"
+  },
+  {
+    "latest_release": "https://github.com/Mayochun/Rainmeter-Sys-Monitor/releases/download/v0.3/Rainmeter-Sys-Monitor_v0.3.rmskin",
+    "name": "Rainmeter-Sys-Monitor",
+    "latest_release_url": "https://api.github.com/repos/Mayochun/Rainmeter-Sys-Monitor/releases/latest",
+    "id": 417012959,
+    "has_downloads": true,
+    "full_name": "Mayochun/Rainmeter-Sys-Monitor"
+  },
+  {
+    "latest_release": "https://github.com/supercam19/Delta/releases/download/v1.3.3/Delta_1.3.3.rmskin",
+    "name": "Delta",
+    "latest_release_url": "https://api.github.com/repos/supercam19/Delta/releases/latest",
+    "id": 387334543,
+    "has_downloads": true,
+    "full_name": "supercam19/Delta"
+  },
+  {
+    "latest_release": "https://github.com/DerianMelvin/SASMusicPlayer/releases/download/v1.2.1/S.A.S_MusicPlayer_1.2.1.rmskin",
+    "name": "SASMusicPlayer",
+    "latest_release_url": "https://api.github.com/repos/DerianMelvin/SASMusicPlayer/releases/latest",
+    "id": 559890537,
+    "has_downloads": true,
+    "full_name": "DerianMelvin/SASMusicPlayer"
+  },
+  {
+    "latest_release": "https://github.com/Katakuari/AiOGPUInfo/releases/download/1.2/AiOGPUInfo_1.2.rmskin",
+    "name": "AiOGPUInfo",
+    "latest_release_url": "https://api.github.com/repos/Katakuari/AiOGPUInfo/releases/latest",
+    "id": 404656650,
+    "has_downloads": true,
+    "full_name": "Katakuari/AiOGPUInfo"
+  },
+  {
+    "latest_release": "https://github.com/SilverAzide/Dark-Side-of-the-Moon/releases/download/v1.0.0/Dark.Side.of.the.Moon_1.0.0.rmskin",
+    "name": "Dark-Side-of-the-Moon",
+    "latest_release_url": "https://api.github.com/repos/SilverAzide/Dark-Side-of-the-Moon/releases/latest",
+    "id": 326027286,
+    "has_downloads": true,
+    "full_name": "SilverAzide/Dark-Side-of-the-Moon"
+  },
+  {
+    "latest_release": "https://github.com/DarkFalc0n/Weather-Widget/releases/download/vAlpha/Weather-Widget_vAlpha.rmskin",
+    "name": "Weather-Widget",
+    "latest_release_url": "https://api.github.com/repos/DarkFalc0n/Weather-Widget/releases/latest",
+    "id": 408370640,
+    "has_downloads": true,
+    "full_name": "DarkFalc0n/Weather-Widget"
+  },
+  {
+    "latest_release": "https://github.com/InLurker/Rainmeter-Simple-AlbumArt/releases/download/Release/AlbumArt_v1.0.rmskin",
+    "name": "Rainmeter-Simple-AlbumArt",
+    "latest_release_url": "https://api.github.com/repos/InLurker/Rainmeter-Simple-AlbumArt/releases/latest",
+    "id": 432700000,
+    "has_downloads": true,
+    "full_name": "InLurker/Rainmeter-Simple-AlbumArt"
+  },
+  {
+    "latest_release": "https://github.com/RedEcho/chaRm/releases/download/v1.2.0/chaRm_1.2.0.rmskin",
+    "name": "chaRm",
+    "latest_release_url": "https://api.github.com/repos/RedEcho/chaRm/releases/latest",
+    "id": 146214134,
+    "has_downloads": true,
+    "full_name": "RedEcho/chaRm"
+  },
+  {
+    "latest_release": "https://github.com/minusInfinite/MIUI-Weather-Fork/releases/download/1.1.0/MIUI.Weather._1.1.0.rmskin",
+    "name": "MIUI-Weather-Fork",
+    "latest_release_url": "https://api.github.com/repos/minusInfinite/MIUI-Weather-Fork/releases/latest",
+    "id": 451729866,
+    "has_downloads": true,
+    "full_name": "minusInfinite/MIUI-Weather-Fork"
+  },
+  {
+    "latest_release": "https://github.com/nek7u/OhTenkiMoe/releases/download/2022-08-06/OhTenkiMoe.rmskin",
+    "name": "OhTenkiMoe",
+    "latest_release_url": "https://api.github.com/repos/nek7u/OhTenkiMoe/releases/latest",
+    "id": 434834599,
+    "has_downloads": true,
+    "full_name": "nek7u/OhTenkiMoe"
+  },
+  {
+    "latest_release": "https://github.com/kazeraniman/dont-break-the-chain-skin/releases/download/1.0.0/dont-break-the-chain_1.0.0.rmskin",
+    "name": "dont-break-the-chain-skin",
+    "latest_release_url": "https://api.github.com/repos/kazeraniman/dont-break-the-chain-skin/releases/latest",
+    "id": 136871118,
+    "has_downloads": true,
+    "full_name": "kazeraniman/dont-break-the-chain-skin"
+  },
+  {
+    "latest_release": "https://github.com/Matsukii/Mondstat-dynamic/releases/download/v1.1/Genshim.impact.-.Mondstat.day.cycle_1.1.rmskin",
+    "name": "Mondstat-dynamic",
+    "latest_release_url": "https://api.github.com/repos/Matsukii/Mondstat-dynamic/releases/latest",
+    "id": 352766321,
+    "has_downloads": true,
+    "full_name": "Matsukii/Mondstat-dynamic"
+  },
+  {
+    "latest_release": "https://github.com/reisir/ffmpegger/releases/download/v1.0/ffmpegger_v1.0.rmskin",
+    "name": "ffmpegger",
+    "latest_release_url": "https://api.github.com/repos/reisir/ffmpegger/releases/latest",
+    "id": 590833749,
+    "has_downloads": true,
+    "full_name": "reisir/ffmpegger"
+  },
+  {
+    "latest_release": "https://github.com/Hockeyfan360/W10-Clock-Rainmeter-Skin/releases/download/v1.0/W10.Lock.Screen.Clock_1.0.rmskin",
+    "name": "W10-Clock-Rainmeter-Skin",
+    "latest_release_url": "https://api.github.com/repos/Hockeyfan360/W10-Clock-Rainmeter-Skin/releases/latest",
+    "id": 82429495,
+    "has_downloads": true,
+    "full_name": "Hockeyfan360/W10-Clock-Rainmeter-Skin"
+  },
+  {
+    "latest_release": "https://github.com/LatinoF/LTFBin/releases/download/V1.0/LTFBin.1.0.rmskin",
+    "name": "LTFBin",
+    "latest_release_url": "https://api.github.com/repos/LatinoF/LTFBin/releases/latest",
+    "id": 503143262,
+    "has_downloads": true,
+    "full_name": "LatinoF/LTFBin"
+  },
+  {
+    "latest_release": "https://github.com/rdivanji/ChromeMeter/releases/download/v1.1/ChromeMeter_1.1.rmskin",
+    "name": "ChromeMeter",
+    "latest_release_url": "https://api.github.com/repos/rdivanji/ChromeMeter/releases/latest",
+    "id": 287767493,
+    "has_downloads": true,
+    "full_name": "rdivanji/ChromeMeter"
+  },
+  {
+    "latest_release": "https://github.com/Halloyo/StellaVisualizer/releases/download/1.0/Stella.by.Starlight_1.0.rmskin",
+    "name": "StellaVisualizer",
+    "latest_release_url": "https://api.github.com/repos/Halloyo/StellaVisualizer/releases/latest",
+    "id": 279948591,
+    "has_downloads": true,
+    "full_name": "Halloyo/StellaVisualizer"
+  },
+  {
+    "latest_release": "https://github.com/Proliantaholic/MaskInfo/releases/download/v0.99/MaskInfo_0.99.rmskin",
+    "name": "MaskInfo",
+    "latest_release_url": "https://api.github.com/repos/Proliantaholic/MaskInfo/releases/latest",
+    "id": 246507978,
+    "has_downloads": true,
+    "full_name": "Proliantaholic/MaskInfo"
+  },
+  {
+    "latest_release": "https://github.com/fhazal/Rainmeter-Skin/releases/download/rainmeter/onedarkpro_rainformer_aida64_edition_by_belon_dfe9bk1.rmskin",
+    "name": "Rainmeter-Skin",
+    "latest_release_url": "https://api.github.com/repos/fhazal/Rainmeter-Skin/releases/latest",
+    "id": 543436263,
+    "has_downloads": true,
+    "full_name": "fhazal/Rainmeter-Skin"
+  },
+  {
+    "latest_release": "https://github.com/AdamWHY2K/Rainmeter_Jellyfin_Status/releases/download/v1.0.3/Jellyfin_Status_1.0.3.rmskin",
+    "name": "Rainmeter_Jellyfin_Status",
+    "latest_release_url": "https://api.github.com/repos/AdamWHY2K/Rainmeter_Jellyfin_Status/releases/latest",
+    "id": 598582628,
+    "has_downloads": true,
+    "full_name": "AdamWHY2K/Rainmeter_Jellyfin_Status"
+  },
+  {
+    "latest_release": "https://github.com/alexesprit/SleepyTime/releases/download/2020-05-20/SleepyTime_2020-05-20.rmskin",
+    "name": "SleepyTime",
+    "latest_release_url": "https://api.github.com/repos/alexesprit/SleepyTime/releases/latest",
+    "id": 47916683,
+    "has_downloads": true,
+    "full_name": "alexesprit/SleepyTime"
+  },
+  {
+    "latest_release": "https://github.com/xun468/Rainmeter-TomatoTelemetry/releases/download/2.1/TomatoTelemetry_2.1.rmskin",
+    "name": "Rainmeter-TomatoTelemetry",
+    "latest_release_url": "https://api.github.com/repos/xun468/Rainmeter-TomatoTelemetry/releases/latest",
+    "id": 327823556,
+    "has_downloads": true,
+    "full_name": "xun468/Rainmeter-TomatoTelemetry"
+  },
+  {
+    "latest_release": "https://github.com/kerfootj/rainmeter-f1-calendar/releases/download/2020.1.0/F1.Calendar_2020.1.0.rmskin",
+    "name": "rainmeter-f1-calendar",
+    "latest_release_url": "https://api.github.com/repos/kerfootj/rainmeter-f1-calendar/releases/latest",
+    "id": 181090596,
+    "has_downloads": true,
+    "full_name": "kerfootj/rainmeter-f1-calendar"
+  },
+  {
+    "latest_release": "https://github.com/lisonge/tiny-toys/releases/download/0.1.0/tiny-toys_0.1.0.rmskin",
+    "name": "tiny-toys",
+    "latest_release_url": "https://api.github.com/repos/lisonge/tiny-toys/releases/latest",
+    "id": 317860391,
+    "has_downloads": true,
+    "full_name": "lisonge/tiny-toys"
+  },
+  {
+    "latest_release": "https://github.com/forgetaz/RokuyouCalendar/releases/download/0.20/RokuyouCalendar_0.2.rmskin",
+    "name": "RokuyouCalendar",
+    "latest_release_url": "https://api.github.com/repos/forgetaz/RokuyouCalendar/releases/latest",
+    "id": 296209013,
+    "has_downloads": true,
+    "full_name": "forgetaz/RokuyouCalendar"
+  },
+  {
+    "latest_release": "https://github.com/Blantas/animated-vinyl-player/releases/download/v0.2/Animated.Vinyl.Player_0.2.rmskin",
+    "name": "animated-vinyl-player",
+    "latest_release_url": "https://api.github.com/repos/Blantas/animated-vinyl-player/releases/latest",
+    "id": 195466033,
+    "has_downloads": true,
+    "full_name": "Blantas/animated-vinyl-player"
+  },
+  {
+    "latest_release": "https://github.com/nek7u/OneTicker/releases/download/2023-02-02/OneTicker.rmskin",
+    "name": "OneTicker",
+    "latest_release_url": "https://api.github.com/repos/nek7u/OneTicker/releases/latest",
+    "id": 586518961,
+    "has_downloads": true,
+    "full_name": "nek7u/OneTicker"
+  },
+  {
+    "latest_release": "https://github.com/OfficialCRUGG/smpl-launchers/releases/download/1.0/smpl.Launchers_1.0.rmskin",
+    "name": "smpl-launchers",
+    "latest_release_url": "https://api.github.com/repos/OfficialCRUGG/smpl-launchers/releases/latest",
+    "id": 175998502,
+    "has_downloads": true,
+    "full_name": "OfficialCRUGG/smpl-launchers"
+  },
+  {
+    "latest_release": "https://github.com/vesegluco/nightscout-rainmenter-skin/releases/download/v1.1/Rainmeter-Nightscout_1.1.rmskin",
+    "name": "nightscout-rainmenter-skin",
+    "latest_release_url": "https://api.github.com/repos/vesegluco/nightscout-rainmenter-skin/releases/latest",
+    "id": 590139370,
+    "has_downloads": true,
+    "full_name": "vesegluco/nightscout-rainmenter-skin"
+  },
+  {
+    "latest_release": "https://github.com/CampaniaGuy/Campania-Rainmeter-Skin/releases/download/1.0/Campania_1.0.rmskin",
+    "name": "Campania-Rainmeter-Skin",
+    "latest_release_url": "https://api.github.com/repos/CampaniaGuy/Campania-Rainmeter-Skin/releases/latest",
+    "id": 461572571,
+    "has_downloads": true,
+    "full_name": "CampaniaGuy/Campania-Rainmeter-Skin"
+  },
+  {
+    "latest_release": "https://github.com/0x-jerry/MusicWave/releases/download/2.0/Music.Wave_2.0.rmskin",
+    "name": "MusicWave",
+    "latest_release_url": "https://api.github.com/repos/0x-jerry/MusicWave/releases/latest",
+    "id": 84146774,
+    "has_downloads": true,
+    "full_name": "0x-jerry/MusicWave"
+  },
+  {
+    "latest_release": "https://github.com/minusInfinite/NuSkopeUsage-Rainmeter/releases/download/2.1.3/Nuskope.Usage.Meter_2.1.3.rmskin",
+    "name": "NuSkopeUsage-Rainmeter",
+    "latest_release_url": "https://api.github.com/repos/minusInfinite/NuSkopeUsage-Rainmeter/releases/latest",
+    "id": 112536339,
+    "has_downloads": true,
+    "full_name": "minusInfinite/NuSkopeUsage-Rainmeter"
+  },
+  {
+    "latest_release": "https://github.com/bluwy/Rainmeter-Pong/releases/download/v1.0/Pong.rmskin",
+    "name": "Rainmeter-Pong",
+    "latest_release_url": "https://api.github.com/repos/bluwy/Rainmeter-Pong/releases/latest",
+    "id": 183744818,
+    "has_downloads": true,
+    "full_name": "bluwy/Rainmeter-Pong"
+  },
+  {
+    "latest_release": "https://github.com/M-O-Z-G/currency-markets-rmskin/releases/download/v290220/currency_markets_by_mordasius.rmskin",
+    "name": "currency-markets-rmskin",
+    "latest_release_url": "https://api.github.com/repos/M-O-Z-G/currency-markets-rmskin/releases/latest",
+    "id": 243634866,
+    "has_downloads": true,
+    "full_name": "M-O-Z-G/currency-markets-rmskin"
+  },
+  {
+    "latest_release": "https://github.com/simwai/dark-boruto-rainmeter-skin/releases/download/v1.2/Dark.Boruto_1.2.rmskin",
+    "name": "dark-boruto-rainmeter-skin",
+    "latest_release_url": "https://api.github.com/repos/simwai/dark-boruto-rainmeter-skin/releases/latest",
+    "id": 253285831,
+    "has_downloads": true,
+    "full_name": "simwai/dark-boruto-rainmeter-skin"
+  },
+  {
+    "latest_release": "https://github.com/EccTM/Conky-Gemini/releases/download/v1.0/Conky.Gemini_1.0.rmskin",
+    "name": "Conky-Gemini",
+    "latest_release_url": "https://api.github.com/repos/EccTM/Conky-Gemini/releases/latest",
+    "id": 258916478,
+    "has_downloads": true,
+    "full_name": "EccTM/Conky-Gemini"
+  },
+  {
+    "latest_release": "https://github.com/minusInfinite/rainmeter-afl-ladder/releases/download/1.0.0/AFL.Ladder_1.0.0.rmskin",
+    "name": "rainmeter-afl-ladder",
+    "latest_release_url": "https://api.github.com/repos/minusInfinite/rainmeter-afl-ladder/releases/latest",
+    "id": 472801958,
+    "has_downloads": true,
+    "full_name": "minusInfinite/rainmeter-afl-ladder"
+  }
+]
