@@ -7,16 +7,16 @@ Rainmeter package manager
 Update the list of available skins
 
 ```
-mond.ps1 update
+mond update
 ```
 
 Install a skin
 
 ```
-mond.ps1 install owner/name
+mond install owner/name
 ```
 
-eg. `mond.ps1 install reisir/robux`
+eg. `mond install reisir/robux`
 
 # Scraping rainmeter-skins topic to skins.json
 
