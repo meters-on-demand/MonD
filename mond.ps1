@@ -10,10 +10,16 @@ param (
 
 . .env.ps1
 
+# URLs
 $githubAPI = "https://api.github.com/"
 $rainmeterSkinsTopic = "$($githubAPI)search/repositories?q=topic:rainmeter-skin&per_page=50"
+
+# Files
 $packageListFile = "skins.json"
 $skinFile = "skin.rmskin"
+
+# Directories
+$includeFilesDirectory = "$($PSScriptRoot)\@Resources\Generated"
 
 function Main {
     param (
@@ -26,18 +32,61 @@ function Main {
             List-Commands
         }
         "update" {
-            if (-not($TOKEN)) { throw "`$TOKEN must be set to use update" }
+            if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" }
             Update
-            Paginate
+            Export
         }
         "install" {
             Install $Parameter
         }
-        "paginate" {
-            Paginate $Parameter
+        "export" {
+            Export
         }
-        Default { }
+        Default {
+            Write-Host "$Command" -ForegroundColor Red -NoNewline
+            Write-Host " is not a command! Use" -NoNewline 
+            Write-Host " mond help " -ForegroundColor Blue -NoNewline
+            Write-Host "to see available commands!"
+        }
     }
+}
+
+function List-Commands {
+    $commands = @(@{
+            Name        = "help"
+            Description = "show this help"
+        }, @{
+            Name        = "update"
+            Description = "update the package list"
+        }, @{
+            Name        = "install"
+            Description = "installs the specified package"
+            Parameters  = @(@{
+                    Name        = "package" 
+                    Description = "the full name of the package to install"
+                })
+        },
+        @{
+            Name        = "export"
+            Description = "exports skins to meters"
+        }
+    )
+
+    Write-Host "List of MonD commands"
+
+    foreach ($command in $commands) {
+        Write-Host "$($command.name)" -ForegroundColor Blue
+        Write-Host "$($command.Description)"
+        if ($command.Parameters) {
+            Write-Host "parameters:" -ForegroundColor Yellow
+            foreach ($parameter in $command.Parameters) {
+                Write-Host "$($parameter.name)" -ForegroundColor Blue
+                Write-Host "$($parameter.Description)"
+            }
+        }
+        Write-Host ""
+    }
+
 }
 
 function Update {
@@ -86,33 +135,79 @@ function Install {
 
 }
 
-function Paginate {
+function Export {
+    $skins = Package-List
+    $metersFile = "$includeFilesDirectory\Meters.inc"
+    $variablesFile = "$includeFilesDirectory\SkinVariables.inc"
+
+    # Empty metersFile
+    "" | Out-File -FilePath $metersFile -Force -Encoding unicode
+
+    # Empty variablesFile
+    @"
+[Variables]
+Skins=$($skins.Count)
+"@ | Out-File -FilePath $variablesFile -Force -Encoding unicode
+
+    # Separate loops to not have two files open? idk
+    for ($i = 0; $i -lt $skins.Count; $i++) {
+        Meter -Skin $skins[$i] -Index $i | Out-File -FilePath $metersFile -Append -Encoding unicode
+    }
+
+    for ($i = 0; $i -lt $skins.Count; $i++) {
+        Variables -Skin $skins[$i] -Index $i | Out-File -FilePath $variablesFile -Append -Encoding unicode
+    }
+}
+
+function Meter {
     param (
         [Parameter(Position = 0)]
+        [System.Object]
+        $Skin,
+        [Parameter(Position = 1)]
         [int]
-        $ItemsOnPage
+        $Index
     )
-    if ($ItemsOnPage -eq 0) { $ItemsOnPage = 10 }
 
-    $emptyPage = @()
-    for ($i = 0; $i -lt $ItemsOnPage; $i++) {
-        $emptyPage += @{
-            name = "" 
-            repo = "" 
-        }
-    }
+    return @"
+[SkinName$i]
+Meter=String
+Text=$($Skin.name)
+MeterStyle=Skins | Names
+Group=Skins | Names
+Hidden=(($index < ([#Index] + [#ItemsShown])) && ($index >= [#Index]) ? 0 : 1)
 
-    $skins = Package-List
-    for ($i = 0; $i -lt $skins.Count / $ItemsOnPage; $i++) {
-        $page = $emptyPage
-        for ($j = 0; $j -lt $page.Count; $j++) {
-            $item = $skins[($i * $ItemsOnPage) + $j]
-            if ($item) {
-                $page[$j % $ItemsOnPage] = $item
-            }
-        }
-        $page | ConvertTo-Json | Out-File -FilePath "pages\$($i).json" -Force
-    }
+[SkinAuthor$i]
+Meter=String
+Text=$($Skin.owner.name)
+MeterStyle=Skins | Authors
+Group=Skins | Authors
+Hidden=(($index < ([#Index] + [#ItemsShown])) && ($index >= [#Index]) ? 0 : 1)
+
+[SkinFullName$i]
+Meter=String
+Text=$($Skin.full_name)
+MeterStyle=Skins | FullNames
+Group=Skins | FullNames
+Hidden=(($index < ([#Index] + [#ItemsShown])) && ($index >= [#Index]) ? 0 : 1)
+
+"@
+}
+
+function Variables {
+    param (
+        [Parameter(Position = 0)]
+        [System.Object]
+        $Skin,
+        [Parameter(Position = 1)]
+        [int]
+        $Index
+    )
+
+    return @"
+Link$i=$($Skin.latest_release.browser_download_url)
+Version$i=$($Skin.latest_release.tag_name)
+"@
 }
 
 function Find-Skin {
