@@ -94,9 +94,9 @@ function Update {
     $allSkins = @()
     Get-RainmeterRepositories | ForEach-Object {
         $skin = @{
-            id            = $_.id
             name          = $_.name
             full_name     = $_.full_name
+            skin_name     = ""
             has_downloads = $_.has_downloads
             owner         = @{
                 name       = $_.owner.login
@@ -106,33 +106,121 @@ function Update {
         $allSkins += $skin
     }
 
-    $skins = @()
+    $Skins = @()
     $allSkins | ForEach-Object {
         $hasRMskin = Latest-RMskin $_
         if ($hasRMskin) {
             $_.latest_release = $hasRMskin
-            $skins += $_
+            $Skins += $_
         }
     }
 
-    $skins | ConvertTo-Json | Out-File -FilePath $packageListFile
+    $Skins = Get-AllSkinNames -Skins $Skins
 
+    Save-PackageList $Skins
+
+}
+
+function Get-AllSkinNames {
+    [CmdletBinding()]
+    param (
+        [Parameter(Position = 0)]
+        [array]
+        $Skins
+    )
+
+    foreach ($Skin in $Skins) {
+        Download -FullName $Skin.full_name -Skins $Skins
+        $Skins = Set-SkinName -Skin $Skin -Skins $Skins
+    }
+
+    return $Skins
+
+}
+
+function Download {
+    [CmdletBinding()]
+    param (
+        [Parameter(ValueFromPipeline)]
+        [string]
+        $FullName,
+        [Parameter()]
+        [array]
+        $Skins
+    )
+
+    $skin = Find-Skin -FullName $FullName -Skins $Skins
+
+    if (-not($skin)) { throw "No skin named $($FullName) found" }
+
+    Write-Host "Downloading $($skin.full_name)"
+
+    Invoke-WebRequest -Uri $skin.latest_release.browser_download_url -UseBasicParsing -OutFile $skinFile
+    
 }
 
 function Install {
     param (
-        [Parameter()]
+        [Parameter(ValueFromPipeline, Position = 0)]
         [string]
-        $SkinName
+        $FullName
     )
 
-    $skin = Find-Skin $SkinName
+    Download -FullName $FullName
 
-    if (-not($skin)) { throw "No skins named $($SkinName) found" }
+    Save-SkinName -Skin $skin
 
-    Invoke-WebRequest -Uri $skin.latest_release.browser_download_url -UseBasicParsing -OutFile $skinFile
     Start-Process -FilePath $skinFile
 
+}
+
+function Find-Skin {
+    param (
+        [Parameter(ValueFromPipeline, Position = 0)]
+        [string]
+        $FullName,
+        [Parameter()]
+        [array]
+        $Skins
+    )
+    if (-not($Skins)) { $Skins = Package-List }
+    foreach ($skin in $Skins) {
+        if ($skin.full_name -like $FullName) {
+            return $skin
+        }
+    }
+    return $false
+}
+
+function Save-SkinName {
+    [CmdletBinding()]
+    param (
+        [Parameter(Position = 0)]
+        [System.Object]
+        $Skin
+    )
+    $Skins = Package-List
+    $Skins = Set-SkinName -Skin $Skin -Skins $Skins 
+    Save-PackageList -Skins $Skins
+}
+
+function Set-SkinName {
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [System.Object]
+        $Skin,
+        [Parameter()]
+        [array]
+        $Skins
+    )
+    for ($i = 0; $i -lt $Skins.Count; $i++) {
+        if ($Skins[$i].full_name -like $Skin.full_name) {
+            $Skins[$i].skin_name = Get-SkinNameFromZip
+            return $Skins
+        }
+    }
+    return $Skins
 }
 
 function Export {
@@ -210,19 +298,13 @@ Version$i=$($Skin.latest_release.tag_name)
 "@
 }
 
-function Find-Skin {
+function Save-PackageList {
     param (
-        [Parameter()]
-        [string]
-        $SkinName
+        [Parameter(Position = 0)]
+        [array]
+        $Skins
     )
-    $skins = Package-List
-    foreach ($skin in $skins) {
-        if ($skin.full_name -like $SkinName) {
-            return $skin
-        }
-    }
-    return $false
+    $Skins | ConvertTo-Json | Out-File -FilePath $packageListFile
 }
 
 function Package-List {
@@ -300,6 +382,20 @@ function Get-Request {
     Write-Host "X-RateLimit-Remaining: $($response.Headers['X-RateLimit-Remaining'])"
 
     return $response
+}
+
+function Get-SkinNameFromZip {
+    $skinNamePattern = "Skins\/(.*?)\/"
+    foreach ($sourceFile in (Get-ChildItem -filter $skinFile)) {
+        $zip = [System.IO.Compression.ZipFile]::OpenRead($sourceFile)
+        $entries = $zip.Entries
+        $zip.Dispose()
+        foreach ($entry in $entries) {
+            if ("$($entry)" -match $skinNamePattern) {
+                return $Matches[1]
+            }
+        }
+    }
 }
 
 Main -Command $Command
