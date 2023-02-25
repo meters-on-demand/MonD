@@ -1,3 +1,11 @@
+# GitHub $TOKEN script 
 *.env*
+
+# Downloaded .rmskin file
 *.rmskin
+
+# Log files
 *.log
+
+# Generated files
+@Resources/generated/*.inc
