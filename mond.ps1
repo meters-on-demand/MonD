@@ -258,26 +258,40 @@ function Meter {
     )
 
     return @"
-[SkinName$i]
-Meter=String
-Text=$($Skin.name)
-MeterStyle=Skins | Names
-Group=Skins | Names
+[SkinHidden$i]
 Hidden=(($index < ([#Index] + [#ItemsShown])) && ($index >= [#Index]) ? 0 : 1)
 
-[SkinAuthor$i]
+[SkinContainer$i]
+Meter=Shape
+MeterStyle=Containers | SkinHidden$i
+Group=Skins | Containers
+
+[SkinBackground$i]
+Meter=Shape
+MeterStyle=Skins | Backgrounds | SkinHidden$i
+Group=Skins | Backgrounds
+Container=SkinContainer$i
+
+[SkinName$i]
 Meter=String
-Text=$($Skin.owner.name)
-MeterStyle=Skins | Authors
-Group=Skins | Authors
-Hidden=(($index < ([#Index] + [#ItemsShown])) && ($index >= [#Index]) ? 0 : 1)
+Text=$(if($Skin.skin_name) { $Skin.skin_name } else { $Skin.name })
+MeterStyle=Skins | Text | Names | SkinHidden$i
+Group=Skins | Names
+Container=SkinContainer$i
+
+[SkinVersion$i]
+Meter=String
+Text=[#Version$i]
+MeterStyle=Skins | Text | Versions | SkinHidden$i
+Group=Skins | Versions
+Container=SkinContainer$i
 
 [SkinFullName$i]
 Meter=String
 Text=$($Skin.full_name)
-MeterStyle=Skins | FullNames
+MeterStyle=Skins | Text | FullNames | SkinHidden$i
 Group=Skins | FullNames
-Hidden=(($index < ([#Index] + [#ItemsShown])) && ($index >= [#Index]) ? 0 : 1)
+Container=SkinContainer$i
 
 "@
 }
