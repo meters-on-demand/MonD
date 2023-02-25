@@ -2,7 +2,7 @@
 param (
     [Parameter(Position = 0)]
     [string]
-    $Command = "help",
+    $Command = "version",
     [Parameter(Position = 1)]
     [string]
     $Parameter
@@ -10,30 +10,45 @@ param (
 
 . .env.ps1
 
+# Constants
+$version = "v1.0"
+
 # URLs
 $githubAPI = "https://api.github.com/"
 $rainmeterSkinsTopic = "$($githubAPI)search/repositories?q=topic:rainmeter-skin&per_page=50"
+$github = "https://github.com/"
 
 # Files
 $packageListFile = "skins.json"
 $skinFile = "skin.rmskin"
 
 # Directories
-$includeFilesDirectory = "$($PSScriptRoot)\@Resources\Generated"
+$baseDirectory = $PSScriptRoot
+if (-not($PSScriptRoot)) { $baseDirectory = $RmApi.VariableStr('ROOTCONFIGPATH') }
+$includeFilesDirectory = "$($baseDirectory)\@Resources\Generated"
+
+# Rainmeter update function
+function Update {
+    return "MonD $version"
+}
 
 function Main {
     param (
         [Parameter(Position = 0)]
         [string]
-        $Command = "help"
+        $Command = "help",
+        [Parameter(Position = 1)]
+        [string]
+        $Parameter
     )
+
     switch ($Command) {
         "help" { 
             List-Commands
         }
         "update" {
             if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" }
-            Update
+            Update-PackageList
             Export
         }
         "install" {
@@ -41,6 +56,12 @@ function Main {
         }
         "export" {
             Export
+        }
+        "search" {
+            Search $Parameter
+        }
+        "version" {
+            Write-Host "MonD $version"
         }
         Default {
             Write-Host "$Command" -ForegroundColor Red -NoNewline
@@ -65,6 +86,12 @@ function List-Commands {
                     Name        = "package" 
                     Description = "the full name of the package to install"
                 })
+        }, @{
+            Name        = "search"
+            Description = "searches the package list"
+        }, @{
+            Name        = "version"
+            Description = "prints the MonD version"
         },
         @{
             Name        = "export"
@@ -89,7 +116,7 @@ function List-Commands {
 
 }
 
-function Update {
+function Update-PackageList {
 
     $allSkins = @()
     Get-RainmeterRepositories | ForEach-Object {
@@ -98,6 +125,7 @@ function Update {
             full_name     = $_.full_name
             skin_name     = ""
             has_downloads = $_.has_downloads
+            topics        = $_.topics
             owner         = @{
                 name       = $_.owner.login
                 avatar_url = $_.owner.avatar_url
@@ -224,27 +252,35 @@ function Set-SkinName {
 }
 
 function Export {
-    $skins = Package-List
-    $metersFile = "$includeFilesDirectory\Meters.inc"
-    $variablesFile = "$includeFilesDirectory\SkinVariables.inc"
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [array]
+        $Skins,
+        # File to export meters to
+        [Parameter()]
+        [string]
+        $MetersFile = "$includeFilesDirectory\Meters.inc",
+        # File to export meters to
+        [Parameter()]
+        [string]
+        $VariablesFile = "$includeFilesDirectory\SkinVariables.inc"
+    )
+    if ( -not($Skins)) { $Skins = Package-List }
 
-    # Empty metersFile
-    "" | Out-File -FilePath $metersFile -Force -Encoding unicode
-
-    # Empty variablesFile
-    @"
+    # Write VariablesFile
+    @"    
 [Variables]
-Skins=$($skins.Count)
-"@ | Out-File -FilePath $variablesFile -Force -Encoding unicode
+Skins=$($Skins.Count)
+"@ | Out-File -FilePath $VariablesFile -Force -Encoding unicode
 
-    # Separate loops to not have two files open? idk
-    for ($i = 0; $i -lt $skins.Count; $i++) {
-        Meter -Skin $skins[$i] -Index $i | Out-File -FilePath $metersFile -Append -Encoding unicode
+    # Empty MetersFile
+    "" | Out-File -FilePath $MetersFile -Force -Encoding unicode
+    # Generate MetersFile
+    for ($i = 0; $i -lt $Skins.Count; $i++) {
+        Meter -Skin $Skins[$i] -Index $i | Out-File -FilePath $MetersFile -Append -Encoding unicode
     }
 
-    for ($i = 0; $i -lt $skins.Count; $i++) {
-        Variables -Skin $skins[$i] -Index $i | Out-File -FilePath $variablesFile -Append -Encoding unicode
-    }
 }
 
 function Meter {
@@ -271,6 +307,8 @@ Meter=Shape
 MeterStyle=Skins | Backgrounds | SkinHidden$i
 Group=Skins | Backgrounds
 Container=SkinContainer$i
+MouseOverAction=[!ShowMeterGroup Hovers$i]
+MouseLeaveAction=[!HideMeterGroup Hovers$i]
 
 [SkinName$i]
 Meter=String
@@ -281,7 +319,7 @@ Container=SkinContainer$i
 
 [SkinVersion$i]
 Meter=String
-Text=[#Version$i]
+Text=$($Skin.latest_release.tag_name)
 MeterStyle=Skins | Text | Versions | SkinHidden$i
 Group=Skins | Versions
 Container=SkinContainer$i
@@ -293,22 +331,26 @@ MeterStyle=Skins | Text | FullNames | SkinHidden$i
 Group=Skins | FullNames
 Container=SkinContainer$i
 
-"@
-}
+[SkinHoverBackground$i]
+Meter=Shape
+MeterStyle=Skins | Backgrounds | SkinHidden$i | Hovers | HoverBackgrounds
+Group=Skins | Hovers$i
+Container=SkinContainer$i
 
-function Variables {
-    param (
-        [Parameter(Position = 0)]
-        [System.Object]
-        $Skin,
-        [Parameter(Position = 1)]
-        [int]
-        $Index
-    )
+[SkinActionIcon$i]
+Meter=String
+MeterStyle=Skins | Hovers | Icons | Actions | fa
+Group=Skins | Hovers$i
+Container=SkinContainer$i
+LeftMouseUpAction=[!CommandMeasure MonD "install $($Skin.full_name)"]
 
-    return @"
-Link$i=$($Skin.latest_release.browser_download_url)
-Version$i=$($Skin.latest_release.tag_name)
+[SkinGithubIcon$i]
+Meter=String
+MeterStyle=Skins | Hovers | Icons | Githubs | fa
+Group=Skins | Hovers$i
+Container=SkinContainer$i
+LeftMouseUpAction=["$github$($Skin.full_name)"]
+
 "@
 }
 
@@ -412,4 +454,33 @@ function Get-SkinNameFromZip {
     }
 }
 
-Main -Command $Command
+function Search {
+
+    [CmdletBinding()]
+    param (
+        [Parameter()]
+        [string]
+        $Keyword
+    )
+
+    Write-Host $Keyword
+
+    $Skins = Package-List
+
+    $Results = @()
+    foreach ($Skin in $Skins) {
+        if ($Skin.full_name -match "$Keyword") { $Results += $Skin }
+    }
+
+    if (-not($Results.Count)) { return "No results" }
+    Export -Skins $Results
+
+    if ($RmApi) {
+        $RmApi.Bang('!Refresh')
+    }
+
+}
+
+if (-not($RmApi)) {
+    Main -Command $Command -Parameter $Parameter
+}
