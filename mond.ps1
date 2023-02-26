@@ -48,7 +48,7 @@ function Main {
 
     switch ($Command) {
         "help" { 
-            List-Commands
+            Show-AvailableCommands
         }
         "update" {
             if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" }
@@ -76,7 +76,7 @@ function Main {
     }
 }
 
-function List-Commands {
+function Show-AvailableCommands {
     $commands = @(@{
             Name        = "help"
             Description = "show this help"
@@ -140,7 +140,7 @@ function Update-PackageList {
 
     $Skins = @()
     $allSkins | ForEach-Object {
-        $hasRMskin = Latest-RMskin $_
+        $hasRMskin = Get-LatestReleaseAsset $_
         if ($hasRMskin) {
             $_.latest_release = $hasRMskin
             $Skins += $_
@@ -410,7 +410,7 @@ function Get-RainmeterRepositories {
 
 }
 
-function Latest-RMskin {
+function Get-LatestReleaseAsset {
     param (
         [Parameter(Position = 0)]
         [hashtable]
