@@ -148,7 +148,7 @@ function Update-Skins {
     # Filter out repositories with no packages
     $Skins = @()
     $allPackages | ForEach-Object {
-        $Skin = Set-PackageInformation $_
+        $Skin = Set-PackageInformation -Skin $_ -ExistingSkins $localPackageList
         if ($Skin) { $Skins += $Skin }
     }
 
@@ -165,7 +165,6 @@ function ConvertTo-Skin {
     return @{
         name          = $InputObject.name
         full_name     = $InputObject.full_name
-        skin_name     = ""
         has_downloads = $InputObject.has_downloads
         topics        = $InputObject.topics
         owner         = @{
@@ -177,15 +176,27 @@ function ConvertTo-Skin {
 
 function Set-PackageInformation {
     param (
-        [Parameter()]
+        [Parameter(Position = 0, Mandatory)]
         [hashtable]
-        $Skin
+        $Skin,
+        [Parameter(Mandatory)]
+        [array]
+        $ExistingSkins
     )
     $latestRelease = Get-LatestRelease $Skin
     if (-not($latestRelease)) { return $false }
     $Skin.latest_release = $latestRelease
-    $Skin.skin_name = Get-SkinName -Skin $Skin
-    $Skin["skin_name_release"] = $Skin.latest_release.tag_name
+
+    # Get existing information
+    $oldSkin = Find-Skins -Query $Skin.full_name -Skins $ExistingSkins -Exact
+    $Skin["skin_name"] = $oldSkin.skin_name
+    $Skin["skin_name_tag"] = $oldSkin.skin_name_tag
+
+    if($Skin.skin_name_tag -ne $Skin.latest_release.tag_name) {
+        $Skin.skin_name = Get-SkinName -Skin $Skin
+        $Skin.skin_name_tag = $Skin.latest_release.tag_name
+    }
+
     return $Skin
 }
 
@@ -238,13 +249,23 @@ function Find-Skins {
         # Should the query return multiple results in an array?
         [Parameter()]
         [switch]
-        $Multiple
+        $Multiple,
+        # Should the match be exact?
+        [Parameter()]
+        [switch]
+        $Exact
     )
     if (-not($Skins)) { $Skins = Get-Skins }
     $Results = @()
     foreach ($Skin in $Skins) {
         $prop = $Skin[$Property]
-        if ($prop -match $Query) {
+        $doesMatch = $false 
+        if ($Exact) {
+            $doesMatch = ($prop -like $Query)
+        } else {
+            $doesMatch = ($prop -match $Query)
+        }
+        if ($doesMatch) {
             if ($Multiple) {
                 $Results += $Skin
             }
@@ -260,9 +281,6 @@ function Get-SkinName {
         [hashtable]
         $Skin
     )
-    if($Skin.skin_name_release -eq $Skin.latest_release.tag_name) {
-        return $Skin.skin_name
-    }
     Download -FullName $Skin.full_name
     $SkinName = Get-SkinNameFromZip
     return $SkinName
