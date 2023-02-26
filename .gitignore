@@ -9,3 +9,6 @@
 
 # Generated files
 @Resources/generated/*.inc
+
+# Installed cache
+installed.json
