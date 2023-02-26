@@ -18,9 +18,11 @@ mond install owner/name
 
 eg. `mond install reisir/robux`
 
-# Scraping rainmeter-skins topic to skins.json
+# Development
 
-For developers
+Information for developers
+
+## Scraping rainmeter-skins topic to skins.json
 
 Make a new script called `.env.ps1` in #ROOTCONFIGPATH# and put your GitHub [Personal Access Token](https://github.com/settings/tokens) in there like this:
 

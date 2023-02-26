@@ -28,7 +28,7 @@ $includeFilesDirectory = "$($baseDirectory)\@Resources\Generated"
 
 # Files
 $installedFile = "$baseDirectory\installed.json"
-$packageListFile = "$baseDirectory\skins.json"
+$skinListFile = "$baseDirectory\skins.json"
 $skinFile = "$baseDirectory\skin.rmskin"
 
 # Rainmeter update function
@@ -40,7 +40,7 @@ function Main {
     param (
         [Parameter(Position = 0)]
         [string]
-        $Command = "help",
+        $Command,
         [Parameter(Position = 1)]
         [string]
         $Parameter
@@ -52,7 +52,7 @@ function Main {
         }
         "update" {
             if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" }
-            Update-PackageList
+            Update-Skins
             Export
         }
         "install" {
@@ -82,17 +82,17 @@ function Show-AvailableCommands {
             Description = "show this help"
         }, @{
             Name        = "update"
-            Description = "update the package list"
+            Description = "update the skins list"
         }, @{
             Name        = "install"
-            Description = "installs the specified package"
+            Description = "installs the specified skin"
             Parameters  = @(@{
-                    Name        = "package" 
-                    Description = "the full name of the package to install"
+                    Name        = "skin" 
+                    Description = "the full name of the skin to install"
                 })
         }, @{
             Name        = "search"
-            Description = "searches the package list"
+            Description = "searches the skin list"
         }, @{
             Name        = "version"
             Description = "prints the MonD version"
@@ -120,53 +120,73 @@ function Show-AvailableCommands {
 
 }
 
-function Update-PackageList {
-
-    $allSkins = @()
-    Get-RainmeterRepositories | ForEach-Object {
-        $skin = @{
-            name          = $_.name
-            full_name     = $_.full_name
-            skin_name     = ""
-            has_downloads = $_.has_downloads
-            topics        = $_.topics
-            owner         = @{
-                name       = $_.owner.login
-                avatar_url = $_.owner.avatar_url
-            }
-        }
-        $allSkins += $skin
-    }
-
-    $Skins = @()
-    $allSkins | ForEach-Object {
-        $hasRMskin = Get-LatestReleaseAsset $_
-        if ($hasRMskin) {
-            $_.latest_release = $hasRMskin
-            $Skins += $_
-        }
-    }
-
-    $Skins = Get-AllSkinNames -Skins $Skins
-
-    Save-PackageList $Skins
-
+function Get-Skins {
+    if ( -not(Test-Path -Path $skinListFile) ) { return $false }
+    $hsh = @()
+    $sk = Get-Content $skinListFile | ConvertFrom-Json
+    $sk | ForEach-Object { $hsh += ConvertTo-Hashtable -InputObject $_ }
+    return $hsh
 }
 
-function Get-AllSkinNames {
-    param (
-        [Parameter(Position = 0)]
-        [array]
-        $Skins
-    )
-
-    foreach ($Skin in $Skins) {
-        Download -FullName $Skin.full_name -Skins $Skins
-        $Skins = Set-SkinName -Skin $Skin -Skins $Skins
+function Update-Skins {
+    # Get all repositories from the rainmeter-skin topic on GitHub
+    $allPackages = @()
+    Get-RainmeterRepositories | ForEach-Object {
+        $allPackages += ConvertTo-Skin -InputObject $_
     }
 
-    return $Skins
+    # Add manually tracked repositories to the repository list
+    $localPackageList = Get-Skins
+    if ($localPackageList) {
+        $localPackageList | ForEach-Object {
+            if (-not(Find-Skins -Query $_.full_name -Skins $allPackages)) { 
+                $allPackages += $_
+            }
+        }
+    }
 
+    # Filter out repositories with no packages
+    $Skins = @()
+    $allPackages | ForEach-Object {
+        $Skin = Set-PackageInformation $_
+        if ($Skin) { $Skins += $Skin }
+    }
+
+    # Save skins to file
+    Save-SkinsList $Skins
+}
+
+function ConvertTo-Skin {
+    param (
+        [Parameter()]
+        [object]
+        $InputObject
+    )
+    return @{
+        name          = $InputObject.name
+        full_name     = $InputObject.full_name
+        skin_name     = ""
+        has_downloads = $InputObject.has_downloads
+        topics        = $InputObject.topics
+        owner         = @{
+            name       = $InputObject.owner.login
+            avatar_url = $InputObject.owner.avatar_url
+        }
+    }
+}
+
+function Set-PackageInformation {
+    param (
+        [Parameter()]
+        [hashtable]
+        $Skin
+    )
+    $latestRelease = Get-LatestRelease $Skin
+    if (-not($latestRelease)) { return $false }
+    $Skin.latest_release = $latestRelease
+    $Skin.skin_name = Get-SkinName -Skin $Skin
+    $Skin["skin_name_release"] = $Skin.latest_release.tag_name
+    return $Skin
 }
 
 function Download {
@@ -198,7 +218,7 @@ function Install {
 
     Download -FullName $FullName
 
-    Save-SkinName -Skin $skin
+    # TODO: call Update-Skin to set the SkinName
 
     Start-Process -FilePath $skinFile
 
@@ -220,7 +240,7 @@ function Find-Skins {
         [switch]
         $Multiple
     )
-    if (-not($Skins)) { $Skins = Get-PackageList }
+    if (-not($Skins)) { $Skins = Get-Skins }
     $Results = @()
     foreach ($Skin in $Skins) {
         $prop = $Skin[$Property]
@@ -234,33 +254,18 @@ function Find-Skins {
     return $Results
 }
 
-function Save-SkinName {
+function Get-SkinName {
     param (
-        [Parameter(Position = 0)]
+        [Parameter()]
         [hashtable]
         $Skin
     )
-    $Skins = Get-PackageList
-    $Skins = Set-SkinName -Skin $Skin -Skins $Skins 
-    Save-PackageList -Skins $Skins
-}
-
-function Set-SkinName {
-    param (
-        [Parameter()]
-        [hashtable]
-        $Skin,
-        [Parameter()]
-        [array]
-        $Skins
-    )
-    for ($i = 0; $i -lt $Skins.Count; $i++) {
-        if ($Skins[$i].full_name -like $Skin.full_name) {
-            $Skins[$i].skin_name = Get-SkinNameFromZip
-            return $Skins
-        }
+    if($Skin.skin_name_release -eq $Skin.latest_release.tag_name) {
+        return $Skin.skin_name
     }
-    return $Skins
+    Download -FullName $Skin.full_name
+    $SkinName = Get-SkinNameFromZip
+    return $SkinName
 }
 
 function Export {
@@ -277,7 +282,7 @@ function Export {
         [string]
         $VariablesFile = "$includeFilesDirectory\SkinVariables.inc"
     )
-    if ( -not($Skins)) { $Skins = Get-PackageList }
+    if ( -not($Skins)) { $Skins = Get-Skins }
 
     # Write VariablesFile
     @"    
@@ -365,22 +370,13 @@ LeftMouseUpAction=["$github$($Skin.full_name)"]
 "@
 }
 
-function Save-PackageList {
+function Save-SkinsList {
     param (
         [Parameter(Position = 0)]
         [array]
         $Skins
     )
-    $Skins | ConvertTo-Json | Out-File -FilePath $packageListFile
-}
-
-function Get-PackageList {
-    
-    $hsh = @()
-    $sk = Get-Content $packageListFile | ConvertFrom-Json
-    $sk | % { $hsh += ConvertTo-Hashtable -InputObject $_ }
-    return $hsh
-
+    $Skins | ConvertTo-Json | Out-File -FilePath $skinListFile
 }
 
 function Get-RainmeterRepositories { 
@@ -409,7 +405,7 @@ function Get-RainmeterRepositories {
 
 }
 
-function Get-LatestReleaseAsset {
+function Get-LatestRelease {
     param (
         [Parameter(Position = 0)]
         [hashtable]
@@ -458,14 +454,12 @@ function Get-Request {
 
 function Get-SkinNameFromZip {
     $skinNamePattern = "Skins\/(.*?)\/"
-    foreach ($sourceFile in (Get-ChildItem -filter $skinFile)) {
-        $zip = [System.IO.Compression.ZipFile]::OpenRead($sourceFile)
-        $entries = $zip.Entries
-        $zip.Dispose()
-        foreach ($entry in $entries) {
-            if ("$($entry)" -match $skinNamePattern) {
-                return $Matches[1]
-            }
+    $zip = [System.IO.Compression.ZipFile]::OpenRead($skinFile)
+    $entries = $zip.Entries
+    $zip.Dispose()
+    foreach ($entry in $entries) {
+        if ("$($entry)" -match $skinNamePattern) {
+            return $Matches[1]
         }
     }
 }
@@ -491,7 +485,7 @@ function Search {
 
 function Get-InstalledSkins {
     $skinsPath = $RmApi.VariableStr("SKINSPATH")
-    $Skins = Get-PackageList
+    $Skins = Get-Skins
     $installedSkins = @()
     Get-ChildItem -Path "$skinsPath" -Directory | ForEach-Object {
         $dir = $_.Name
