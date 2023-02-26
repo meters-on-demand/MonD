@@ -1,0 +1,12 @@
+{
+  // Do not fuck with PowerShell generated json files
+  "[json]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false,
+    "editor.formatOnType": false
+  },
+  // Hide temp files from view
+  "files.exclude": {
+    "skin.rmskin": true
+  }
+}
