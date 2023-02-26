@@ -154,7 +154,6 @@ function Update-PackageList {
 }
 
 function Get-AllSkinNames {
-    [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
         [array]
@@ -171,7 +170,6 @@ function Get-AllSkinNames {
 }
 
 function Download {
-    [CmdletBinding()]
     param (
         [Parameter(ValueFromPipeline)]
         [string]
@@ -225,8 +223,7 @@ function Find-Skins {
     if (-not($Skins)) { $Skins = Get-PackageList }
     $Results = @()
     foreach ($Skin in $Skins) {
-        $prop = $Skin | Select-Object -ExpandProperty $Property
-        # Write-Host $prop
+        $prop = $Skin[$Property]
         if ($prop -match $Query) {
             if ($Multiple) {
                 $Results += $Skin
@@ -238,10 +235,9 @@ function Find-Skins {
 }
 
 function Save-SkinName {
-    [CmdletBinding()]
     param (
         [Parameter(Position = 0)]
-        [System.Object]
+        [hashtable]
         $Skin
     )
     $Skins = Get-PackageList
@@ -250,10 +246,9 @@ function Save-SkinName {
 }
 
 function Set-SkinName {
-    [CmdletBinding()]
     param (
         [Parameter()]
-        [System.Object]
+        [hashtable]
         $Skin,
         [Parameter()]
         [array]
@@ -269,7 +264,6 @@ function Set-SkinName {
 }
 
 function Export {
-    [CmdletBinding()]
     param (
         [Parameter()]
         [array]
@@ -303,7 +297,7 @@ Skins=$($Skins.Count)
 function Meter {
     param (
         [Parameter(Position = 0)]
-        [System.Object]
+        [hashtable]
         $Skin,
         [Parameter(Position = 1)]
         [int]
@@ -381,7 +375,12 @@ function Save-PackageList {
 }
 
 function Get-PackageList {
-    return Get-Content $packageListFile | ConvertFrom-Json
+    
+    $hsh = @()
+    $sk = Get-Content $packageListFile | ConvertFrom-Json
+    $sk | % { $hsh += ConvertTo-Hashtable -InputObject $_ }
+    return $hsh
+
 }
 
 function Get-RainmeterRepositories { 
@@ -472,12 +471,18 @@ function Get-SkinNameFromZip {
 }
 
 function Search {
-    [CmdletBinding()]
     param (
-        [Parameter()]
+        [Parameter(Position = 0, Mandatory = $false)]
         [string]
         $Keyword
     )
+
+    if (-not($Keyword)) {
+        Export
+        if ($RmApi) { $RmApi.Bang('!Refresh') }
+        return
+    }
+
     $Results = Find-Skins -Multiple -Query $Keyword 
     if (-not($Results.Count)) { return "No results" }
     Export -Skins $Results
@@ -520,6 +525,17 @@ function Get-InstalledSkins {
         $RmApi.Bang("!UpdateMeter *")
         $RmApi.Bang("!Redraw")
     }
+}
+
+function ConvertTo-Hashtable {
+    param (
+        [Parameter()]
+        [object]
+        $InputObject
+    )
+    $OutputHashtable = @{}
+    $InputObject.psobject.properties | ForEach-Object { $OutputHashtable[$_.Name] = $_.Value }
+    return $OutputHashtable
 }
 
 if ($RmApi) { Get-InstalledSkins }
