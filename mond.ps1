@@ -152,6 +152,9 @@ function Update-Skins {
         if ($Skin) { $Skins += $Skin }
     }
 
+    # Sort skins alphabetically
+    $Skins = $Skins | Sort-Object -Property "full_name"
+
     # Save skins to file
     Save-SkinsList $Skins
 }
