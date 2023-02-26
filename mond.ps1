@@ -11,6 +11,7 @@ param (
 . .env.ps1
 
 # Constants
+$self = "reisir/mond"
 $version = "v1.0"
 
 # URLs
@@ -18,14 +19,15 @@ $githubAPI = "https://api.github.com/"
 $rainmeterSkinsTopic = "$($githubAPI)search/repositories?q=topic:rainmeter-skin&per_page=50"
 $github = "https://github.com/"
 
-# Files
-$packageListFile = "skins.json"
-$skinFile = "skin.rmskin"
-
 # Directories
 $baseDirectory = $PSScriptRoot
 if (-not($PSScriptRoot)) { $baseDirectory = $RmApi.VariableStr('ROOTCONFIGPATH') }
 $includeFilesDirectory = "$($baseDirectory)\@Resources\Generated"
+
+# Files
+$installedFile = "$baseDirectory\installed.json"
+$packageListFile = "$baseDirectory\skins.json"
+$skinFile = "$baseDirectory\skin.rmskin"
 
 # Rainmeter update function
 function Update {
@@ -177,7 +179,7 @@ function Download {
         $Skins
     )
 
-    $skin = Find-Skin -FullName $FullName -Skins $Skins
+    $skin = Find-Skins -Query $FullName -Skins $Skins
 
     if (-not($skin)) { throw "No skin named $($FullName) found" }
 
@@ -202,22 +204,35 @@ function Install {
 
 }
 
-function Find-Skin {
+function Find-Skins {
     param (
         [Parameter(ValueFromPipeline, Position = 0)]
         [string]
-        $FullName,
+        $Query,
+        [Parameter()]
+        [string]
+        $Property = "full_name",
         [Parameter()]
         [array]
-        $Skins
+        $Skins,
+        # Should the query return multiple results in an array?
+        [Parameter()]
+        [switch]
+        $Multiple
     )
-    if (-not($Skins)) { $Skins = Package-List }
-    foreach ($skin in $Skins) {
-        if ($skin.full_name -like $FullName) {
-            return $skin
+    if (-not($Skins)) { $Skins = Get-PackageList }
+    $Results = @()
+    foreach ($Skin in $Skins) {
+        $prop = $Skin | Select-Object -ExpandProperty $Property
+        # Write-Host $prop
+        if ($prop -match $Query) {
+            if ($Multiple) {
+                $Results += $Skin
+            }
+            else { return $Skin }
         }
     }
-    return $false
+    return $Results
 }
 
 function Save-SkinName {
@@ -227,7 +242,7 @@ function Save-SkinName {
         [System.Object]
         $Skin
     )
-    $Skins = Package-List
+    $Skins = Get-PackageList
     $Skins = Set-SkinName -Skin $Skin -Skins $Skins 
     Save-PackageList -Skins $Skins
 }
@@ -266,7 +281,7 @@ function Export {
         [string]
         $VariablesFile = "$includeFilesDirectory\SkinVariables.inc"
     )
-    if ( -not($Skins)) { $Skins = Package-List }
+    if ( -not($Skins)) { $Skins = Get-PackageList }
 
     # Write VariablesFile
     @"    
@@ -363,7 +378,7 @@ function Save-PackageList {
     $Skins | ConvertTo-Json | Out-File -FilePath $packageListFile
 }
 
-function Package-List {
+function Get-PackageList {
     return Get-Content $packageListFile | ConvertFrom-Json
 }
 
@@ -455,32 +470,44 @@ function Get-SkinNameFromZip {
 }
 
 function Search {
-
     [CmdletBinding()]
     param (
         [Parameter()]
         [string]
         $Keyword
     )
-
-    Write-Host $Keyword
-
-    $Skins = Package-List
-
-    $Results = @()
-    foreach ($Skin in $Skins) {
-        if ($Skin.full_name -match "$Keyword") { $Results += $Skin }
-    }
-
+    $Results = Find-Skins -Multiple -Query $Keyword 
     if (-not($Results.Count)) { return "No results" }
     Export -Skins $Results
+    if ($RmApi) { $RmApi.Bang('!Refresh') }
+}
 
-    if ($RmApi) {
-        $RmApi.Bang('!Refresh')
+function Get-InstalledSkins {
+    $skinsPath = $RmApi.VariableStr("SKINSPATH")
+    $Skins = Get-PackageList
+    $installedSkins = @()
+    Get-ChildItem -Path "$skinsPath" -Directory | ForEach-Object {
+        $dir = $_.Name
+        $Skin = Find-Skins -Query "^$dir`$" -Property "skin_name" -Skins $Skins
+        if ($Skin) {
+            $installedSkins += $Skin
+        }
     }
+    
+    $installed = @{}
+    (Get-Content $installedFile | ConvertFrom-Json).psobject.properties | ForEach-Object { $installed[$_.Name] = $_.Value }
 
+    if (-not($installed[$self])) {
+        $installed[$self] = $version
+    }
+    foreach ($skin in $installedSkins) {
+        if (-not($installed[$skin.full_name])) {
+            $installed[$skin.full_name] = $skin.latest_release.name
+        }
+    }
+    Write-Host "Found $($installed.Count) installed skins!"
+    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force
 }
 
-if (-not($RmApi)) {
-    Main -Command $Command -Parameter $Parameter
-}
+if ($RmApi) { Get-InstalledSkins }
+else { Main -Command $Command -Parameter $Parameter }
