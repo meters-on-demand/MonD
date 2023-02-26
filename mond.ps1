@@ -13,6 +13,8 @@ param (
 # Constants
 $self = "reisir/mond"
 $version = "v1.0"
+$updateable = @{}
+$updatesAvailable = $false
 
 # URLs
 $githubAPI = "https://api.github.com/"
@@ -501,12 +503,23 @@ function Get-InstalledSkins {
         $installed[$self] = $version
     }
     foreach ($skin in $installedSkins) {
+        $v = $skin.latest_release.tag_name
         if (-not($installed[$skin.full_name])) {
-            $installed[$skin.full_name] = $skin.latest_release.name
+            $installed[$skin.full_name] = $v
         }
+        if ($installed[$skin.full_name] -ne $v) {
+            $updateable[$skin.full_name] = $v
+        }
+        if ($updateable.Count) { $updatesAvailable = $true }
     }
     Write-Host "Found $($installed.Count) installed skins!"
     $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force
+
+    if ($updatesAvailable) {
+        $RmApi.Bang("!SetVariable UpdatesAvailable $($updateable.Keys.Count)")
+        $RmApi.Bang("!UpdateMeter *")
+        $RmApi.Bang("!Redraw")
+    }
 }
 
 if ($RmApi) { Get-InstalledSkins }
