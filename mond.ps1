@@ -17,8 +17,8 @@ $updateable = @{}
 $updatesAvailable = $false
 
 # URLs
-$githubAPI = "https://api.github.com/"
-$rainmeterSkinsTopic = "$($githubAPI)search/repositories?q=topic:rainmeter-skin&per_page=50"
+$githubAPI = "https://api.github.com"
+$rainmeterSkinsTopic = "$githubAPI/search/repositories?q=topic:rainmeter-skin&per_page=50"
 $github = "https://github.com/"
 
 # Directories
@@ -51,8 +51,13 @@ function Main {
             Show-AvailableCommands
         }
         "update" {
-            if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" }
-            Update-Skins
+            if ($Parameter) {
+                Update-Skin -FullName $Parameter
+            }
+            else {
+                if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" }
+                Update-Skins
+            }
             Export
         }
         "install" {
@@ -128,6 +133,18 @@ function Get-Skins {
     return $hsh
 }
 
+function Sort-Skins {
+    param (
+        [Parameter(Position = 0)]
+        [array]
+        $Skins,
+        [Parameter()]
+        [string]
+        $Property = "full_name"
+    )
+    return $Skins | Sort-Object -Property $Property
+}
+
 function Update-Skins {
     # Get all repositories from the rainmeter-skin topic on GitHub
     $allPackages = @()
@@ -148,14 +165,50 @@ function Update-Skins {
     # Filter out repositories with no packages
     $Skins = @()
     $allPackages | ForEach-Object {
-        $Skin = Set-PackageInformation -Skin $_ -ExistingSkins $localPackageList
+        $Skin = Set-PackageInformation -Skin $_ -Skins $localPackageList
         if ($Skin) { $Skins += $Skin }
     }
 
     # Sort skins alphabetically
-    $Skins = $Skins | Sort-Object -Property "full_name"
+    $Skins = Sort-Skins $Skins -Property "full_name"
 
     # Save skins to file
+    Save-SkinsList $Skins
+}
+
+function Update-Skin {
+    param (
+        [Parameter()]
+        [string]
+        $FullName
+    )
+
+    # Existing skins
+    $Skins = Get-Skins
+
+    # Get repository information from GitHub
+    $Uri = "$githubAPI/repos/$FullName"
+    $response = Get-Request $Uri | ConvertFrom-Json 
+    $repo = ConvertTo-Skin -InputObject $response
+
+    # Get package information
+    $Skin = Set-PackageInformation -Skin $repo -Skins $Skins
+    if (-not($Skin)) { return }
+
+    # Check if skin exists
+    $skinExists = Find-Skins -Query $Skin.full_name -Skins $Skins
+    
+    # Handle skin update or addition
+    if ($skinExists) {
+        $Skins = $Skins | % {
+            if ($_.full_name -like $Skin.full_name) { $Skin } else { $_ }
+        }
+    }
+    else {
+        $Skins += $Skin
+        $Skins = Sort-Skins $Skins 
+    }
+
     Save-SkinsList $Skins
 }
 
@@ -184,18 +237,18 @@ function Set-PackageInformation {
         $Skin,
         [Parameter(Mandatory)]
         [array]
-        $ExistingSkins
+        $Skins
     )
     $latestRelease = Get-LatestRelease $Skin
     if (-not($latestRelease)) { return $false }
     $Skin.latest_release = $latestRelease
 
     # Get existing information
-    $oldSkin = Find-Skins -Query $Skin.full_name -Skins $ExistingSkins -Exact
+    $oldSkin = Find-Skins -Query $Skin.full_name -Skins $Skins -Exact
     $Skin["skin_name"] = $oldSkin.skin_name
     $Skin["skin_name_tag"] = $oldSkin.skin_name_tag
 
-    if($Skin.skin_name_tag -ne $Skin.latest_release.tag_name) {
+    if ($Skin.skin_name_tag -ne $Skin.latest_release.tag_name) {
         $Skin.skin_name = Get-SkinName -Skin $Skin
         $Skin.skin_name_tag = $Skin.latest_release.tag_name
     }
@@ -205,22 +258,21 @@ function Set-PackageInformation {
 
 function Download {
     param (
-        [Parameter(ValueFromPipeline)]
+        [Parameter(Position = 0)]
+        [hashtable]
+        $Skin,
+        [Parameter()]
         [string]
         $FullName,
         [Parameter()]
         [array]
         $Skins
     )
+    if (-not($Skin)) { $Skin = Find-Skins -Query $FullName -Skins $Skins }
+    if (-not($Skin)) { throw "No skin named $($FullName) found" }
 
-    $skin = Find-Skins -Query $FullName -Skins $Skins
-
-    if (-not($skin)) { throw "No skin named $($FullName) found" }
-
-    Write-Host "Downloading $($skin.full_name)"
-
-    Invoke-WebRequest -Uri $skin.latest_release.browser_download_url -UseBasicParsing -OutFile $skinFile
-    
+    Write-Host "Downloading $($Skin.full_name)"
+    Invoke-WebRequest -Uri $Skin.latest_release.browser_download_url -UseBasicParsing -OutFile $skinFile
 }
 
 function Install {
@@ -265,7 +317,8 @@ function Find-Skins {
         $doesMatch = $false 
         if ($Exact) {
             $doesMatch = ($prop -like $Query)
-        } else {
+        }
+        else {
             $doesMatch = ($prop -match $Query)
         }
         if ($doesMatch) {
@@ -284,7 +337,7 @@ function Get-SkinName {
         [hashtable]
         $Skin
     )
-    Download -FullName $Skin.full_name
+    Download $Skin
     $SkinName = Get-SkinNameFromZip
     return $SkinName
 }
@@ -435,7 +488,7 @@ function Get-LatestRelease {
     if (-not($Skin.has_downloads)) { return $false }
 
     try {
-        $releaseResponse = Get-Request "$($githubAPI)repos/$($Skin.full_name)/releases/latest" | ConvertFrom-Json
+        $releaseResponse = Get-Request "$($githubAPI)/repos/$($Skin.full_name)/releases/latest" | ConvertFrom-Json
     }
     catch {
         return $false
