@@ -47,7 +47,7 @@ function Main {
     )
 
     switch ($Command) {
-        "help" { 
+        "help" {
             Show-AvailableCommands
         }
         "update" {
@@ -200,7 +200,7 @@ function Update-Skin {
     
     # Handle skin update or addition
     if ($skinExists) {
-        $Skins = $Skins | % {
+        $Skins = $Skins | ForEach-Object {
             if ($_.full_name -like $Skin.full_name) { $Skin } else { $_ }
         }
     }
