@@ -388,7 +388,9 @@ function Get-SkinName {
         [switch]
         $SkipDownload
     )
-    if (-not($SkipDownload)) { Download $Skin }
+    if (-not($SkipDownload)) { 
+        Download $Skin
+    }
     $SkinName = Get-SkinNameFromZip
     return $SkinName
 }
@@ -588,11 +590,18 @@ function Get-Request {
     return $response
 }
 
-function Get-SkinNameFromZip {
-    $skinNamePattern = "Skins\/(.*?)\/"
-    $zip = [System.IO.Compression.ZipFile]::OpenRead($skinFile)
+function Get-ZipEntries {
+    # PowerShell 5.0 moment
+    [Reflection.Assembly]::LoadWithPartialName('System.IO.Compression.FileSystem')
+    $zip = [IO.Compression.ZipFile]::OpenRead($skinFile)
     $entries = $zip.Entries
     $zip.Dispose()
+    return $entries
+}
+
+function Get-SkinNameFromZip {
+    $entries = Get-ZipEntries
+    $skinNamePattern = "Skins\/(.*?)\/"
     foreach ($entry in $entries) {
         if ("$($entry)" -match $skinNamePattern) {
             return $Matches[1]
