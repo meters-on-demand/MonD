@@ -33,6 +33,16 @@ $skinFile = "$baseDirectory\skin.rmskin"
 
 # Rainmeter update function
 function Update {
+    if ($RmApi) {
+        Update-InstalledSkinsTable
+        if ($RmApi.Variable('Export')) { 
+            $RmApi.Bang('!WriteKeyValue Variables Export 0')
+            Export
+            return "Exporting!"
+        }
+        Get-UpdateableSkins
+    }
+
     return "MonD $version"
 }
 
@@ -62,6 +72,9 @@ function Main {
         }
         "install" {
             Install $Parameter
+        }
+        "uninstall" {
+            Uninstall $Parameter
         }
         "export" {
             Export
@@ -178,9 +191,12 @@ function Update-Skins {
 
 function Update-Skin {
     param (
-        [Parameter()]
+        [Parameter(Position = 0)]
         [string]
-        $FullName
+        $FullName,
+        [Parameter()]
+        [switch]
+        $ForceDownload
     )
 
     # Existing skins
@@ -192,7 +208,7 @@ function Update-Skin {
     $repo = ConvertTo-Skin -InputObject $response
 
     # Get package information
-    $Skin = Set-PackageInformation -Skin $repo -Skins $Skins
+    $Skin = Set-PackageInformation -Skin $repo -Skins $Skins -ForceDownload:$ForceDownload
     if (-not($Skin)) { return }
 
     # Check if skin exists
@@ -237,7 +253,10 @@ function Set-PackageInformation {
         $Skin,
         [Parameter(Mandatory)]
         [array]
-        $Skins
+        $Skins,
+        [Parameter()]
+        [switch]
+        $ForceDownload
     )
     $latestRelease = Get-LatestRelease $Skin
     if (-not($latestRelease)) { return $false }
@@ -248,8 +267,13 @@ function Set-PackageInformation {
     $Skin["skin_name"] = $oldSkin.skin_name
     $Skin["skin_name_tag"] = $oldSkin.skin_name_tag
 
-    if ($Skin.skin_name_tag -ne $Skin.latest_release.tag_name) {
-        $Skin.skin_name = Get-SkinName -Skin $Skin
+    $SkipDownload = $false
+    if ($ForceDownload) {
+        Download $Skin
+        $SkipDownload = $true
+    }
+    if (($Skin.skin_name_tag -ne $Skin.latest_release.tag_name) -or ($ForceDownload)) {
+        $Skin.skin_name = Get-SkinName -Skin $Skin -SkipDownload:$SkipDownload
         $Skin.skin_name_tag = $Skin.latest_release.tag_name
     }
 
@@ -277,17 +301,41 @@ function Download {
 
 function Install {
     param (
-        [Parameter(ValueFromPipeline, Position = 0)]
+        [Parameter(Position = 0)]
         [string]
         $FullName
     )
-
-    Download -FullName $FullName
-
-    # TODO: call Update-Skin to set the SkinName
-
+    # Update the skin before installing
+    Update-Skin -FullName $FullName -ForceDownload
+    if ($RmApi) {
+        $RmApi.Bang('!WriteKeyValue Variables Export 1')
+    }
     Start-Process -FilePath $skinFile
+}
 
+function Uninstall {
+    param (
+        [Parameter(Position = 0)]
+        [string]
+        $FullName
+    )
+    $installed = Get-InstalledSkinsTable
+    if (-not($installed[$FullName])) { 
+        Write-Host "Skin $FullName is not installed"
+        return 
+    }
+
+    # Get the skin object
+    $Skin = Find-Skins -Query $FullName -Exact
+
+    # Remove the skin folder
+    $skinsPath = $RmApi.VariableStr("SKINSPATH")
+    Remove-Item -Path "$($skinsPath)$($Skin.skin_name)" -Recurse
+
+    # Report results
+    Write-Host "Uninstalled $($Skin.full_name)"
+    Update-InstalledSkinsTable
+    Export
 }
 
 function Find-Skins {
@@ -335,9 +383,12 @@ function Get-SkinName {
     param (
         [Parameter()]
         [hashtable]
-        $Skin
+        $Skin,
+        [Parameter()]
+        [switch]
+        $SkipDownload
     )
-    Download $Skin
+    if (-not($SkipDownload)) { Download $Skin }
     $SkinName = Get-SkinNameFromZip
     return $SkinName
 }
@@ -359,18 +410,22 @@ function Export {
     if ( -not($Skins)) { $Skins = Get-Skins }
 
     # Write VariablesFile
-    @"    
+    @"
 [Variables]
 Skins=$($Skins.Count)
 "@ | Out-File -FilePath $VariablesFile -Force -Encoding unicode
 
     # Empty MetersFile
     "" | Out-File -FilePath $MetersFile -Force -Encoding unicode
+
+    # Get installed skins
+    $installed = Get-InstalledSkinsTable
     # Generate MetersFile
     for ($i = 0; $i -lt $Skins.Count; $i++) {
-        Meter -Skin $Skins[$i] -Index $i | Out-File -FilePath $MetersFile -Append -Encoding unicode
+        Meter -Skin $Skins[$i] -Index $i -Installed $installed | Out-File -FilePath $MetersFile -Append -Encoding unicode
     }
 
+    Refresh
 }
 
 function Meter {
@@ -380,8 +435,15 @@ function Meter {
         $Skin,
         [Parameter(Position = 1)]
         [int]
-        $Index
+        $Index,
+        [Parameter()]
+        [hashtable]
+        $Installed
     )
+
+    $isInstalled = $Installed[$Skin.full_name]
+    $action = if ($isInstalled) { "uninstall" } else { "install" }
+    $actionStyle = if ($isInstalled) { "Uninstalls" } else { "Installs" }
 
     return @"
 [SkinHidden$i]
@@ -429,10 +491,10 @@ Container=SkinContainer$i
 
 [SkinActionIcon$i]
 Meter=String
-MeterStyle=Skins | Hovers | Icons | Actions | fa
+MeterStyle=Skins | Hovers | Icons | Actions | $actionStyle | fa
 Group=Skins | Hovers$i
 Container=SkinContainer$i
-LeftMouseUpAction=[!CommandMeasure MonD "install $($Skin.full_name)"]
+LeftMouseUpAction=[!CommandMeasure MonD "$action $($Skin.full_name)"]
 
 [SkinGithubIcon$i]
 Meter=String
@@ -547,47 +609,58 @@ function Search {
 
     if (-not($Keyword)) {
         Export
-        if ($RmApi) { $RmApi.Bang('!Refresh') }
         return
     }
 
     $Results = Find-Skins -Multiple -Query $Keyword 
     if (-not($Results.Count)) { return "No results" }
     Export -Skins $Results
+}
+
+function Refresh {
     if ($RmApi) { $RmApi.Bang('!Refresh') }
+}
+
+function Get-InstalledSkinsTable {
+    try {
+        $installed = Get-Content $installedFile | ConvertFrom-Json
+        return ConvertTo-Hashtable $installed
+    }
+    catch {
+        return @{}
+    }
 }
 
 function Get-InstalledSkins {
     $skinsPath = $RmApi.VariableStr("SKINSPATH")
     $Skins = Get-Skins
+
     $installedSkins = @()
     Get-ChildItem -Path "$skinsPath" -Directory | ForEach-Object {
         $dir = $_.Name
         $Skin = Find-Skins -Query "^$dir`$" -Property "skin_name" -Skins $Skins
-        if ($Skin) {
-            $installedSkins += $Skin
-        }
+        if ($Skin) { $installedSkins += $Skin }
     }
-    
-    $installed = @{}
-    (Get-Content $installedFile | ConvertFrom-Json).psobject.properties | ForEach-Object { $installed[$_.Name] = $_.Value }
+    return $installedSkins
+}
 
-    if (-not($installed[$self])) {
-        $installed[$self] = $version
-    }
-    foreach ($skin in $installedSkins) {
-        $v = $skin.latest_release.tag_name
-        if (-not($installed[$skin.full_name])) {
-            $installed[$skin.full_name] = $v
-        }
-        if ($installed[$skin.full_name] -ne $v) {
-            $updateable[$skin.full_name] = $v
-        }
-        if ($updateable.Count) { $updatesAvailable = $true }
-    }
-    Write-Host "Found $($installed.Count) installed skins!"
-    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force
+function Get-UpdateableSkins {
+    $Skins = Get-Skins
+    $installed = Get-InstalledSkinsTable
 
+    # Check for updates
+    $updateable = @{}
+    $updatesAvailable = $false
+    foreach ($FullName in $installed.Keys) {
+        $Skin = Find-Skins -Query $FullName -Skins $Skins -Exact
+        if (-not($Skin)) { continue }
+        $v = $Skin.latest_release.tag_name
+        if ($installed[$Skin.full_name] -ne $v) { $updateable[$Skin.full_name] = $v } 
+    }
+    if ($updateable.Count) { $updatesAvailable = $true }
+
+    # Log results
+    Write-Host "$($updateable.Count) updates available!"
     if ($updatesAvailable) {
         $RmApi.Bang("!SetVariable UpdatesAvailable $($updateable.Keys.Count)")
         $RmApi.Bang("!UpdateMeter *")
@@ -595,9 +668,29 @@ function Get-InstalledSkins {
     }
 }
 
+function Update-InstalledSkinsTable {    
+    $installedSkins = Get-InstalledSkins
+    $installed = @{}
+
+    # Add self to installed
+    if (-not($installed[$self])) {
+        $installed[$self] = $version
+    }
+    # Add skins to installed
+    foreach ($skin in $installedSkins) {
+        if (-not($installed[$skin.full_name])) {
+            $installed[$skin.full_name] = $skin.latest_release.tag_name
+        }
+    }
+    # Log installed skins to rainmeter
+    Write-Host "Found $($installed.Count) installed skins!"
+    # Save installed.json
+    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force
+}
+
 function ConvertTo-Hashtable {
     param (
-        [Parameter()]
+        [Parameter(Position = 0)]
         [object]
         $InputObject
     )
@@ -606,5 +699,4 @@ function ConvertTo-Hashtable {
     return $OutputHashtable
 }
 
-if ($RmApi) { Get-InstalledSkins }
-else { Main -Command $Command -Parameter $Parameter }
+Main -Command $Command -Parameter $Parameter
