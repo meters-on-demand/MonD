@@ -5,6 +5,12 @@
     "editor.formatOnPaste": false,
     "editor.formatOnType": false
   },
+  "[powershell]": {
+    "editor.defaultFormatter": "ms-vscode.powershell",
+    "editor.formatOnSave": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
+  },
   // Hide temp files from view
   "files.exclude": {
     "skin.rmskin": true
