@@ -36,6 +36,5 @@ This is because GitHubs API has a rate limit of like 10 requests per minute if y
 
 # TODO
 
-- uninstall action shouldn't be that hard just delete the skin dur
 - upgrade skin action
 - api skin authors can ping / use a github webhook to automatically ping whenever they release a new version
