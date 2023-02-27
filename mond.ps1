@@ -577,14 +577,14 @@ function Get-Request {
         [string]
         $Uri
     )
-
-    $response = Invoke-WebRequest -Uri $Uri -UseBasicParsing `
-        -Authentication Bearer `
-        -Token $TOKEN 
-
-    Write-Host "-Uri $($Uri)"
-    Write-Host "X-RateLimit-Remaining: $($response.Headers['X-RateLimit-Remaining'])"
-
+    $response = ""
+    if ($TOKEN) {
+        $response = Invoke-WebRequest -Uri $Uri -Headers @{Authentication = "Bearer $TOKEN" }
+    }
+    else {
+        Write-Host "X-RateLimit-Remaining: $($response.Headers['X-RateLimit-Remaining'])"
+        $response = Invoke-WebRequest -Uri $Uri -UseBasicParsing 
+    }
     return $response
 }
 
