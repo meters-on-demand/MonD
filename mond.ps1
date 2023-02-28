@@ -73,6 +73,9 @@ function Main {
         "install" {
             Install $Parameter
         }
+        "upgrade" {
+            Install $Parameter
+        }
         "uninstall" {
             Uninstall $Parameter
         }
@@ -422,6 +425,7 @@ Skins=$($Skins.Count)
 
     # Get installed skins
     $installed = Get-InstalledSkinsTable
+
     # Generate MetersFile
     for ($i = 0; $i -lt $Skins.Count; $i++) {
         Meter -Skin $Skins[$i] -Index $i -Installed $installed | Out-File -FilePath $MetersFile -Append -Encoding unicode
@@ -446,6 +450,22 @@ function Meter {
     $isInstalled = $Installed[$Skin.full_name]
     $action = if ($isInstalled) { "uninstall" } else { "install" }
     $actionStyle = if ($isInstalled) { "Uninstalls" } else { "Installs" }
+    $canUpgrade = (($isInstalled) -and ($installed[$Skin.full_name] -ne $Skin.latest_release.tag_name))
+
+    function Status {
+        if ($canUpgrade) { return "Updateable" }
+        elseif ( $isInstalled ) { return "Installed" }
+        else { return "Available" }
+    }
+
+    $upgrade = @"
+[SkinUpgradeIcon$i]
+Meter=String
+MeterStyle=Skins | Hovers | Icons | Upgrades | fa
+Group=Skins | Hovers$i
+Container=SkinContainer$i
+LeftMouseUpAction=[!CommandMeasure MonD "upgrade $($Skin.full_name)"]
+"@
 
     return @"
 [SkinHidden$i]
@@ -467,7 +487,7 @@ MouseLeaveAction=[!HideMeterGroup Hovers$i]
 [SkinName$i]
 Meter=String
 Text=$(if($Skin.skin_name) { $Skin.skin_name } else { $Skin.name })
-MeterStyle=Skins | Text | Names | SkinHidden$i
+MeterStyle=Skins | Text | Names | $(Status) | SkinHidden$i
 Group=Skins | Names
 Container=SkinContainer$i
 
@@ -497,6 +517,8 @@ MeterStyle=Skins | Hovers | Icons | Actions | $actionStyle | fa
 Group=Skins | Hovers$i
 Container=SkinContainer$i
 LeftMouseUpAction=[!CommandMeasure MonD "$action $($Skin.full_name)"]
+
+$(if( $canUpgrade ) { $upgrade })
 
 [SkinGithubIcon$i]
 Meter=String
@@ -654,6 +676,11 @@ function Get-InstalledSkins {
 }
 
 function Get-UpdateableSkins {
+    param (
+        [Parameter()]
+        [switch]
+        $SkipRefresh
+    )
     $Skins = Get-Skins
     $installed = Get-InstalledSkinsTable
 
@@ -670,6 +697,7 @@ function Get-UpdateableSkins {
 
     # Log results
     Write-Host "$($updateable.Count) updates available!"
+    if ($SkipRefresh) { return $updateable }
     if ($updatesAvailable) {
         $RmApi.Bang("!SetVariable UpdatesAvailable $($updateable.Keys.Count)")
         $RmApi.Bang("!UpdateMeter *")
