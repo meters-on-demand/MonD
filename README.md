@@ -1,5 +1,7 @@
 # Meters on Demand
 
+![MonD splash](https://repository-images.githubusercontent.com/601636170/25834e41-d86e-4f2a-809c-441ab80c2a8a)
+
 Rainmeter package manager. Install skins directly from Rainmeter!
 
 ## Installation
