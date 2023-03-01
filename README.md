@@ -54,4 +54,9 @@ To scrape GitHub, use `mond update -Scrape`
 
 # TODO
 
+- deactivate all active configs before uninstalling
 - api skin authors can ping / use a github webhook to automatically ping whenever they release a new version
+
+# Credits
+
+- Installed header background image by [MA SH](https://www.artstation.com/artwork/L36yml)
