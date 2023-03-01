@@ -5,7 +5,13 @@ param (
     $Command = "version",
     [Parameter(Position = 1)]
     [string]
-    $Parameter
+    $Parameter,
+    [Parameter(Position = 2)]
+    [string]
+    $Option,
+    [Parameter()]
+    [switch]
+    $All
 )
 
 . .env.ps1
@@ -46,58 +52,13 @@ function Update {
     return "MonD $version"
 }
 
-function Main {
+function Show-AvailableCommands {
     param (
-        [Parameter(Position = 0)]
-        [string]
-        $Command,
-        [Parameter(Position = 1)]
-        [string]
-        $Parameter
+        [Parameter()]
+        [switch]
+        $All
     )
 
-    switch ($Command) {
-        "help" {
-            Show-AvailableCommands
-        }
-        "update" {
-            if ($Parameter) {
-                Update-Skin -FullName $Parameter
-            }
-            else {
-                if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" }
-                Update-Skins
-            }
-            Export
-        }
-        "install" {
-            Install $Parameter
-        }
-        "upgrade" {
-            Install $Parameter
-        }
-        "uninstall" {
-            Uninstall $Parameter
-        }
-        "export" {
-            Export
-        }
-        "search" {
-            Search $Parameter
-        }
-        "version" {
-            Write-Host "MonD $version"
-        }
-        Default {
-            Write-Host "$Command" -ForegroundColor Red -NoNewline
-            Write-Host " is not a command! Use" -NoNewline 
-            Write-Host " mond help " -ForegroundColor Blue -NoNewline
-            Write-Host "to see available commands!"
-        }
-    }
-}
-
-function Show-AvailableCommands {
     $commands = @(@{
             Name        = "help"
             Description = "show this help"
@@ -145,8 +106,8 @@ function Get-Skins {
     if ( -not(Test-Path -Path $skinListFile) ) { return $false }
     $hsh = @()
     $sk = Get-Content $skinListFile | ConvertFrom-Json
-    $sk | ForEach-Object { $hsh += ConvertTo-Hashtable -InputObject $_ }
-    return $hsh
+    $sk | ForEach-Object { $hsh += ConvertTo-Hashtable -InputObject $_ } 
+    return Sort-Skins $hsh
 }
 
 function Sort-Skins {
@@ -400,6 +361,14 @@ function Get-SkinName {
 
 function Export {
     param (
+        # Current page
+        [Parameter(Mandatory, Position = 0)]
+        [int]
+        $Page,
+        # Items on a single page
+        [Parameter(Position = 1)]
+        [int]
+        $ItemsOnPage,
         [Parameter()]
         [array]
         $Skins,
@@ -407,17 +376,31 @@ function Export {
         [Parameter()]
         [string]
         $MetersFile = "$includeFilesDirectory\Meters.inc",
-        # File to export meters to
+        # File to export variables to
         [Parameter()]
         [string]
         $VariablesFile = "$includeFilesDirectory\SkinVariables.inc"
     )
-    if ( -not($Skins)) { $Skins = Get-Skins }
+    if (-not($Skins)) { $Skins = Get-Skins }
+    if (-not($ItemsOnPage)) {
+        if ($RmApi) { $ItemsOnPage = $RmApi.Variable("ItemsOnPage") }
+        else { $ItemsOnPage = 10 }
+    }
+
+    $PreviousPage = (($Page - 1), 0 | Measure-Object -Maximum).Maximum
+    $NextPage = (($Page + 1), [math]::Floor($Skins.Count / $ItemsOnPage) | Measure-Object -Minimum).Minimum
+
+    Write-Host "$($Skins[($Page * $ItemsOnPage) + 1].full_name)"
+
+    if (($Page -eq $PreviousPage) -or ($Page -eq $NextPage)) { return }
 
     # Write VariablesFile
     @"
 [Variables]
 Skins=$($Skins.Count)
+CurrentPage=$($Page)
+PreviousPage=$($PreviousPage)
+NextPage=$($NextPage)
 "@ | Out-File -FilePath $VariablesFile -Force -Encoding unicode
 
     # Empty MetersFile
@@ -427,10 +410,10 @@ Skins=$($Skins.Count)
     $installed = Get-InstalledSkinsTable
 
     # Generate MetersFile
-    for ($i = 0; $i -lt $Skins.Count; $i++) {
+    $start = ($Page * $ItemsOnPage)
+    for ($i = $start; $i -lt ($ItemsOnPage + $start); $i++) {
         Meter -Skin $Skins[$i] -Index $i -Installed $installed | Out-File -FilePath $MetersFile -Append -Encoding unicode
     }
-
     Refresh
 }
 
@@ -447,6 +430,24 @@ function Meter {
         $Installed
     )
 
+    
+    $ContainerBackground = @"
+[SkinContainer$i]
+Meter=Shape
+MeterStyle=Containers
+Group=Skins | Containers
+
+[SkinBackground$i]
+Meter=Shape
+MeterStyle=Skins | Backgrounds 
+Group=Skins | Backgrounds
+Container=SkinContainer$i
+MouseOverAction=[!ShowMeterGroup Hovers$i]
+MouseLeaveAction=[!HideMeterGroup Hovers$i]
+"@
+
+    if (-not($Skin.full_name)) { return $ContainerBackground }
+
     $isInstalled = $Installed[$Skin.full_name]
     $action = if ($isInstalled) { "uninstall" } else { "install" }
     $actionStyle = if ($isInstalled) { "Uninstalls" } else { "Installs" }
@@ -458,7 +459,31 @@ function Meter {
         else { return "Available" }
     }
 
-    $upgrade = @"
+
+    $Info = @"
+[SkinName$i]
+Meter=String
+Text=$(if($Skin.skin_name) { $Skin.skin_name } else { $Skin.name })
+MeterStyle=Skins | Text | Names | $(Status) 
+Group=Skins | Names
+Container=SkinContainer$i
+
+[SkinVersion$i]
+Meter=String
+Text=$($Skin.latest_release.tag_name)
+MeterStyle=Skins | Text | Versions 
+Group=Skins | Versions
+Container=SkinContainer$i
+
+[SkinFullName$i]
+Meter=String
+Text=$($Skin.full_name)
+MeterStyle=Skins | Text | FullNames 
+Group=Skins | FullNames
+Container=SkinContainer$i
+"@
+
+    $Upgrade = @"
 [SkinUpgradeIcon$i]
 Meter=String
 MeterStyle=Skins | Hovers | Icons | Upgrades | fa
@@ -467,47 +492,10 @@ Container=SkinContainer$i
 LeftMouseUpAction=[!CommandMeasure MonD "upgrade $($Skin.full_name)"]
 "@
 
-    return @"
-[SkinHidden$i]
-Hidden=(($index < ([#Index] + [#ItemsShown])) && ($index >= [#Index]) ? 0 : 1)
-
-[SkinContainer$i]
-Meter=Shape
-MeterStyle=Containers | SkinHidden$i
-Group=Skins | Containers
-
-[SkinBackground$i]
-Meter=Shape
-MeterStyle=Skins | Backgrounds | SkinHidden$i
-Group=Skins | Backgrounds
-Container=SkinContainer$i
-MouseOverAction=[!ShowMeterGroup Hovers$i]
-MouseLeaveAction=[!HideMeterGroup Hovers$i]
-
-[SkinName$i]
-Meter=String
-Text=$(if($Skin.skin_name) { $Skin.skin_name } else { $Skin.name })
-MeterStyle=Skins | Text | Names | $(Status) | SkinHidden$i
-Group=Skins | Names
-Container=SkinContainer$i
-
-[SkinVersion$i]
-Meter=String
-Text=$($Skin.latest_release.tag_name)
-MeterStyle=Skins | Text | Versions | SkinHidden$i
-Group=Skins | Versions
-Container=SkinContainer$i
-
-[SkinFullName$i]
-Meter=String
-Text=$($Skin.full_name)
-MeterStyle=Skins | Text | FullNames | SkinHidden$i
-Group=Skins | FullNames
-Container=SkinContainer$i
-
+    $Hovers = @"
 [SkinHoverBackground$i]
 Meter=Shape
-MeterStyle=Skins | Backgrounds | SkinHidden$i | Hovers | HoverBackgrounds
+MeterStyle=Skins | Backgrounds | Hovers | HoverBackgrounds
 Group=Skins | Hovers$i
 Container=SkinContainer$i
 
@@ -518,7 +506,7 @@ Group=Skins | Hovers$i
 Container=SkinContainer$i
 LeftMouseUpAction=[!CommandMeasure MonD "$action $($Skin.full_name)"]
 
-$(if( $canUpgrade ) { $upgrade })
+$(if( $canUpgrade ) { $Upgrade })
 
 [SkinGithubIcon$i]
 Meter=String
@@ -526,7 +514,12 @@ MeterStyle=Skins | Hovers | Icons | Githubs | fa
 Group=Skins | Hovers$i
 Container=SkinContainer$i
 LeftMouseUpAction=["$github$($Skin.full_name)"]
+"@
 
+    return @"
+$ContainerBackground
+$Info
+$Hovers
 "@
 }
 
@@ -736,4 +729,47 @@ function ConvertTo-Hashtable {
     return $OutputHashtable
 }
 
-Main -Command $Command -Parameter $Parameter
+if ($RmApi) { return }
+
+# MAIN BODY
+
+switch ($Command) {
+    "help" {
+        Show-AvailableCommands -All:$All
+    }
+    "update" {
+        if ($Parameter) {
+            Update-Skin -FullName $Parameter
+        }
+        else {
+            if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" } 
+            else { Update-Skins }
+        }
+        Export
+    }
+    "install" {
+        Install $Parameter
+    }
+    "upgrade" {
+        Install $Parameter
+    }
+    "uninstall" {
+        Uninstall $Parameter
+    }
+    "export" {
+        Export $Parameter $Option
+    }
+    "search" {
+        Search $Parameter
+    }
+    "version" {
+        Write-Host "MonD $version"
+    }
+    Default {
+        Write-Host "$Command" -ForegroundColor Red -NoNewline
+        Write-Host " is not a command! Use" -NoNewline 
+        Write-Host " mond help " -ForegroundColor Blue -NoNewline
+        Write-Host "to see available commands!"
+    }
+}
+
