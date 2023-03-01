@@ -272,7 +272,7 @@ function Update-Skin {
     if (-not($Skin)) { return }
 
     # Check if skin exists
-    $skinExists = Find-Skins -Query $Skin.full_name -Skins $Skins
+    $skinExists = Find-Skins -Query $Skin.full_name -Skins $Skins -Exact
     
     # Handle skin update or addition
     if ($skinExists) {
