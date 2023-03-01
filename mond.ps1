@@ -50,7 +50,6 @@ function Update {
             Export
             return
         }
-        Update-SkinList
         Get-UpdateableSkins
     }
     return "MonD $version"
@@ -183,7 +182,7 @@ function Save-Cache {
         [hashtable]
         $Cache
     )
-    $Cache | ConvertTo-Json | Out-File -FilePath $cacheFile
+    $Cache | ConvertTo-Json | Out-File -FilePath $cacheFile -Encoding utf8
 }
 
 function Update-SkinList {
@@ -191,8 +190,9 @@ function Update-SkinList {
     $today = Get-Date -Format "dd.MM.yyyy"
     if ($Cache["last_update"] -eq $today) { return }
 
-    $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw | ConvertFrom-Json
-    Save-SkinsList -Skins $data
+    $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw
+    $skins = ConvertFrom-Json -InputObject $data
+    Save-SkinsList -Skins $skins
 
     $Cache["last_update"] = $today
     Save-Cache -Cache $Cache
@@ -618,7 +618,7 @@ function Save-SkinsList {
         [array]
         $Skins
     )
-    $Skins | ConvertTo-Json | Format-JSON | Out-File -FilePath $skinListFile
+    $Skins | ConvertTo-Json | Format-JSON | Out-File -FilePath $skinListFile -Encoding utf8
 }
 
 function Get-RainmeterRepositories { 
@@ -803,7 +803,7 @@ function Update-InstalledSkinsTable {
     # Log installed skins to rainmeter
     Write-Host "Found $($installed.Count) installed skins!"
     # Save installed.json
-    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force
+    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force -Encoding utf8
 }
 
 function ConvertTo-Hashtable {
@@ -827,7 +827,10 @@ function Format-JSON {
     return $JSON | & $jq
 }
 
-if ($RmApi) { return }
+if ($RmApi) { 
+    Update-SkinList
+    return
+}
 
 # MAIN BODY
 
