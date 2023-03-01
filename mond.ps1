@@ -47,7 +47,6 @@ function Update {
             Export
             return
         }
-        Update-SkinList
         Get-UpdateableSkins
     }
     return "MonD $version"
@@ -814,7 +813,10 @@ function ConvertTo-Hashtable {
     return $OutputHashtable
 }
 
-if ($RmApi) { return }
+if ($RmApi) { 
+    Update-SkinList
+    return
+}
 
 # MAIN BODY
 
