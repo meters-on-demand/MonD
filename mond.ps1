@@ -38,6 +38,9 @@ $skinListFile = "$baseDirectory\skins.json"
 $skinFile = "$baseDirectory\skin.rmskin"
 $cacheFile = "$baseDirectory\.cache.json"
 
+# Executables
+$jq = "$basedirectory\jq.exe"
+
 # Rainmeter update function
 function Update {
     if ($RmApi) {
@@ -190,7 +193,7 @@ function Update-SkinList {
 
     $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw | ConvertFrom-Json
     Save-SkinsList -Skins $data
-    
+
     $Cache["last_update"] = $today
     Save-Cache -Cache $Cache
 }
@@ -615,7 +618,7 @@ function Save-SkinsList {
         [array]
         $Skins
     )
-    $Skins | ConvertTo-Json | Out-File -FilePath $skinListFile
+    $Skins | ConvertTo-Json | Format-JSON | Out-File -FilePath $skinListFile
 }
 
 function Get-RainmeterRepositories { 
@@ -812,6 +815,16 @@ function ConvertTo-Hashtable {
     $OutputHashtable = @{}
     $InputObject.psobject.properties | ForEach-Object { $OutputHashtable[$_.Name] = $_.Value }
     return $OutputHashtable
+}
+
+function Format-JSON {
+    # PowerShell 5.0 moment
+    param (
+        [Parameter(ValueFromPipeline, Position = 0, Mandatory)]
+        [object]
+        $JSON
+    )
+    return $JSON | & $jq
 }
 
 if ($RmApi) { return }
