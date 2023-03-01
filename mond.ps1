@@ -47,6 +47,7 @@ function Update {
             Export
             return
         }
+        Update-SkinList
         Get-UpdateableSkins
     }
     return "MonD $version"
@@ -187,12 +188,9 @@ function Update-SkinList {
     $today = Get-Date -Format "dd.MM.yyyy"
     if ($Cache["last_update"] -eq $today) { return }
 
-    $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw
-    Write-Host "we goode"
-    Write-Host "$($data.Content)"
-    $skins = ConvertFrom-Json -InputObject $data
-    Save-SkinsList -Skins $skins
-
+    $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw | ConvertFrom-Json
+    Save-SkinsList -Skins $data
+    
     $Cache["last_update"] = $today
     Save-Cache -Cache $Cache
 }
@@ -745,7 +743,6 @@ function Get-InstalledSkinsTable {
 function Get-InstalledSkins {
     $skinsPath = $RmApi.VariableStr("SKINSPATH")
     $Skins = Get-Skins
-    if (!Skins) { return @() }
 
     $installedSkins = @()
     Get-ChildItem -Path "$skinsPath" -Directory | ForEach-Object {
@@ -817,11 +814,7 @@ function ConvertTo-Hashtable {
     return $OutputHashtable
 }
 
-
-if ($RmApi) { 
-    Update-SkinList
-    return
-}
+if ($RmApi) { return }
 
 # MAIN BODY
 
