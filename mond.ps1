@@ -181,8 +181,8 @@ function Save-Cache {
         [hashtable]
         $Cache
     )
-    $Cache = $Cache | ConvertTo-Json
-    Out-UTF8NoBom -FilePath $cacheFile -String $Cache
+    $JSON = $Cache | ConvertTo-Json
+    [System.IO.File]::WriteAllLines($cacheFile, $JSON)
 }
 
 function Update-SkinList {
@@ -191,9 +191,9 @@ function Update-SkinList {
     if ($Cache["last_update"] -eq $today) { return }
 
     $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw
-    $data = "$data" | ConvertFrom-Json
-    Save-SkinsList -Skins $data
-    
+    $Skins = ConvertFrom-Json -InputObject $data
+    Save-SkinsList -Skins $Skins
+
     $Cache["last_update"] = $today
     Save-Cache -Cache $Cache
 }
@@ -618,21 +618,8 @@ function Save-SkinsList {
         [array]
         $Skins
     )
-    $Skins = $Skins | ConvertTo-Json
-    Out-UTF8NoBom -FilePath $skinListFile -String $Skins
-}
-
-function Out-UTF8NoBom {
-    param (
-        [Parameter()]
-        [string]
-        $String,
-        [Parameter()]
-        [string]
-        $FilePath
-    )
-    # PowerShell 5.0 moment
-    [System.IO.File]::WriteAllLines($FilePath, $String)    
+    $JSON = $Skins | ConvertTo-Json
+    [System.IO.File]::WriteAllLines($skinListFile, $JSON)
 }
 
 function Get-RainmeterRepositories { 
@@ -817,8 +804,8 @@ function Update-InstalledSkinsTable {
     # Log installed skins to rainmeter
     Write-Host "Found $($installed.Count) installed skins!"
     # Save installed.json
-    $installed = $installed | ConvertTo-Json
-    Out-UTF8NoBom -FilePath $installedFile -String $installed
+    $JSON = $installed | ConvertTo-Json
+    [System.IO.File]::WriteAllLines($installedFile, $JSON)
 }
 
 function ConvertTo-Hashtable {
