@@ -38,7 +38,3 @@ This is because GitHubs API has a rate limit of like 10 requests per minute if y
 
 - autoupdate self / skins.json when available
 - api skin authors can ping / use a github webhook to automatically ping whenever they release a new version
-
-# Credits
-
-- JSON formatter by @stedolan https://github.com/stedolan/jq/

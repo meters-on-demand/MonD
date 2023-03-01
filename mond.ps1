@@ -38,9 +38,6 @@ $skinListFile = "$baseDirectory\skins.json"
 $skinFile = "$baseDirectory\skin.rmskin"
 $cacheFile = "$baseDirectory\.cache.json"
 
-# Executables
-$jq = "$basedirectory\jq.exe"
-
 # Rainmeter update function
 function Update {
     if ($RmApi) {
@@ -182,7 +179,7 @@ function Save-Cache {
         [hashtable]
         $Cache
     )
-    $Cache | ConvertTo-Json | Out-File -FilePath $cacheFile -Encoding utf8
+    $Cache | ConvertTo-Json | Out-File -FilePath $cacheFile
 }
 
 function Update-SkinList {
@@ -191,6 +188,8 @@ function Update-SkinList {
     if ($Cache["last_update"] -eq $today) { return }
 
     $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw
+    Write-Host "we goode"
+    Write-Host "$($data.Content)"
     $skins = ConvertFrom-Json -InputObject $data
     Save-SkinsList -Skins $skins
 
@@ -618,7 +617,7 @@ function Save-SkinsList {
         [array]
         $Skins
     )
-    $Skins | ConvertTo-Json | Format-JSON | Out-File -FilePath $skinListFile -Encoding utf8
+    $Skins | ConvertTo-Json | Out-File -FilePath $skinListFile
 }
 
 function Get-RainmeterRepositories { 
@@ -746,6 +745,7 @@ function Get-InstalledSkinsTable {
 function Get-InstalledSkins {
     $skinsPath = $RmApi.VariableStr("SKINSPATH")
     $Skins = Get-Skins
+    if (!Skins) { return @() }
 
     $installedSkins = @()
     Get-ChildItem -Path "$skinsPath" -Directory | ForEach-Object {
@@ -803,7 +803,7 @@ function Update-InstalledSkinsTable {
     # Log installed skins to rainmeter
     Write-Host "Found $($installed.Count) installed skins!"
     # Save installed.json
-    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force -Encoding utf8
+    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force
 }
 
 function ConvertTo-Hashtable {
@@ -817,15 +817,6 @@ function ConvertTo-Hashtable {
     return $OutputHashtable
 }
 
-function Format-JSON {
-    # PowerShell 5.0 moment
-    param (
-        [Parameter(ValueFromPipeline, Position = 0, Mandatory)]
-        [object]
-        $JSON
-    )
-    return $JSON | & $jq
-}
 
 if ($RmApi) { 
     Update-SkinList
