@@ -14,6 +14,8 @@ Once you've installed the skin, it should open automatically. You can use the ar
 
 # Commandline Usage
 
+FOR ADVANCED USERS!!!
+
 I've yet to make a way to actually call mond without having to use `.\mond.ps1` so these are more like future plans than current documentation.
 
 Update the list of available skins
