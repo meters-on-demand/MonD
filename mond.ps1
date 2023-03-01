@@ -36,6 +36,7 @@ $includeFilesDirectory = "$($baseDirectory)\@Resources\Generated"
 $installedFile = "$baseDirectory\installed.json"
 $skinListFile = "$baseDirectory\skins.json"
 $skinFile = "$baseDirectory\skin.rmskin"
+$cacheFile = "$baseDirectory\.cache.json"
 
 # Rainmeter update function
 function Update {
@@ -44,11 +45,11 @@ function Update {
         if ($RmApi.Variable('Export')) { 
             $RmApi.Bang('!WriteKeyValue Variables Export 0')
             Export
-            return "Exporting!"
+            return
         }
+        Update-SkinList
         Get-UpdateableSkins
     }
-
     return "MonD $version"
 }
 
@@ -104,10 +105,8 @@ function Show-AvailableCommands {
 
 function Get-Skins {
     if ( -not(Test-Path -Path $skinListFile) ) { return $false }
-    $hsh = @()
-    $sk = Get-Content $skinListFile | ConvertFrom-Json
-    $sk | ForEach-Object { $hsh += ConvertTo-Hashtable -InputObject $_ } 
-    return Sort-Skins $hsh
+    $Skins = Get-JSONContent -Path $skinListFile -Array
+    return Sort-Skins $Skins
 }
 
 function Sort-Skins {
@@ -122,7 +121,7 @@ function Sort-Skins {
     return Sort-Object -InputObject $Skins -Property $Property
 }
 
-function Update-Skins {
+function Scrape-GitHub {
     # Get all repositories from the rainmeter-skin topic on GitHub
     $allPackages = @()
     Get-RainmeterRepositories | ForEach-Object {
@@ -146,11 +145,76 @@ function Update-Skins {
         if ($Skin) { $Skins += $Skin }
     }
 
+    return $Skins
+}
+
+function Get-JSONContent {
+    param (
+        [Parameter(Mandatory, Position = 0)]
+        [string]
+        $Path,
+        [Parameter()]
+        [switch]
+        $Array
+    )
+    $content = Get-Content -Path $Path | ConvertFrom-Json
+    if (!$content) { if ($Array) { return $() } else { return @{} } }
+    if ($Array) {
+        $arr = @()
+        $content | ForEach-Object { $arr += ConvertTo-Hashtable -InputObject $_ }
+        return $arr
+    }
+    else {
+        $hash = ConvertTo-Hashtable -InputObject $content
+        return $hash
+    }
+}
+
+function Get-Cache {
+    return Get-JSONContent -Path $cacheFile
+}
+
+function Save-Cache {
+    param (
+        [Parameter(Mandatory, Position = 0)]
+        [hashtable]
+        $Cache
+    )
+    $Cache | ConvertTo-Json | Out-File -FilePath $cacheFile
+}
+
+function Update-SkinList {
+    $Cache = Get-Cache
+    $today = Get-Date -Format "dd.MM.yyyy"
+    if ($Cache["last_update"] -eq $today) { return }
+
+    $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw | ConvertFrom-Json
+    Save-SkinsList -Skins $data
+    
+    $Cache["last_update"] = $today
+    Save-Cache -Cache $Cache
+}
+
+function Update-Skins {
+    param (
+        [Parameter()]
+        [switch]
+        $Scrape
+    )
+    if ($Scrape) {
+        $Skins = Scrape-GitHub
+    }
+    else {
+        
+    }
+
     # Sort skins alphabetically
     $Skins = Sort-Skins $Skins -Property "full_name"
 
     # Save skins to file
     Save-SkinsList $Skins
+
+    return $Skins
 }
 
 function Update-Skin {
@@ -601,7 +665,6 @@ function Get-LatestRelease {
                 browser_download_url = $asset.browser_download_url
                 tag_name             = $releaseResponse.tag_name
                 name                 = $releaseResponse.name
-                body                 = $releaseResponse.body
             }
             return $assetHashtable
         }
@@ -614,16 +677,23 @@ function Get-Request {
     param(
         [Parameter(Position = 0)]
         [string]
-        $Uri
+        $Uri,
+        [Parameter()]
+        [switch]
+        $Raw
     )
-    $response = ""
+    $Headers = @{
+        "Accept"               = "application/vnd.github+json"
+        "X-GitHub-Api-Version" = "2022-11-28"
+    }
     if ($TOKEN) {
-        $response = Invoke-WebRequest -Uri $Uri -Headers @{Authentication = "Bearer $TOKEN" }
+        $Headers["Authentication"] = "Bearer $TOKEN"
     }
-    else {
-        Write-Host "X-RateLimit-Remaining: $($response.Headers['X-RateLimit-Remaining'])"
-        $response = Invoke-WebRequest -Uri $Uri -UseBasicParsing 
+    if ($Raw) {
+        $Headers["Accept"] = "application/vnd.github.raw"
     }
+    $response = Invoke-WebRequest -Uri $Uri -UseBasicParsing -Headers $Headers
+    Write-Host "X-RateLimit-Remaining: $($response.Headers['X-RateLimit-Remaining'])"
     return $response
 }
 
@@ -663,8 +733,7 @@ function Refresh {
 
 function Get-InstalledSkinsTable {
     try {
-        $installed = Get-Content $installedFile | ConvertFrom-Json
-        return ConvertTo-Hashtable $installed
+        return Get-JSONContent -Path $installedFile
     }
     catch {
         return @{}
