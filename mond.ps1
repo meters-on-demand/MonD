@@ -362,9 +362,9 @@ function Get-SkinName {
 function Export {
     param (
         # Current page
-        [Parameter(Mandatory, Position = 0)]
+        [Parameter(Position = 0)]
         [int]
-        $Page,
+        $Page = 0,
         # Items on a single page
         [Parameter(Position = 1)]
         [int]
@@ -381,7 +381,20 @@ function Export {
         [string]
         $VariablesFile = "$includeFilesDirectory\SkinVariables.inc"
     )
-    if (-not($Skins)) { $Skins = Get-Skins }
+    if (-not($Skins)) { 
+        $Skins = Get-Skins
+        if ($RmApi) {
+            if ($RmApi.Variable("ViewInstalled")) {
+                $Skins = Get-InstalledSkins
+            }
+            $Search = $RmApi.VariableStr("Search")
+            if ($Search) {
+                Write-Host "$Search"
+                $Skins = Find-Skins -Skins $Skins -Query $Search -Multiple
+            }
+            if (!$Skins) { $Skins = @() }
+        }
+    }
     if (-not($ItemsOnPage)) {
         if ($RmApi) { $ItemsOnPage = $RmApi.Variable("ItemsOnPage") }
         else { $ItemsOnPage = 10 }
@@ -414,10 +427,10 @@ __last=$($LastPage + 1)
 
     # Generate MetersFile
     $start = ($Page * $ItemsOnPage)
-    Write-Host "$start $nextPage"
     for ($i = $start; $i -lt ($ItemsOnPage + $start); $i++) {
         Meter -Skin $Skins[$i] -Index $i -Installed $installed | Out-File -FilePath $MetersFile -Append -Encoding unicode
     }
+
     Refresh
 }
 
@@ -434,7 +447,6 @@ function Meter {
         $Installed
     )
 
-    
     $ContainerBackground = @"
 [SkinContainer$i]
 Meter=Shape
@@ -450,7 +462,7 @@ MouseOverAction=[!ShowMeterGroup Hovers$i]
 MouseLeaveAction=[!HideMeterGroup Hovers$i]
 "@
 
-    if (-not($Skin.full_name)) { return $ContainerBackground }
+    if (!($Skin.full_name)) { return $ContainerBackground }
 
     $isInstalled = $Installed[$Skin.full_name]
     $action = if ($isInstalled) { "uninstall" } else { "install" }
@@ -634,15 +646,9 @@ function Search {
         [string]
         $Keyword
     )
-
-    if (-not($Keyword)) {
-        Export
-        return
+    Find-Skins -Multiple -Query $Keyword | % {
+        Write-Host "$($_.full_name) $($_.latest_release.tag_name)"
     }
-
-    $Results = Find-Skins -Multiple -Query $Keyword 
-    if (-not($Results.Count)) { return "No results" }
-    Export -Skins $Results
 }
 
 function Refresh {
