@@ -409,6 +409,7 @@ function Export {
     @"
 [Variables]
 Skins=$($Skins.Count)
+Searching=$(if($Search) { 1 } else { 0 })
 CurrentPage=$($Page)
 PreviousPage=$($PreviousPage)
 NextPage=$($NextPage)
@@ -515,14 +516,19 @@ MeterStyle=Skins | Backgrounds | Hovers | HoverBackgrounds
 Group=Skins | Hovers$i
 Container=SkinContainer$i
 
+[SkinIconAnchor$i]
+Meter=Image
+Container=SkinContainer$i
+MeterStyle=Skins | Hovers | Icons | IconAnchors
+
+$(if( $canUpgrade ) { $Upgrade })
+
 [SkinActionIcon$i]
 Meter=String
 MeterStyle=Skins | Hovers | Icons | Actions | $actionStyle | fa
 Group=Skins | Hovers$i
 Container=SkinContainer$i
 LeftMouseUpAction=[!CommandMeasure MonD "$action $($Skin.full_name)"]
-
-$(if( $canUpgrade ) { $Upgrade })
 
 [SkinGithubIcon$i]
 Meter=String
@@ -703,7 +709,7 @@ function Get-UpdateableSkins {
     if ($SkipRefresh) { return $updateable }
     if ($updatesAvailable) {
         $RmApi.Bang("!SetVariable UpdatesAvailable $($updateable.Keys.Count)")
-        $RmApi.Bang("!UpdateMeter *")
+        $RmApi.Bang("!UpdateMeasureGroup Notice")
         $RmApi.Bang("!Redraw")
     }
 }
