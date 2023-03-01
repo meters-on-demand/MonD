@@ -14,7 +14,9 @@ param (
     $All
 )
 
-. .env.ps1
+if (Test-Path -Path ".env.ps1") {
+    . .env.ps1
+}
 
 # Constants
 $self = "reisir/mond"
