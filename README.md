@@ -36,6 +36,8 @@ Install a skin
 mond install owner/name
 ```
 
+eg. `mond install reisir/robux`
+
 Upgrade a skin
 
 ```
@@ -47,8 +49,6 @@ Uninstall a skin
 ```
 mond uninstall owner/name
 ```
-
-eg. `mond install reisir/robux`
 
 # Development
 
