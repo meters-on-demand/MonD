@@ -181,7 +181,8 @@ function Save-Cache {
         [hashtable]
         $Cache
     )
-    $Cache | ConvertTo-Json | Out-File -FilePath $cacheFile
+    $Cache = $Cache | ConvertTo-Json
+    Out-UTF8NoBom -FilePath $cacheFile -String $Cache
 }
 
 function Update-SkinList {
@@ -617,7 +618,21 @@ function Save-SkinsList {
         [array]
         $Skins
     )
-    $Skins | ConvertTo-Json | Out-File -FilePath $skinListFile
+    $Skins = $Skins | ConvertTo-Json
+    Out-UTF8NoBom -FilePath $skinListFile -String $Skins
+}
+
+function Out-UTF8NoBom {
+    param (
+        [Parameter()]
+        [string]
+        $String,
+        [Parameter()]
+        [string]
+        $FilePath
+    )
+    # PowerShell 5.0 moment
+    [System.IO.File]::WriteAllLines($FilePath, $String)    
 }
 
 function Get-RainmeterRepositories { 
@@ -802,7 +817,8 @@ function Update-InstalledSkinsTable {
     # Log installed skins to rainmeter
     Write-Host "Found $($installed.Count) installed skins!"
     # Save installed.json
-    $installed | ConvertTo-Json | Out-File -FilePath $installedFile -Force
+    $installed = $installed | ConvertTo-Json
+    Out-UTF8NoBom -FilePath $installedFile -String $installed
 }
 
 function ConvertTo-Hashtable {
