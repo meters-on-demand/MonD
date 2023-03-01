@@ -119,7 +119,7 @@ function Sort-Skins {
         [string]
         $Property = "full_name"
     )
-    return $Skins | Sort-Object -Property $Property
+    return Sort-Object -InputObject $Skins -Property $Property
 }
 
 function Update-Skins {
@@ -387,12 +387,10 @@ function Export {
         else { $ItemsOnPage = 10 }
     }
 
-    $PreviousPage = (($Page - 1), 0 | Measure-Object -Maximum).Maximum
-    $NextPage = (($Page + 1), [math]::Floor($Skins.Count / $ItemsOnPage) | Measure-Object -Minimum).Minimum
-
-    Write-Host "$($Skins[($Page * $ItemsOnPage) + 1].full_name)"
-
-    if (($Page -eq $PreviousPage) -or ($Page -eq $NextPage)) { return }
+    $FirstPage = 0
+    $LastPage = [math]::Floor($Skins.Count / $ItemsOnPage)
+    $PreviousPage = (($Page - 1), $FirstPage | Measure-Object -Maximum).Maximum
+    $NextPage = (($Page + 1), $LastPage  | Measure-Object -Minimum).Minimum
 
     # Write VariablesFile
     @"
@@ -401,6 +399,11 @@ Skins=$($Skins.Count)
 CurrentPage=$($Page)
 PreviousPage=$($PreviousPage)
 NextPage=$($NextPage)
+LastPage=$($LastPage)
+__curr=$($Page + 1)
+__prev=$($PreviousPage + 1)
+__next=$($NextPage + 1)
+__last=$($LastPage + 1)
 "@ | Out-File -FilePath $VariablesFile -Force -Encoding unicode
 
     # Empty MetersFile
@@ -411,6 +414,7 @@ NextPage=$($NextPage)
 
     # Generate MetersFile
     $start = ($Page * $ItemsOnPage)
+    Write-Host "$start $nextPage"
     for ($i = $start; $i -lt ($ItemsOnPage + $start); $i++) {
         Meter -Skin $Skins[$i] -Index $i -Installed $installed | Out-File -FilePath $MetersFile -Append -Encoding unicode
     }
