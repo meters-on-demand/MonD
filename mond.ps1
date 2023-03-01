@@ -11,7 +11,10 @@ param (
     $Option,
     [Parameter()]
     [switch]
-    $All
+    $All,
+    [Parameter()]
+    [switch]
+    $Scrape
 )
 
 if (Test-Path -Path ".env.ps1") {
@@ -67,6 +70,14 @@ function Show-AvailableCommands {
         }, @{
             Name        = "update"
             Description = "update the skins list"
+            Parameters  = @(@{
+                    Name        = "skin"
+                    Description = "the full name of the skin to update"
+                }, @{
+                    Name        = "-Scrape"
+                    Description = "scrape GitHub #rainmeter-skins topic"
+                }
+            )
         }, @{
             Name        = "install"
             Description = "installs the specified skin"
@@ -75,20 +86,35 @@ function Show-AvailableCommands {
                     Description = "the full name of the skin to install"
                 })
         }, @{
+            Name        = "upgrade"
+            Description = "upgrades the specified skin"
+            Parameters  = @(@{
+                    Name        = "skin" 
+                    Description = "the full name of the skin to upgrade"
+                })
+        }, @{
+            Name        = "uninstall"
+            Description = "uninstalls the specified skin"
+            Parameters  = @(@{
+                    Name        = "skin" 
+                    Description = "the full name of the skin to uninstall"
+                })
+        }, 
+        @{
             Name        = "search"
             Description = "searches the skin list"
         }, @{
             Name        = "version"
             Description = "prints the MonD version"
-        },
-        @{
-            Name        = "export"
-            Description = "exports skins to meters"
         }
     )
 
-    Write-Host "List of MonD commands"
+    $devCommands = @(@{
+            Name        = "export"
+            Description = "exports skins to meters"
+        })
 
+    Write-Host "List of MonD commands"
     foreach ($command in $commands) {
         Write-Host "$($command.name)" -ForegroundColor Blue
         Write-Host "$($command.Description)"
@@ -102,6 +128,20 @@ function Show-AvailableCommands {
         Write-Host ""
     }
 
+    if (!$All) { return }
+    Write-Host "MonD development commands"
+    foreach ($command in $devCommands) {
+        Write-Host "$($command.name)" -ForegroundColor Blue
+        Write-Host "$($command.Description)"
+        if ($command.Parameters) {
+            Write-Host "parameters:" -ForegroundColor Yellow
+            foreach ($parameter in $command.Parameters) {
+                Write-Host "$($parameter.name)" -ForegroundColor Blue
+                Write-Host "$($parameter.Description)"
+            }
+        }
+        Write-Host ""
+    }
 }
 
 function Get-Skins {
@@ -120,33 +160,6 @@ function Sort-Skins {
         $Property = "full_name"
     )
     return Sort-Object -InputObject $Skins -Property $Property
-}
-
-function Scrape-GitHub {
-    # Get all repositories from the rainmeter-skin topic on GitHub
-    $allPackages = @()
-    Get-RainmeterRepositories | ForEach-Object {
-        $allPackages += ConvertTo-Skin -InputObject $_
-    }
-
-    # Add manually tracked repositories to the repository list
-    $localPackageList = Get-Skins
-    if ($localPackageList) {
-        $localPackageList | ForEach-Object {
-            if (-not(Find-Skins -Query $_.full_name -Skins $allPackages)) { 
-                $allPackages += $_
-            }
-        }
-    }
-
-    # Filter out repositories with no packages
-    $Skins = @()
-    $allPackages | ForEach-Object {
-        $Skin = Set-PackageInformation -Skin $_ -Skins $localPackageList
-        if ($Skin) { $Skins += $Skin }
-    }
-
-    return $Skins
 }
 
 function Get-JSONContent {
@@ -186,9 +199,14 @@ function Save-Cache {
 }
 
 function Update-SkinList {
+    param (
+        [Parameter()]
+        [switch]
+        $Force
+    )
     $Cache = Get-Cache
     $today = Get-Date -Format "dd.MM.yyyy"
-    if ($Cache["last_update"] -eq $today) { return }
+    if ($Cache["last_update"] -eq $today) { if (!$Force) { return } }
 
     $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw
     $Skins = ConvertFrom-Json -InputObject $data
@@ -199,16 +217,27 @@ function Update-SkinList {
 }
 
 function Update-Skins {
-    param (
-        [Parameter()]
-        [switch]
-        $Scrape
-    )
-    if ($Scrape) {
-        $Skins = Scrape-GitHub
+    # Get all repositories from the rainmeter-skin topic on GitHub
+    $allPackages = @()
+    Get-RainmeterRepositories | ForEach-Object {
+        $allPackages += ConvertTo-Skin -InputObject $_
     }
-    else {
-        
+
+    # Add manually tracked repositories to the repository list
+    $localPackageList = Get-Skins
+    if ($localPackageList) {
+        $localPackageList | ForEach-Object {
+            if (-not(Find-Skins -Query $_.full_name -Skins $allPackages)) { 
+                $allPackages += $_
+            }
+        }
+    }
+
+    # Filter out repositories with no packages
+    $Skins = @()
+    $allPackages | ForEach-Object {
+        $Skin = Set-PackageInformation -Skin $_ -Skins $localPackageList
+        if ($Skin) { $Skins += $Skin }
     }
 
     # Sort skins alphabetically
@@ -697,7 +726,12 @@ function Get-Request {
         $Headers["Accept"] = "application/vnd.github.raw"
     }
     $response = Invoke-WebRequest -Uri $Uri -UseBasicParsing -Headers $Headers
-    Write-Host "X-RateLimit-Remaining: $($response.Headers['X-RateLimit-Remaining'])"
+    # Write-Host "Bearer $TOKEN"
+    # Write-Host "X-Content-Type-Options: $($response.Headers['X-Content-Type-Options'])"
+    # Write-Host "X-RateLimit-Limit: $($response.Headers['X-RateLimit-Limit'])"
+    # Write-Host "X-RateLimit-Remaining: $($response.Headers['X-RateLimit-Remaining'])"
+    # Write-Host "X-RateLimit-Reset: $($response.Headers['X-RateLimit-Reset'])"
+    # Write-Host "X-RateLimit-Resource: $($response.Headers['X-RateLimit-Resource'])"
     return $response
 }
 
@@ -835,8 +869,13 @@ switch ($Command) {
             Update-Skin -FullName $Parameter
         }
         else {
-            if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" } 
-            else { Update-Skins }
+            if ($Scrape) {
+                if (-not($TOKEN)) { throw "`$TOKEN must be set in `".env.ps1`" to use update" } 
+                Update-Skins 
+            }
+            else {
+                Update-SkinList -Force
+            }
         }
         Export
     }
