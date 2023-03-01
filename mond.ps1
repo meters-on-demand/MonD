@@ -189,7 +189,8 @@ function Update-SkinList {
     $today = Get-Date -Format "dd.MM.yyyy"
     if ($Cache["last_update"] -eq $today) { return }
 
-    $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw | ConvertFrom-Json
+    $data = Get-Request -Uri "$githubAPI/repos/$self/contents/skins.json" -Raw
+    $data = "$data" | ConvertFrom-Json
     Save-SkinsList -Skins $data
     
     $Cache["last_update"] = $today
