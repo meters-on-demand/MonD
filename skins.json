@@ -1556,24 +1556,24 @@
     {
         "skin_name":  "Mondtholomew",
         "latest_release":  {
-                               "browser_download_url":  "https://github.com/reisir/mondtholomew/releases/download/v1.2.1/Mondtholomew_v1.2.1.rmskin",
-                               "name":  "v1.2.1",
-                               "tag_name":  "v1.2.1"
+                               "browser_download_url":  "https://github.com/reisir/mondtholomew/releases/download/v1.2.2/Mondtholomew_v1.2.2.rmskin",
+                               "tag_name":  "v1.2.2",
+                               "name":  "v1.2.2"
                            },
+        "full_name":  "reisir/mondtholomew",
+        "has_downloads":  true,
+        "owner":  {
+                      "avatar_url":  "https://avatars.githubusercontent.com/u/93496808?v=4",
+                      "name":  "reisir"
+                  },
+        "name":  "mondtholomew",
+        "skin_name_tag":  "v1.2.2",
         "topics":  [
                        "mond",
                        "mondtholomew",
                        "rainmeter",
                        "rainmeter-skin"
-                   ],
-        "has_downloads":  true,
-        "full_name":  "reisir/mondtholomew",
-        "name":  "mondtholomew",
-        "skin_name_tag":  "v1.2.1",
-        "owner":  {
-                      "avatar_url":  "https://avatars.githubusercontent.com/u/93496808?v=4",
-                      "name":  "reisir"
-                  }
+                   ]
     },
     {
         "skin_name":  "Robux",
